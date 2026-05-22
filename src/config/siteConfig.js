@@ -2,6 +2,24 @@ import { COMPANY } from '../data/company';
 
 export const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://www.kcdesignmfg.com').replace(/\/$/, '');
 
+export const BRAND = {
+  primaryBlue: '#0D4F8B',
+  navy: '#0A2745',
+  steelGray: '#6B7280',
+  lightGray: '#F3F5F7',
+  white: '#FFFFFF',
+  accentBlue: '#2E6DA4',
+};
+
+export const HERO_CONTENT = {
+  eyebrow: 'Precision CNC Machining • Tooling • Fixtures • Gauges',
+  headline: 'Precision Manufacturing Built on Quality, Service, and Long-Term Trust',
+  subheadline:
+    'K&C Design and Manufacturing provides precision CNC machining, tooling, fixtures, gauges, and custom manufacturing services for Midwest manufacturers.',
+  primaryCta: 'Request a Quote',
+  secondaryCta: 'View Capabilities',
+};
+
 export const DEFAULT_SEO = {
   title: 'K&C Design and Manufacturing | Precision CNC Machining in Addison, IL',
   description:
@@ -16,10 +34,10 @@ export const DEFAULT_SEO = {
 export const PAGE_SEO = {
   home: {
     title: 'K&C Design and Manufacturing | Precision CNC Machining in Addison, IL',
-    description:
-      'Quality precision CNC machining, fixtures, gauges, and tooling for Midwest manufacturers. Founded 1987 in Addison, Illinois. Request a quote today.',
+    description: HERO_CONTENT.subheadline,
     path: '/',
     schema: 'localBusiness',
+    ogImage: `${SITE_URL}/kc-logo.svg`,
   },
   about: {
     title: 'About K&C Design and Manufacturing | Family-Owned Since 1987',
@@ -94,7 +112,7 @@ export const LOCAL_BUSINESS_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
   name: COMPANY.name,
-  image: `${SITE_URL}/favicon.svg`,
+  image: `${SITE_URL}/kc-logo-mark.svg`,
   url: SITE_URL,
   telephone: COMPANY.phone,
   email: COMPANY.email,

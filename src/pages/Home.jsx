@@ -18,7 +18,7 @@ export default function Home() {
       <SEO {...PAGE_SEO.home} schema="localBusiness" />
       <Hero />
 
-      <section className="section-padding border-b border-slate-100">
+      <section className="section-padding border-b border-slate-100 bg-brand-light">
         <div className="section-container">
           <SectionHeading
             label="Our Commitment"
@@ -29,7 +29,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-padding bg-slate-50" aria-labelledby="capabilities-heading">
+      <section className="section-padding bg-brand-light" aria-labelledby="capabilities-heading">
         <div className="section-container">
           <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
             <SectionHeading
@@ -101,7 +101,7 @@ export default function Home() {
 
       <section className="section-padding">
         <div className="section-container">
-          <div className="overflow-hidden rounded-2xl bg-gradient-to-br from-accent to-accent-dark shadow-xl">
+          <div className="overflow-hidden rounded-2xl shadow-xl" style={{ background: 'linear-gradient(135deg, #0D4F8B 0%, #2E6DA4 100%)' }}>
             <div className="grid lg:grid-cols-2">
               <div className="p-8 sm:p-12 lg:p-14">
                 <p className="text-sm font-semibold uppercase tracking-widest text-blue-200">Ready to Start?</p>

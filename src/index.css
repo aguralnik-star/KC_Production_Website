@@ -1,14 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  --color-charcoal: #1a2332;
-  --color-charcoal-light: #2d3748;
+  --color-charcoal: #0a2745;
+  --color-charcoal-light: #123456;
   --color-graphite: #374151;
-  --color-metallic: #64748b;
+  --color-metallic: #6b7280;
   --color-metallic-light: #94a3b8;
-  --color-accent: #2563eb;
-  --color-accent-light: #3b82f6;
-  --color-accent-dark: #1d4ed8;
+  --color-accent: #0d4f8b;
+  --color-accent-light: #2e6da4;
+  --color-accent-dark: #0a3d6d;
+  --color-brand-primary: #0d4f8b;
+  --color-brand-navy: #0a2745;
+  --color-brand-steel: #6b7280;
+  --color-brand-light: #f3f5f7;
+  --color-brand-accent: #2e6da4;
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
 }
 
@@ -85,8 +90,8 @@
 
   .hero-gradient {
     background:
-      linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, transparent 45%),
-      linear-gradient(180deg, #1a2332 0%, #111827 100%);
+      linear-gradient(135deg, rgba(13, 79, 139, 0.18) 0%, transparent 45%),
+      linear-gradient(180deg, var(--color-brand-navy) 0%, #061525 100%);
   }
 
   .hero-grid {
@@ -96,9 +101,160 @@
     background-size: 48px 48px;
   }
 
+  .hero-kc {
+    @apply relative overflow-hidden;
+    min-height: clamp(640px, 82vh, 860px);
+    background: linear-gradient(180deg, var(--color-brand-navy) 0%, #061525 100%);
+  }
+
+  .hero-kc__background {
+    @apply pointer-events-none absolute inset-0;
+  }
+
+  .hero-kc__grid {
+    @apply absolute inset-0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.85) 0%, transparent 100%);
+  }
+
+  .hero-kc__lines {
+    @apply absolute inset-0 opacity-40;
+    background-image: repeating-linear-gradient(
+      180deg,
+      transparent 0,
+      transparent 18px,
+      rgba(46, 109, 164, 0.22) 18px,
+      rgba(46, 109, 164, 0.22) 19px,
+      transparent 19px,
+      transparent 34px,
+      rgba(13, 79, 139, 0.18) 34px,
+      rgba(13, 79, 139, 0.18) 35px
+    );
+    mask-image: radial-gradient(circle at 70% 40%, black 0%, transparent 72%);
+  }
+
+  .hero-kc__watermark {
+    @apply absolute inset-y-0 right-0 w-[min(52%,28rem)];
+    background-image: url('/kc-logo-mark.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0.06;
+  }
+
+  .hero-kc__glow {
+    @apply absolute inset-0;
+    background:
+      radial-gradient(circle at 18% 18%, rgba(46, 109, 164, 0.28) 0%, transparent 34%),
+      radial-gradient(circle at 82% 28%, rgba(13, 79, 139, 0.24) 0%, transparent 38%);
+  }
+
+  .hero-kc__overlay {
+    @apply absolute inset-0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, transparent 42%, rgba(6, 21, 37, 0.35) 100%);
+  }
+
+  .hero-kc__eyebrow {
+    @apply mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-brand-accent;
+  }
+
+  .hero-kc__headline {
+    @apply text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[3.35rem];
+  }
+
+  .hero-kc__subheadline {
+    @apply mt-6 max-w-xl text-lg leading-relaxed text-slate-300;
+  }
+
+  .hero-kc__cta-primary {
+    background: linear-gradient(180deg, var(--color-brand-accent) 0%, var(--color-brand-primary) 100%);
+  }
+
+  .hero-kc__cta-primary:hover {
+    background: linear-gradient(180deg, #3a7cb8 0%, var(--color-brand-accent) 100%);
+  }
+
+  .hero-kc__visual-wrap {
+    @apply relative mx-auto w-full max-w-xl lg:max-w-none;
+  }
+
+  .hero-trust-badge {
+    @apply flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-slate-200 backdrop-blur-sm;
+  }
+
+  .hero-trust-badge__icon {
+    @apply flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-primary/20 text-brand-accent;
+  }
+
+  .hero-industrial-card {
+    @apply relative overflow-hidden rounded-2xl border shadow-2xl;
+    border-color: rgba(255, 255, 255, 0.14);
+    background:
+      linear-gradient(145deg, rgba(46, 109, 164, 0.16) 0%, rgba(10, 39, 69, 0.92) 42%, rgba(6, 21, 37, 0.98) 100%);
+    box-shadow:
+      0 24px 60px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+
+  .hero-industrial-card__glow {
+    @apply absolute -right-10 -top-10 h-40 w-40 rounded-full blur-3xl;
+    background: rgba(46, 109, 164, 0.35);
+  }
+
+  .hero-industrial-card__lines {
+    @apply absolute inset-0 opacity-30;
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 28px,
+      rgba(255, 255, 255, 0.08) 28px,
+      rgba(255, 255, 255, 0.08) 29px
+    );
+  }
+
+  .hero-industrial-card__content {
+    @apply relative p-6 sm:p-8;
+  }
+
+  .hero-industrial-card__mark {
+    @apply h-14 w-14 object-contain;
+  }
+
+  .hero-industrial-card__services {
+    @apply mt-6 space-y-3 border-t border-white/10 pt-6;
+  }
+
+  .hero-industrial-card__services li {
+    @apply flex items-center gap-3 text-base font-medium text-white;
+  }
+
+  .hero-industrial-card__services li::before {
+    content: '';
+    @apply h-0.5 w-8 shrink-0 rounded-full bg-brand-accent;
+  }
+
+  .hero-industrial-card__stats {
+    @apply mt-8 grid grid-cols-3 gap-3 border-t border-white/10 pt-6;
+  }
+
+  .hero-industrial-card__stat {
+    @apply rounded-xl border border-white/10 bg-white/5 px-3 py-3 text-center;
+  }
+
+  .hero-industrial-card__stat-value {
+    @apply text-sm font-bold text-white sm:text-base;
+  }
+
+  .hero-industrial-card__stat-label {
+    @apply mt-1 text-[11px] uppercase tracking-[0.14em] text-slate-400;
+  }
+
   .cnc-panel {
     @apply relative overflow-hidden rounded-2xl border border-white/10;
-    background: linear-gradient(145deg, #334155 0%, #1e293b 50%, #0f172a 100%);
+    background: linear-gradient(145deg, #1a3d5c 0%, var(--color-brand-navy) 50%, #061525 100%);
   }
 }
 
