@@ -13,6 +13,7 @@ const NAV_ITEMS = [
   { to: '/admin/post-launch', label: 'Post-Launch', match: (location) => location.pathname === '/admin/post-launch' },
   { to: '/admin/mobile-browser-qa', label: 'Mobile & Browser QA', match: (location) => location.pathname === '/admin/mobile-browser-qa' },
   { to: '/admin/testimonials', label: 'Testimonials', match: (location) => location.pathname === '/admin/testimonials' },
+  { to: '/admin/customer-approvals', label: 'Customer Approvals', match: (location) => location.pathname === '/admin/customer-approvals' },
   { to: '/admin/case-studies', label: 'Case Studies', match: (location) => location.pathname.startsWith('/admin/case-studies') },
   { to: '/admin/real-content', label: 'Real Content', match: (location) => location.pathname === '/admin/real-content' },
   { to: '/admin/content-qa', label: 'Content QA', match: (location) => location.pathname === '/admin/content-qa' },
