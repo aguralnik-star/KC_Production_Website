@@ -103,6 +103,25 @@ export const EQUIPMENT_SECTIONS = [
   },
 ];
 
+export const EQUIPMENT_PAGE_HERO = {
+  machineName: 'Haas UMC-750 Universal Machining Center',
+  eyebrow: 'Advanced CNC Machining Technology',
+  headline: 'Modern CNC Manufacturing Equipment',
+  description:
+    'K&C Design and Manufacturing utilizes advanced CNC machining technology to deliver precision components, tooling, fixtures, prototypes, and production parts with exceptional quality and repeatability.',
+  image: '/images/equipment/haas-umc750-hero.jpg',
+  imageAlt: 'Haas UMC-750 5-axis CNC machining center',
+  placeholderText: 'UMC-750 Equipment Image',
+  featureBadges: [
+    'Precision Machining',
+    'Tight Tolerances',
+    'Production Manufacturing',
+    'Quality Inspection',
+  ],
+  overlayTitle: 'Representative CNC Equipment',
+  overlayText: 'Representative equipment shown for capability illustration purposes.',
+};
+
 export const FEATURED_EQUIPMENT = {
   name: 'Haas VF-7/50 CNC Vertical Machining Center',
   category: 'CNC Milling',
@@ -164,12 +183,13 @@ export const REPRESENTATIVE_EQUIPMENT_GALLERY = {
   items: [
     {
       id: 'haas-umc-750',
-      name: 'Haas UMC-750',
-      category: '5-Axis CNC Machining',
+      name: 'HAAS UMC-750',
+      category: '5-Axis CNC Machining Center',
       description: 'Complex multi-sided machining with reduced setups and high precision.',
-      image: '/images/equipment/haas-umc-750.jpg',
-      imageAlt: 'Haas UMC-750 representative 5-axis CNC machining center',
+      image: '/images/equipment/haas-umc750-hero.jpg',
+      imageAlt: 'Haas UMC-750 5-axis CNC machining center',
       badges: ['5-Axis Capability', 'Reduced Setups', 'Multi-Sided Machining', 'High Precision'],
+      featured: true,
     },
     {
       id: 'haas-vf-5',

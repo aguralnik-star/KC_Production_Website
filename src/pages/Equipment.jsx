@@ -2,6 +2,7 @@ import { ArrowRight, Cpu, ScanLine, Ruler, Layers } from 'lucide-react';
 import SEO from '../components/SEO';
 import { PAGE_SEO } from '../config/siteConfig';
 import SectionHeading from '../components/SectionHeading';
+import EquipmentHero from '../components/EquipmentHero';
 import EquipmentCategoryCard, { FeaturedEquipmentShowcase } from '../components/EquipmentCard';
 import EquipmentGallery from '../components/EquipmentGallery';
 import CTAButton from '../components/CTAButton';
@@ -14,16 +15,7 @@ export default function Equipment() {
     <>
       <SEO {...PAGE_SEO.equipment} />
 
-      <section className="page-hero">
-        <div className="section-container px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            label="Equipment"
-            title="Modern CNC & Inspection Technology"
-            description="Invested in Haas CNC machining centers, precision inspection equipment, and Mastercam programming to deliver first-class quality."
-            dark
-          />
-        </div>
-      </section>
+      <EquipmentHero />
 
       <section className="section-padding bg-brand-light" aria-labelledby="equipment-feature-panel-heading">
         <div className="section-container">

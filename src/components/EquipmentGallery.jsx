@@ -3,6 +3,8 @@ import { EquipmentCard } from './EquipmentCard';
 
 export default function EquipmentGallery({ className = '', id }) {
   const { title, disclaimer, items } = REPRESENTATIVE_EQUIPMENT_GALLERY;
+  const featuredItem = items.find((item) => item.featured);
+  const galleryItems = items.filter((item) => !item.featured);
 
   return (
     <section
@@ -21,8 +23,26 @@ export default function EquipmentGallery({ className = '', id }) {
           <p className="mt-4 text-base leading-relaxed text-metallic sm:text-lg">{disclaimer}</p>
         </div>
 
-        <ul className="equipment-gallery-grid mt-10">
-          {items.map((item) => (
+        {featuredItem ? (
+          <div className="mt-10">
+            <EquipmentCard
+              variant="gallery"
+              featured
+              title={featuredItem.name}
+              category={featuredItem.category}
+              description={featuredItem.description}
+              image={featuredItem.image}
+              imageAlt={featuredItem.imageAlt}
+              badges={featuredItem.badges}
+              maxBadges={4}
+              ctaTo="/contact"
+              ctaLabel="Learn More"
+            />
+          </div>
+        ) : null}
+
+        <ul className={`equipment-gallery-grid ${featuredItem ? 'mt-8' : 'mt-10'}`}>
+          {galleryItems.map((item) => (
             <li key={item.id} className="equipment-gallery-grid__item">
               <EquipmentCard
                 variant="gallery"

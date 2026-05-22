@@ -6,13 +6,45 @@ import { FEATURED_EQUIPMENT } from '../data/company';
 
 const FEATURED_ICONS = [Factory, Cog, Wrench];
 
-function EquipmentImagePlaceholder({ alt }) {
+function EquipmentImagePlaceholder({ alt, placeholderText = 'Equipment Image Coming Soon' }) {
   return (
     <div className="equipment-image equipment-image--placeholder" role="img" aria-label={alt}>
       <div className="equipment-image__placeholder-glow" aria-hidden="true" />
       <div className="equipment-image__placeholder-lines" aria-hidden="true" />
       <Factory className="equipment-image__placeholder-icon" aria-hidden="true" />
-      <p className="equipment-image__placeholder-text">Equipment Image Coming Soon</p>
+      <p className="equipment-image__placeholder-text">{placeholderText}</p>
+    </div>
+  );
+}
+
+export function EquipmentHeroImage({
+  src,
+  alt,
+  placeholderText = 'UMC-750 Equipment Image',
+  className = '',
+}) {
+  const [failed, setFailed] = useState(false);
+
+  if (!src || failed) {
+    return (
+      <div className={`equipment-hero-image-frame ${className}`.trim()}>
+        <EquipmentImagePlaceholder alt={alt} placeholderText={placeholderText} />
+      </div>
+    );
+  }
+
+  return (
+    <div className={`equipment-hero-image-frame ${className}`.trim()}>
+      <img
+        src={src}
+        alt={alt}
+        className="equipment-hero-image"
+        loading="lazy"
+        decoding="async"
+        width={1920}
+        height={1080}
+        onError={() => setFailed(true)}
+      />
     </div>
   );
 }
@@ -22,13 +54,15 @@ export function EquipmentImage({
   alt,
   className = '',
   priority = false,
+  fit = 'cover',
+  placeholderText,
 }) {
   const [failed, setFailed] = useState(false);
 
   if (!src || failed) {
     return (
       <div className={`equipment-image-frame ${className}`.trim()}>
-        <EquipmentImagePlaceholder alt={alt} />
+        <EquipmentImagePlaceholder alt={alt} placeholderText={placeholderText} />
       </div>
     );
   }
@@ -38,7 +72,7 @@ export function EquipmentImage({
       <img
         src={src}
         alt={alt}
-        className="equipment-image"
+        className={`equipment-image ${fit === 'contain' ? 'equipment-image--contain' : ''}`.trim()}
         loading={priority ? 'eager' : 'lazy'}
         decoding="async"
         width={1600}
@@ -66,6 +100,7 @@ export function EquipmentCard({
   showSpecs = true,
   showRepresentativeMeta = true,
   maxBadges,
+  featured = false,
   ctaTo,
   ctaLabel,
 }) {
@@ -75,10 +110,18 @@ export function EquipmentCard({
   if (variant === 'gallery') {
     return (
       <article
-        className={`equipment-gallery-card ${className}`.trim()}
+        className={`equipment-gallery-card ${featured ? 'equipment-gallery-card--featured' : ''} ${className}`.trim()}
         aria-labelledby={title ? `equipment-gallery-${title.replace(/\s+/g, '-').toLowerCase()}` : undefined}
       >
-        <EquipmentImage src={image} alt={alt} className="equipment-gallery-card__media" />
+        {featured ? (
+          <p className="equipment-gallery-card__featured-label">Featured Representative Equipment</p>
+        ) : null}
+        <EquipmentImage
+          src={image}
+          alt={alt}
+          fit={featured ? 'contain' : 'cover'}
+          className={`equipment-gallery-card__media ${featured ? 'equipment-gallery-card__media--featured' : ''}`.trim()}
+        />
         <div className="equipment-gallery-card__body">
           <p className="equipment-gallery-card__category">{category}</p>
           <h3
