@@ -8,7 +8,8 @@
     "build": "node src/utils/sitemapGenerator.js && vite build",
     "preview": "vite preview",
     "test:rfq-bridge": "node scripts/test-rfq-bridge.js",
-    "validate:rfq-sync": "node scripts/validate-rfq-sync.js"
+    "validate:rfq-sync": "node scripts/validate-rfq-sync.js",
+    "validate:production-rfq-sync": "node scripts/validate-production-rfq-sync.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.106.1",

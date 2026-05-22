@@ -152,6 +152,14 @@ Report output: `docs/rfq-sync-validation-report.md`
 
 When `FACTORAOS_EXTERNAL_CRM_INTAKE_URL` and `FACTORAOS_EXTERNAL_CRM_INTAKE_SECRET` are not configured locally, the validator injects a mock FactoraOS intake server for end-to-end testing. Configure production env vars in Vercel before production RFQ sync validation.
 
+Run production validation against the live site:
+
+```bash
+npm run validate:production-rfq-sync
+```
+
+Report output: `docs/production-rfq-sync-validation-report.md`
+
 ## Frontend integration
 
 - Service: `src/services/rfqBridgeService.js`
