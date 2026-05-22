@@ -34,7 +34,7 @@ const CAPABILITY_CARDS = [
       'Haas ST-10 CNC lathe capability',
       'Tight tolerance turning',
       'Production part repeatability',
-      'Bar-fed and short-run components',
+      'Short-run and production quantities',
       'Multi-material machining',
     ],
   },

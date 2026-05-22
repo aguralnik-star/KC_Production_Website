@@ -29,6 +29,7 @@ const AdminLaunchGoNoGoReview = lazy(() => lazyWithRetry(() => import('./pages/A
 const AdminHandoffCenter = lazy(() => lazyWithRetry(() => import('./pages/AdminHandoffCenter')));
 const AdminPostLaunchDashboard = lazy(() => lazyWithRetry(() => import('./pages/AdminPostLaunchDashboard')));
 const AdminMobileBrowserQA = lazy(() => lazyWithRetry(() => import('./pages/AdminMobileBrowserQA')));
+const AdminContentQAAudit = lazy(() => lazyWithRetry(() => import('./pages/AdminContentQAAudit')));
 
 function PublicRoutes() {
   return (
@@ -67,6 +68,7 @@ export default function App() {
           <Route path="/admin/handoff" element={<AdminHandoffCenter />} />
           <Route path="/admin/post-launch" element={<AdminPostLaunchDashboard />} />
           <Route path="/admin/mobile-browser-qa" element={<AdminMobileBrowserQA />} />
+          <Route path="/admin/content-qa" element={<AdminContentQAAudit />} />
         </Route>
 
         <Route path="/admin" element={<Navigate to="/admin/rfqs" replace />} />

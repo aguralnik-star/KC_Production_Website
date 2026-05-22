@@ -35,7 +35,7 @@ export const INDUSTRIES = [
   { title: 'Custom Inspection Fixtures', description: 'Purpose-built fixtures for dimensional verification and assembly.' },
   { title: 'Gauges', description: 'Go/no-go gauges and custom measurement tools built to specification.' },
   { title: 'Food Service', description: 'Machined components for food service and commercial kitchen equipment.' },
-  { title: 'Military', description: 'Precision machining with documentation and quality requirements.' },
+  { title: 'Military', description: 'Machining support for military-related industry applications. Industry served only — not a certification claim.' },
 ];
 
 export const CAPABILITIES = [
