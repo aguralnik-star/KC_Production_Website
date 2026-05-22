@@ -53,7 +53,7 @@ export default function RFQForm() {
   const navigate = useNavigate();
   const [form, setForm] = useState(initialForm);
   const [files, setFiles] = useState([]);
-  const [submitting, setSubmitting] = useState(false);
+  const [submissionState, setSubmissionState] = useState('idle');
   const [submitError, setSubmitError] = useState('');
   const [fieldErrors, setFieldErrors] = useState({});
   const [fileErrors, setFileErrors] = useState([]);
@@ -137,6 +137,7 @@ export default function RFQForm() {
     trackFormStart();
     setForm((prev) => ({ ...prev, [name]: value }));
     setSubmitError('');
+    setSubmissionState('idle');
     setFieldErrors((prev) => ({ ...prev, [name]: undefined }));
   };
 
@@ -203,40 +204,46 @@ export default function RFQForm() {
     }
 
     trackSubmitAttempt();
-    setSubmitting(true);
+    setSubmissionState('submitting');
 
     try {
-      const result = await submitRFQ(form, files);
+      const result = await submitRFQ(form, files, {
+        sourcePage: window.location.pathname,
+      });
       trackSubmitSuccess(result.reference_number);
       clearDraft();
+      setSubmissionState('success');
       setSuccessPreview(result.reference_number);
 
-      window.setTimeout(() => {
-        navigate(`/rfq/confirmation?ref=${encodeURIComponent(result.reference_number)}`, {
-          replace: true,
-          state: {
-            confirmation: {
-              referenceNumber: result.reference_number,
-              submittedAt: result.submitted_at,
-              company: form.company.trim() || null,
-              name: form.name.trim(),
-              email: result.email,
-              projectType: form.projectType || null,
-              timeline: form.timeline || null,
-              customerConfirmationSent: result.notification?.customer_confirmation_sent ?? false,
-              customerConfirmationStatus: result.notification?.customer_confirmation_status ?? 'not_sent',
+      if (result.reference_number) {
+        window.setTimeout(() => {
+          navigate(`/rfq/confirmation?ref=${encodeURIComponent(result.reference_number)}`, {
+            replace: true,
+            state: {
+              confirmation: {
+                referenceNumber: result.reference_number,
+                submittedAt: result.submitted_at,
+                company: form.company.trim() || null,
+                name: form.name.trim(),
+                email: result.email,
+                projectType: form.projectType || null,
+                timeline: form.timeline || null,
+                customerConfirmationSent: result.notification?.customer_confirmation_sent ?? false,
+                customerConfirmationStatus: result.notification?.customer_confirmation_status ?? 'not_sent',
+              },
             },
-          },
-        });
-      }, 900);
+          });
+        }, 900);
+      }
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Unable to submit your RFQ. Please try again.';
       setSubmitError(message);
+      setSubmissionState('error');
       trackSubmitError('submit');
-    } finally {
-      setSubmitting(false);
     }
   };
+
+  const submitting = submissionState === 'submitting';
 
   if (successPreview) {
     return <RFQSuccessPreview referenceNumber={successPreview} />;

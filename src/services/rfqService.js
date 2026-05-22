@@ -7,6 +7,7 @@ import {
   getFileExtension,
 } from '../utils/rfqFileUtils';
 import { validateRFQInput } from '../utils/rfqValidation';
+import { postRFQToBridge } from './rfqBridgeService';
 
 export { MAX_FILES, MAX_FILE_SIZE_BYTES, ALLOWED_EXTENSIONS, sanitizeFileName, getFileExtension };
 
@@ -89,7 +90,7 @@ export async function notifyRFQSubmission(rfqRequestId, mode = 'full_notificatio
   };
 }
 
-export async function submitRFQ(formData, files = []) {
+export async function submitRFQ(formData, files = [], options = {}) {
   if (!isSupabaseConfigured) {
     throw new Error('RFQ submission is not configured yet. Please call (630) 543-3386 or email info@kcdesignmfg.com.');
   }
@@ -144,12 +145,26 @@ export async function submitRFQ(formData, files = []) {
     throw err instanceof Error ? err : new Error('RFQ submission failed. Please try again.');
   }
 
+  let bridgeResult = null;
+
+  try {
+    bridgeResult = await postRFQToBridge(formData, {
+      sourcePage: options.sourcePage,
+    });
+  } catch (bridgeError) {
+    console.warn(
+      '[rfq-bridge] CRM forward failed after local RFQ save.',
+      bridgeError instanceof Error ? bridgeError.message : bridgeError,
+    );
+  }
+
   return {
     id: rfqRequestId,
     reference_number: rfqRecord.reference_number,
     submitted_at: rfqRecord.submitted_at,
     email: formData.email.trim(),
     notification,
+    bridge: bridgeResult,
   };
 }
 

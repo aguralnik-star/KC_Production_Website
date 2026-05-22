@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "node src/utils/sitemapGenerator.js && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:rfq-bridge": "node scripts/test-rfq-bridge.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.106.1",
