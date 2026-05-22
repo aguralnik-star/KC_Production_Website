@@ -1,35 +1,19 @@
 import { supabase, RFQ_BUCKET } from '../lib/supabaseClient';
+import { isCurrentUserAdmin } from './authService';
 
 export const RFQ_STATUSES = ['new', 'in_review', 'quoted', 'closed', 'rejected'];
 
 const SIGNED_URL_TTL_SECONDS = 3600;
 
-async function requireAuth() {
-  const { data: { session }, error } = await supabase.auth.getSession();
-  if (error || !session) {
+async function requireAdminAccess() {
+  const isAdmin = await isCurrentUserAdmin();
+  if (!isAdmin) {
     throw new Error('Admin access required.');
   }
-  return session;
-}
-
-export async function getAuthSession() {
-  const { data: { session } } = await supabase.auth.getSession();
-  return session;
-}
-
-export async function signInAdmin(email, password) {
-  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-  if (error) throw new Error('Invalid email or password.');
-  return data.session;
-}
-
-export async function signOutAdmin() {
-  const { error } = await supabase.auth.signOut();
-  if (error) throw new Error('Unable to sign out.');
 }
 
 export async function getRFQRequests() {
-  await requireAuth();
+  await requireAdminAccess();
 
   const { data, error } = await supabase
     .from('rfq_requests')
@@ -41,7 +25,7 @@ export async function getRFQRequests() {
 }
 
 export async function getRFQRequestById(id) {
-  await requireAuth();
+  await requireAdminAccess();
 
   const { data, error } = await supabase
     .from('rfq_requests')
@@ -54,7 +38,7 @@ export async function getRFQRequestById(id) {
 }
 
 export async function getRFQFiles(rfqRequestId) {
-  await requireAuth();
+  await requireAdminAccess();
 
   const { data, error } = await supabase
     .from('rfq_files')
@@ -67,7 +51,7 @@ export async function getRFQFiles(rfqRequestId) {
 }
 
 export async function updateRFQStatus(id, status) {
-  await requireAuth();
+  await requireAdminAccess();
 
   if (!RFQ_STATUSES.includes(status)) {
     throw new Error('Invalid status.');
@@ -85,7 +69,7 @@ export async function updateRFQStatus(id, status) {
 }
 
 export async function createSignedFileUrl(filePath) {
-  await requireAuth();
+  await requireAdminAccess();
 
   const { data, error } = await supabase.storage
     .from(RFQ_BUCKET)
