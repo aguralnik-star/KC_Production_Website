@@ -141,7 +141,7 @@ export async function submitRFQ(formData, files = []) {
   const { data: rfqRecord, error: insertError } = await supabase
     .from('rfq_requests')
     .insert(payload)
-    .select('id')
+    .select('id, reference_number, submitted_at')
     .single();
 
   if (insertError || !rfqRecord?.id) {
@@ -157,7 +157,11 @@ export async function submitRFQ(formData, files = []) {
     throw err instanceof Error ? err : new Error('RFQ submission failed. Please try again.');
   }
 
-  return { id: rfqRequestId };
+  return {
+    id: rfqRequestId,
+    reference_number: rfqRecord.reference_number,
+    submitted_at: rfqRecord.submitted_at,
+  };
 }
 
 export { MAX_FILES, MAX_FILE_SIZE_BYTES, ALLOWED_EXTENSIONS };

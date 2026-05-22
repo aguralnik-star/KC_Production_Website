@@ -268,7 +268,7 @@ select
   'RFQ has been waiting on customer response for more than 7 business days.'
 from public.rfq_requests r
 where r.status = 'waiting_on_customer'
-  and r.updated_at < (now() - interval '7 days')
+  and r.updated_at < (now() - interval '7 days');
 
 grant select on public.rfq_followup_queue_view to authenticated;
 grant select on public.rfq_overdue_alerts_view to authenticated;

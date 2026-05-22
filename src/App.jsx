@@ -9,6 +9,7 @@ import Equipment from './pages/Equipment';
 import Quality from './pages/Quality';
 import Industries from './pages/Industries';
 import Contact from './pages/Contact';
+import RFQConfirmation from './pages/RFQConfirmation';
 import AdminLogin from './pages/AdminLogin';
 import AdminRFQDashboard from './pages/AdminRFQDashboard';
 
@@ -43,6 +44,7 @@ export default function App() {
                 <Route path="/quality" element={<Quality />} />
                 <Route path="/industries" element={<Industries />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/rfq/confirmation" element={<RFQConfirmation />} />
               </Routes>
             </main>
             <Footer />

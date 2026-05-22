@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
-import { Upload, CheckCircle2, AlertCircle, X, Loader2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Upload, AlertCircle, X, Loader2 } from 'lucide-react';
 import CTAButton from './CTAButton';
 import { submitRFQ, validateRFQInput, MAX_FILES } from '../services/rfqService';
 
@@ -51,9 +52,9 @@ function formatFileSize(bytes) {
 }
 
 export default function RFQForm() {
+  const navigate = useNavigate();
   const [form, setForm] = useState(initialForm);
   const [files, setFiles] = useState([]);
-  const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [fieldErrors, setFieldErrors] = useState([]);
@@ -93,14 +94,6 @@ export default function RFQForm() {
     setFieldErrors([]);
   };
 
-  const resetForm = () => {
-    setForm(initialForm);
-    setFiles([]);
-    setSubmitted(false);
-    setError('');
-    setFieldErrors([]);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -115,31 +108,27 @@ export default function RFQForm() {
     setSubmitting(true);
 
     try {
-      await submitRFQ(form, files);
-      setSubmitted(true);
+      const result = await submitRFQ(form, files);
+      navigate(`/rfq/confirmation?ref=${encodeURIComponent(result.reference_number)}`, {
+        replace: true,
+        state: {
+          confirmation: {
+            referenceNumber: result.reference_number,
+            submittedAt: result.submitted_at,
+            company: form.company.trim() || null,
+            name: form.name.trim(),
+            email: form.email.trim(),
+            projectType: form.projectType || null,
+            timeline: form.timeline || null,
+          },
+        },
+      });
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unable to submit your RFQ. Please try again.');
     } finally {
       setSubmitting(false);
     }
   };
-
-  if (submitted) {
-    return (
-      <div className="card flex flex-col items-center py-16 text-center" role="status">
-        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-green-600">
-          <CheckCircle2 className="h-8 w-8" aria-hidden="true" />
-        </div>
-        <h2 className="mt-6 text-2xl font-bold text-charcoal">RFQ Submitted</h2>
-        <p className="mt-3 max-w-md text-metallic">
-          Thank you. Your RFQ has been submitted. Our team will review it and contact you shortly.
-        </p>
-        <CTAButton variant="secondary" className="mt-8" onClick={resetForm}>
-          Submit Another RFQ
-        </CTAButton>
-      </div>
-    );
-  }
 
   return (
     <form onSubmit={handleSubmit} className="card space-y-6" aria-label="Request for quote form" noValidate>
