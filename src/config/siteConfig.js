@@ -8,7 +8,7 @@ export const DEFAULT_SEO = {
     'K&C Design and Manufacturing provides precision CNC machining, tooling, fixtures, gauges, and custom manufacturing services for Midwest manufacturers.',
   keywords:
     'precision machining, CNC machining, CNC milling, CNC turning, manufacturing fixtures, inspection gauges, Addison IL machine shop, Midwest CNC machining',
-  ogImage: `${SITE_URL}/favicon.svg`,
+  ogImage: `${SITE_URL}/kc-logo.svg`,
   ogType: 'website',
   twitterCard: 'summary_large_image',
 };

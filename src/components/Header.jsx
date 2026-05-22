@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Menu, X, Phone, Mail } from 'lucide-react';
 import CTAButton from './CTAButton';
+import Logo from './Logo';
 import { COMPANY } from '../data/company';
 import { trapFocus } from '../utils/accessibilityUtils';
 
@@ -57,16 +58,14 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="section-container mx-auto flex items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        <Link to="/" className="group flex items-center gap-3" aria-label="K&C Design and Manufacturing home">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-charcoal text-sm font-bold transition-colors group-hover:bg-accent">
-            <span className="text-white">K&amp;C</span>
-          </div>
-          <div>
-            <p className="text-sm font-bold leading-tight text-charcoal sm:text-base">{COMPANY.shortName}</p>
-            <p className="text-xs text-metallic">Est. {COMPANY.founded} • Addison, IL</p>
-          </div>
-        </Link>
+      <div className="section-container mx-auto flex items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+        <Logo
+          variant="default"
+          asLink
+          showText
+          className="h-[38px] w-auto max-w-[min(100%,220px)] shrink-0 object-contain object-left sm:h-12 sm:max-w-none"
+          linkClassName="shrink-0 transition-opacity hover:opacity-90"
+        />
 
         <nav className="hidden items-center gap-6 xl:flex" aria-label="Main navigation">
           {navLinks.map(({ to, label }) => (

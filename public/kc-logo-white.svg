@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 48" fill="none" role="img" aria-label="K&amp;C Design and Manufacturing">
+  <g fill="#FFFFFF">
+    <rect x="0" y="8" width="34" height="3" rx="1.5"/>
+    <rect x="0" y="16" width="26" height="3" rx="1.5"/>
+    <rect x="0" y="24" width="34" height="3" rx="1.5"/>
+    <rect x="0" y="32" width="20" height="3" rx="1.5"/>
+  </g>
+  <text x="46" y="19" fill="#FFFFFF" font-family="Inter, system-ui, -apple-system, Segoe UI, sans-serif" font-size="17" font-weight="700" letter-spacing="0.04em">K&amp;C</text>
+  <text x="46" y="30" fill="#FFFFFF" font-family="Inter, system-ui, -apple-system, Segoe UI, sans-serif" font-size="8.5" font-weight="600" letter-spacing="0.22em" opacity="0.92">DESIGN</text>
+  <text x="46" y="40" fill="#FFFFFF" font-family="Inter, system-ui, -apple-system, Segoe UI, sans-serif" font-size="7.25" font-weight="600" letter-spacing="0.14em" opacity="0.88">AND MANUFACTURING</text>
+</svg>

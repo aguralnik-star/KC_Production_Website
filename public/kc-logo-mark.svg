@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" role="img" aria-label="K&amp;C Design and Manufacturing">
+  <rect width="48" height="48" rx="10" fill="#0A2745"/>
+  <g fill="#FFFFFF">
+    <rect x="10" y="12" width="28" height="2.75" rx="1.375"/>
+    <rect x="10" y="18.75" width="21" height="2.75" rx="1.375"/>
+    <rect x="10" y="25.5" width="28" height="2.75" rx="1.375"/>
+    <rect x="10" y="32.25" width="17" height="2.75" rx="1.375"/>
+  </g>
+</svg>

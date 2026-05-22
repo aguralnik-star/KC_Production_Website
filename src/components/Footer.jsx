@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Printer } from 'lucide-react';
+import Logo from './Logo';
 import { COMPANY } from '../data/company';
 
 const footerLinks = {
@@ -27,12 +28,14 @@ export default function Footer() {
         <div className="section-container">
           <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
             <div>
-              <div className="mb-4 flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-sm font-bold text-accent-light">K&amp;C</div>
-                <div>
-                  <p className="font-bold">{COMPANY.name}</p>
-                  <p className="text-xs text-slate-400">Founded {COMPANY.founded}</p>
-                </div>
+              <div className="mb-4">
+                <Logo
+                  variant="white"
+                  showText
+                  className="h-11 w-auto max-w-[240px] object-contain object-left"
+                />
+                <p className="mt-3 text-sm font-medium text-slate-200">{COMPANY.name}</p>
+                <p className="text-xs text-slate-400">Founded {COMPANY.founded} • Addison, IL</p>
               </div>
               <p className="text-sm leading-relaxed text-slate-400">
                 Dedicated to quality precision machining, responsive service, and long-term customer relationships across the Midwest.
