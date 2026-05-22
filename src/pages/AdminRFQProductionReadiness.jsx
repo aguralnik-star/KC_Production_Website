@@ -128,7 +128,7 @@ export default function AdminRFQProductionReadiness() {
         description="Admin production readiness audit and final QA checklist for the RFQ platform."
       />
 
-      <AdminLayout email={session?.user?.email} onSignOut={onSignOut}>
+      <AdminLayout email={session?.user?.email} onSignOut={onSignOut} title="Production Readiness">
         <RFQReadinessDashboard
           audit={audit}
           checks={checks}

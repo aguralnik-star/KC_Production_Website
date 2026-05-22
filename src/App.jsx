@@ -15,6 +15,7 @@ import AdditionalInfoUpload from './pages/AdditionalInfoUpload';
 import AdminLogin from './pages/AdminLogin';
 import AdminRFQDashboard from './pages/AdminRFQDashboard';
 import AdminRFQProductionReadiness from './pages/AdminRFQProductionReadiness';
+import AdminRFQOperationsCommandCenter from './pages/AdminRFQOperationsCommandCenter';
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
       <Route element={<ProtectedAdminRoute />}>
         <Route path="/admin/rfqs" element={<AdminRFQDashboard />} />
         <Route path="/admin/rfq-readiness" element={<AdminRFQProductionReadiness />} />
+        <Route path="/admin/rfq-operations" element={<AdminRFQOperationsCommandCenter />} />
       </Route>
 
       <Route

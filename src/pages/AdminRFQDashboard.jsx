@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useNavigate, useOutletContext } from 'react-router-dom';
+import { useNavigate, useOutletContext, useSearchParams } from 'react-router-dom';
 import { AlertCircle, Bell, Inbox, Loader2, RefreshCw } from 'lucide-react';
 import PageHead from '../components/PageHead';
 import AdminLayout from '../components/admin/AdminLayout';
@@ -40,6 +40,7 @@ const TABS = [
 
 export default function AdminRFQDashboard() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { session, handleSignOut } = useOutletContext();
 
   const [activeTab, setActiveTab] = useState('rfqs');
@@ -91,16 +92,6 @@ export default function AdminRFQDashboard() {
     }
   }, []);
 
-  useEffect(() => {
-    loadRequests();
-  }, [loadRequests]);
-
-  useEffect(() => {
-    if (activeTab === 'reminders') {
-      loadReminders();
-    }
-  }, [activeTab, loadReminders]);
-
   const loadDetail = useCallback(async (id) => {
     setDetailLoading(true);
     try {
@@ -118,6 +109,32 @@ export default function AdminRFQDashboard() {
       setDetailLoading(false);
     }
   }, []);
+
+  useEffect(() => {
+    loadRequests();
+  }, [loadRequests]);
+
+  useEffect(() => {
+    const tab = searchParams.get('tab');
+    if (tab === 'reminders') {
+      setActiveTab('reminders');
+    }
+  }, [searchParams]);
+
+  useEffect(() => {
+    const rfqId = searchParams.get('rfq');
+    if (rfqId) {
+      setActiveTab('rfqs');
+      setSelectedId(rfqId);
+      loadDetail(rfqId);
+    }
+  }, [searchParams, loadDetail]);
+
+  useEffect(() => {
+    if (activeTab === 'reminders') {
+      loadReminders();
+    }
+  }, [activeTab, loadReminders]);
 
   const handleSelect = (id) => {
     setSelectedId(id);
@@ -221,7 +238,7 @@ export default function AdminRFQDashboard() {
     <>
       <PageHead title="Admin RFQ Dashboard | K&C Design and Manufacturing" description="Review submitted RFQ requests." />
 
-      <AdminLayout email={session?.user?.email} onSignOut={onSignOut}>
+      <AdminLayout email={session?.user?.email} onSignOut={onSignOut} title="RFQ Review Dashboard">
         <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="inline-flex rounded-lg border border-slate-200 bg-white p-1">
             {TABS.map(({ id, label, icon: Icon }) => (
