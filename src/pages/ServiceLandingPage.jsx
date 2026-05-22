@@ -1,6 +1,10 @@
 import { useEffect } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import SEO from '../components/SEO';
+import Breadcrumbs from '../components/seo/Breadcrumbs';
+import RelatedServices from '../components/seo/RelatedServices';
+import RelatedIndustries from '../components/seo/RelatedIndustries';
+import RelatedProjects from '../components/seo/RelatedProjects';
 import ServiceHero from '../components/services/ServiceHero';
 import ServiceOverview from '../components/services/ServiceOverview';
 import ServiceCapabilities from '../components/services/ServiceCapabilities';
@@ -11,9 +15,7 @@ import ServiceWhyKC from '../components/services/ServiceWhyKC';
 import ServiceFAQ from '../components/services/ServiceFAQ';
 import ServiceCTA from '../components/services/ServiceCTA';
 import CredibilityBand from '../components/trust/CredibilityBand';
-import IndustriesServedModern from '../components/trust/IndustriesServedModern';
-import { getRelatedServices, getServiceBySlug } from '../data/seoServicePages';
-import { getIndustriesForService } from '../data/industriesData';
+import { getServiceBySlug } from '../data/seoServicePages';
 import { buildServicePageJsonLd } from '../utils/serviceSeoUtils';
 import { trackServicePageView } from '../utils/analytics';
 
@@ -31,9 +33,6 @@ export default function ServiceLandingPage() {
     return <Navigate to="/capabilities" replace />;
   }
 
-  const relatedServices = getRelatedServices(service.relatedServices ?? []);
-  const relatedIndustries = getIndustriesForService(slug);
-
   return (
     <>
       <SEO
@@ -42,6 +41,16 @@ export default function ServiceLandingPage() {
         path={service.path}
         jsonLd={buildServicePageJsonLd(service)}
       />
+
+      <div className="section-container px-4 pt-6 sm:px-6 lg:px-8">
+        <Breadcrumbs
+          items={[
+            { label: 'Home', to: '/' },
+            { label: 'Services', to: '/capabilities' },
+            { label: service.eyebrow },
+          ]}
+        />
+      </div>
 
       <ServiceHero eyebrow={service.eyebrow} h1={service.h1} overview={service.overview} serviceSlug={slug} />
       <CredibilityBand compact />
@@ -52,19 +61,10 @@ export default function ServiceLandingPage() {
       <ServiceProcess />
       <ServiceWhyKC />
       <ServiceFAQ faq={service.faq} />
-      {relatedIndustries.length > 0 ? (
-        <IndustriesServedModern
-          industries={relatedIndustries}
-          showDescriptions={false}
-          showCTA
-          ctaLabel="View All Industries"
-          ctaTo="/industries"
-          title="Related Industries"
-          description="Explore industrial markets commonly supported by this service."
-          className="bg-brand-light"
-        />
-      ) : null}
-      <ServiceCTA relatedServices={relatedServices} serviceSlug={slug} />
+      <RelatedServices serviceSlug={slug} />
+      <RelatedIndustries serviceSlug={slug} />
+      <RelatedProjects className="bg-brand-light" />
+      <ServiceCTA serviceSlug={slug} />
     </>
   );
 }

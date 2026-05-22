@@ -1,8 +1,11 @@
+import { Link } from 'react-router-dom';
 import CTAButton from '../CTAButton';
 import { ProjectImage } from './ProjectImage';
+import { getProjectRelatedServiceLinks } from '../../data/internalLinksData';
 
 export default function ProjectShowcaseCard({ project, onViewDetails }) {
   const Icon = project.icon;
+  const relatedServices = getProjectRelatedServiceLinks(project);
 
   return (
     <article className="project-showcase-card card flex h-full flex-col overflow-hidden p-0">
@@ -31,6 +34,24 @@ export default function ProjectShowcaseCard({ project, onViewDetails }) {
               </li>
             ))}
           </ul>
+        ) : null}
+
+        {relatedServices.length > 0 ? (
+          <div className="mt-4 border-t border-slate-100 pt-4">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-metallic">Related Services</h4>
+            <ul className="mt-2 flex flex-wrap gap-2">
+              {relatedServices.map((service) => (
+                <li key={service.path}>
+                  <Link
+                    to={service.path}
+                    className="inline-flex min-h-[36px] items-center rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-brand-primary transition-colors hover:border-brand-accent hover:text-brand-accent"
+                  >
+                    {service.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         ) : null}
 
         <div className="mt-5 flex flex-col gap-2 sm:flex-row">

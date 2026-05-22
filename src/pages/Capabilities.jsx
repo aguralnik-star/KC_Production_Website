@@ -2,11 +2,14 @@ import { Award, Clock, Cpu, DollarSign, Factory, FlaskConical, RotateCw, Ruler, 
 import SEO from '../components/SEO';
 import { PAGE_SEO } from '../config/siteConfig';
 import SectionHeading from '../components/SectionHeading';
+import Breadcrumbs from '../components/seo/Breadcrumbs';
+import InternalLinkGrid from '../components/seo/InternalLinkGrid';
 import CapabilitiesHero from '../components/capabilities/CapabilitiesHero';
 import CapabilityFeatureCard from '../components/capabilities/CapabilityFeatureCard';
 import CapabilityProcessStrip from '../components/capabilities/CapabilityProcessStrip';
 import IndustriesServedModern from '../components/trust/IndustriesServedModern';
 import CapabilitiesCTA from '../components/capabilities/CapabilitiesCTA';
+import { CAPABILITY_SERVICE_LINKS } from '../data/internalLinksData';
 
 const CAPABILITY_CARDS = [
   {
@@ -101,6 +104,10 @@ export default function Capabilities() {
     <>
       <SEO {...PAGE_SEO.capabilities} />
 
+      <div className="section-container px-4 pt-6 sm:px-6 lg:px-8">
+        <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Capabilities' }]} />
+      </div>
+
       <CapabilitiesHero />
 
       <section className="section-padding" aria-labelledby="capability-cards-heading">
@@ -120,6 +127,15 @@ export default function Capabilities() {
       </section>
 
       <CapabilityProcessStrip />
+
+      <InternalLinkGrid
+        title="Explore Specific Services"
+        description="Review dedicated service pages for CNC machining, milling, turning, prototype work, production runs, tooling, fixtures, and gauges."
+        links={CAPABILITY_SERVICE_LINKS}
+        columns={4}
+        headingId="capability-services-heading"
+        className="bg-brand-light !pt-0"
+      />
 
       <IndustriesServedModern
         limit={6}

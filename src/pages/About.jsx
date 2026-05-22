@@ -1,5 +1,6 @@
 import SEO from '../components/SEO';
 import { PAGE_SEO } from '../config/siteConfig';
+import Breadcrumbs from '../components/seo/Breadcrumbs';
 import AboutHero from '../components/about/AboutHero';
 import AboutStory from '../components/about/AboutStory';
 import AboutTimeline from '../components/about/AboutTimeline';
@@ -12,6 +13,10 @@ export default function About() {
   return (
     <>
       <SEO {...PAGE_SEO.about} />
+
+      <div className="section-container px-4 pt-6 sm:px-6 lg:px-8">
+        <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'About' }]} />
+      </div>
 
       <AboutHero />
 

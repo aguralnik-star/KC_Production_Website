@@ -1,5 +1,6 @@
 import SEO from '../components/SEO';
 import { PAGE_SEO } from '../config/siteConfig';
+import InternalLinkGrid from '../components/seo/InternalLinkGrid';
 import HomeHeroV2 from '../components/home/HomeHeroV2';
 import HomeTrustStrip from '../components/home/HomeTrustStrip';
 import CredibilityBand from '../components/trust/CredibilityBand';
@@ -13,6 +14,7 @@ import HomeWhyKC from '../components/home/HomeWhyKC';
 import HomeStatsBand from '../components/home/HomeStatsBand';
 import TestimonialSection from '../components/trust/TestimonialSection';
 import HomeRFQCTA from '../components/home/HomeRFQCTA';
+import { HOME_EXPLORE_LINKS } from '../data/internalLinksData';
 
 export default function Home() {
   return (
@@ -39,6 +41,14 @@ export default function Home() {
       <HomeWhyKC />
       <HomeStatsBand />
       <TestimonialSection limit={4} />
+      <InternalLinkGrid
+        title="Explore K&C Manufacturing"
+        description="Navigate capabilities, industries, projects, and RFQ resources across the K&C website."
+        links={HOME_EXPLORE_LINKS}
+        columns={4}
+        headingId="home-explore-heading"
+        className="bg-brand-light"
+      />
       <HomeRFQCTA />
     </>
   );

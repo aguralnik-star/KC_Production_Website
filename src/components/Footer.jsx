@@ -1,33 +1,17 @@
-import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Printer } from 'lucide-react';
 import Logo from './Logo';
+import SEOFooterLinks from './seo/SEOFooterLinks';
 import { COMPANY } from '../data/company';
-import { SERVICE_NAV_LINKS } from '../data/seoServicePages';
-import { trackCTAClick, trackEmailClick, trackPhoneClick } from '../utils/analytics';
-
-const footerLinks = {
-  Company: [
-    { to: '/about', label: 'About Us' },
-    { to: '/capabilities', label: 'Capabilities' },
-    { to: '/projects', label: 'Projects' },
-    { to: '/equipment', label: 'Equipment' },
-    { to: '/quality', label: 'Quality' },
-    { to: '/industries', label: 'Industries' },
-  ],
-  Services: [
-    ...SERVICE_NAV_LINKS.map(({ slug, label }) => ({ to: `/services/${slug}`, label })),
-    { to: '/contact', label: 'Request a Quote' },
-    { to: '/rfq/status', label: 'Check RFQ Status' },
-  ],
-};
+import { FOOTER_BRAND } from '../data/footerNavigationData';
+import { trackEmailClick, trackPhoneClick } from '../utils/analytics';
 
 export default function Footer() {
   return (
     <footer className="border-t border-slate-200 bg-charcoal text-white">
       <div className="section-padding pb-8">
         <div className="section-container">
-          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
-            <div>
+          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
+            <div className="lg:col-span-1">
               <div className="mb-4">
                 <Logo
                   variant="white"
@@ -37,42 +21,22 @@ export default function Footer() {
                 <p className="mt-3 text-sm font-medium text-slate-200">{COMPANY.name}</p>
                 <p className="text-xs text-slate-400">Founded {COMPANY.founded} • Addison, IL</p>
               </div>
-              <p className="text-sm leading-relaxed text-slate-400">
-                Dedicated to quality precision machining, responsive service, and long-term customer relationships across the Midwest.
-              </p>
+              <p className="text-sm leading-relaxed text-slate-400">{FOOTER_BRAND.tagline}</p>
             </div>
 
-            {Object.entries(footerLinks).map(([title, links]) => (
-              <nav key={title} aria-label={`${title} footer links`}>
-                <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-slate-300">{title}</h2>
-                <ul className="space-y-2.5">
-                  {links.map(({ to, label }) => (
-                    <li key={label}>
-                      <Link
-                        to={to}
-                        className="text-sm text-slate-400 hover:text-white"
-                        onClick={() => {
-                          if (label === 'Request a Quote') {
-                            trackCTAClick('Request a Quote', 'footer', to);
-                          } else if (label === 'Check RFQ Status') {
-                            trackCTAClick('Check RFQ Status', 'footer', to);
-                          }
-                        }}
-                      >
-                        {label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            ))}
+            <SEOFooterLinks />
 
             <div>
               <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-slate-300">Contact</h2>
               <address className="space-y-3 text-sm not-italic text-slate-400">
+                <p>{COMPANY.name}</p>
                 <p className="flex items-start gap-2.5">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent-light" aria-hidden="true" />
-                  <span>{COMPANY.address}<br />{COMPANY.city}</span>
+                  <span>
+                    {COMPANY.address}
+                    <br />
+                    {COMPANY.city}
+                  </span>
                 </p>
                 <p className="flex items-center gap-2.5">
                   <Phone className="h-4 w-4 shrink-0 text-accent-light" aria-hidden="true" />

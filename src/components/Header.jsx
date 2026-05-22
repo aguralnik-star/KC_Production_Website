@@ -78,8 +78,14 @@ export default function Header() {
           linkClassName="shrink-0 transition-opacity hover:opacity-90"
         />
 
-        <nav className="hidden items-center gap-6 xl:flex" aria-label="Main navigation">
-          {navLinks.map(({ to, label }) => (
+        <nav className="hidden items-center gap-5 xl:flex" aria-label="Main navigation">
+          {navLinks.slice(0, 3).map(({ to, label }) => (
+            <NavLink key={to} to={to} end={to === '/'} className={linkClass}>
+              {label}
+            </NavLink>
+          ))}
+          <ServicesNavDropdown linkClass={linkClass} />
+          {navLinks.slice(3).map(({ to, label }) => (
             <NavLink key={to} to={to} end={to === '/'} className={linkClass}>
               {label}
             </NavLink>

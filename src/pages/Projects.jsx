@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react';
 import SEO from '../components/SEO';
 import { PAGE_SEO } from '../config/siteConfig';
+import Breadcrumbs from '../components/seo/Breadcrumbs';
+import RelatedProjects from '../components/seo/RelatedProjects';
 import ProjectsHero from '../components/projects/ProjectsHero';
 import ProjectCategoryFilter from '../components/projects/ProjectCategoryFilter';
 import ProjectShowcaseGrid from '../components/projects/ProjectShowcaseGrid';
@@ -34,6 +36,10 @@ export default function Projects() {
     <>
       <SEO {...PAGE_SEO.projects} />
 
+      <div className="section-container px-4 pt-6 sm:px-6 lg:px-8">
+        <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Projects' }]} />
+      </div>
+
       <ProjectsHero />
 
       <section className="section-padding" aria-labelledby="projects-showcase-heading">
@@ -57,6 +63,7 @@ export default function Projects() {
       </section>
 
       <ProjectProcessSummary />
+      <RelatedProjects className="bg-white !pt-0" />
       <TestimonialSection limit={2} className="bg-slate-50" />
       <TrustCTA
         headline="Have a similar machining, fixture, gauge, or tooling project?"

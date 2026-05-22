@@ -1,6 +1,7 @@
 import SEO from '../components/SEO';
 import { PAGE_SEO } from '../config/siteConfig';
 import SectionHeading from '../components/SectionHeading';
+import Breadcrumbs from '../components/seo/Breadcrumbs';
 import IndustriesServedModern from '../components/trust/IndustriesServedModern';
 import TrustCTA from '../components/trust/TrustCTA';
 
@@ -11,6 +12,11 @@ export default function Industries() {
 
       <section className="page-hero">
         <div className="section-container px-4 sm:px-6 lg:px-8">
+          <Breadcrumbs
+            items={[{ label: 'Home', to: '/' }, { label: 'Industries' }]}
+            className="mb-6"
+            dark
+          />
           <SectionHeading
             label="Industries Served"
             title="Manufacturing Support Across Demanding Industrial Markets"

@@ -2,6 +2,7 @@ import { ArrowRight, Cpu, Layers, RotateCw, Ruler, ScanLine } from 'lucide-react
 import SEO from '../components/SEO';
 import { PAGE_SEO } from '../config/siteConfig';
 import SectionHeading from '../components/SectionHeading';
+import Breadcrumbs from '../components/seo/Breadcrumbs';
 import EquipmentHero from '../components/EquipmentHero';
 import EquipmentCard from '../components/EquipmentCard';
 import CTAButton from '../components/CTAButton';
@@ -13,6 +14,10 @@ export default function Equipment() {
   return (
     <>
       <SEO {...PAGE_SEO.equipment} />
+
+      <div className="section-container px-4 pt-6 sm:px-6 lg:px-8">
+        <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Equipment' }]} />
+      </div>
 
       <EquipmentHero />
 

@@ -1,6 +1,7 @@
 import SEO from '../components/SEO';
 import { PAGE_SEO } from '../config/siteConfig';
 import SectionHeading from '../components/SectionHeading';
+import Breadcrumbs from '../components/seo/Breadcrumbs';
 import QualityHero from '../components/quality/QualityHero';
 import QualityInspectionProcess from '../components/quality/QualityInspectionProcess';
 import QualityEquipmentGrid from '../components/quality/QualityEquipmentGrid';
@@ -13,6 +14,10 @@ export default function Quality() {
   return (
     <>
       <SEO {...PAGE_SEO.quality} />
+
+      <div className="section-container px-4 pt-6 sm:px-6 lg:px-8">
+        <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Quality' }]} />
+      </div>
 
       <QualityHero />
 

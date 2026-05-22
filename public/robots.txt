@@ -1,17 +1,11 @@
 User-agent: *
 Allow: /
-Allow: /about
-Allow: /capabilities
-Allow: /equipment
-Allow: /quality
-Allow: /industries
-Allow: /contact
-Allow: /rfq/status
 
 Disallow: /admin
 Disallow: /admin/
 Disallow: /rfq/additional-info
-Disallow: /rfq/additional-info/
-Disallow: /rfq/confirmation
+Disallow: /rfq/additional-info/*
+Disallow: /api-private
+Disallow: /private
 
 Sitemap: https://www.kcdesignmfg.com/sitemap.xml

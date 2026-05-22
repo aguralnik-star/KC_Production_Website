@@ -2,6 +2,7 @@ import { Phone, Mail, MapPin, Printer } from 'lucide-react';
 import SEO from '../components/SEO';
 import { PAGE_SEO } from '../config/siteConfig';
 import SectionHeading from '../components/SectionHeading';
+import Breadcrumbs from '../components/seo/Breadcrumbs';
 import RFQForm from '../components/RFQForm';
 import RFQTrustPanel from '../components/rfq/RFQTrustPanel';
 import { COMPANY } from '../data/company';
@@ -14,6 +15,11 @@ export default function Contact() {
 
       <section className="page-hero">
         <div className="section-container px-4 sm:px-6 lg:px-8">
+          <Breadcrumbs
+            items={[{ label: 'Home', to: '/' }, { label: 'Contact' }]}
+            className="mb-6"
+            dark
+          />
           <SectionHeading
             label="Contact / RFQ"
             title="Request a Prompt, Competitive Quote"

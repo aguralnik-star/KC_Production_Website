@@ -12,17 +12,7 @@ import {
   UtensilsCrossed,
   Cog,
 } from 'lucide-react';
-
-const SERVICE_LINKS = {
-  cncMachining: { label: 'CNC Machining', slug: 'cnc-machining' },
-  cncMilling: { label: 'CNC Milling', slug: 'cnc-milling' },
-  cncTurning: { label: 'CNC Turning', slug: 'cnc-turning' },
-  tooling: { label: 'Tooling', slug: 'tooling' },
-  fixtures: { label: 'Fixtures', slug: 'fixtures' },
-  gauges: { label: 'Gauges', slug: 'gauges' },
-  prototype: { label: 'Prototype Machining', slug: 'prototype-machining' },
-  production: { label: 'Production Machining', slug: 'production-machining' },
-};
+import { getIndustryServiceLinks, getIndustriesForServiceSlug } from './internalLinksData';
 
 export const INDUSTRIES_SERVED = [
   {
@@ -31,7 +21,7 @@ export const INDUSTRIES_SERVED = [
     description:
       'Precision machined components, fixtures, tooling, and inspection support for transportation-related manufacturing needs.',
     commonProjectTypes: ['Machined components', 'Fixtures', 'Tooling details', 'Inspection gauges'],
-    relatedServices: [SERVICE_LINKS.cncMachining, SERVICE_LINKS.fixtures, SERVICE_LINKS.gauges],
+    relatedServices: getIndustryServiceLinks('transportation'),
     icon: Truck,
   },
   {
@@ -40,7 +30,7 @@ export const INDUSTRIES_SERVED = [
     description:
       'Machined parts, fixtures, and tooling support for medical device and healthcare-related manufacturing applications.',
     commonProjectTypes: ['Precision components', 'Inspection fixtures', 'Prototype parts', 'Production details'],
-    relatedServices: [SERVICE_LINKS.cncMachining, SERVICE_LINKS.prototype, SERVICE_LINKS.fixtures],
+    relatedServices: getIndustryServiceLinks('medical'),
     icon: HeartPulse,
   },
   {
@@ -49,7 +39,7 @@ export const INDUSTRIES_SERVED = [
     description:
       'Production components, fixtures, tooling, and gauge support for automotive suppliers and related manufacturers.',
     commonProjectTypes: ['Production components', 'Manufacturing fixtures', 'Tooling details', 'Gauge components'],
-    relatedServices: [SERVICE_LINKS.production, SERVICE_LINKS.tooling, SERVICE_LINKS.fixtures],
+    relatedServices: getIndustryServiceLinks('automotive'),
     icon: Car,
   },
   {
@@ -58,7 +48,7 @@ export const INDUSTRIES_SERVED = [
     description:
       'Complex hydraulic components, manifolds, and machined details for fluid power and related industrial applications.',
     commonProjectTypes: ['Manifold components', 'Machined blocks', 'Fittings and adapters', 'Prototype details'],
-    relatedServices: [SERVICE_LINKS.cncMilling, SERVICE_LINKS.cncTurning, SERVICE_LINKS.prototype],
+    relatedServices: getIndustryServiceLinks('hydraulics'),
     icon: Droplets,
   },
   {
@@ -67,7 +57,7 @@ export const INDUSTRIES_SERVED = [
     description:
       'Precision valve bodies, components, and related machined details for industrial valve manufacturing support.',
     commonProjectTypes: ['Valve bodies', 'Machined components', 'Inspection fixtures', 'Production details'],
-    relatedServices: [SERVICE_LINKS.cncMachining, SERVICE_LINKS.production, SERVICE_LINKS.gauges],
+    relatedServices: getIndustryServiceLinks('valves'),
     icon: Cog,
   },
   {
@@ -76,7 +66,7 @@ export const INDUSTRIES_SERVED = [
     description:
       'Durable machined parts, tooling, and fixture support for heavy equipment and off-highway manufacturing needs.',
     commonProjectTypes: ['Structural components', 'Replacement parts', 'Tooling details', 'Production machining'],
-    relatedServices: [SERVICE_LINKS.cncMachining, SERVICE_LINKS.production, SERVICE_LINKS.tooling],
+    relatedServices: getIndustryServiceLinks('heavy-equipment'),
     icon: Factory,
   },
   {
@@ -85,7 +75,7 @@ export const INDUSTRIES_SERVED = [
     description:
       'Components and fixtures for conveyors, lifts, handling systems, and related industrial equipment applications.',
     commonProjectTypes: ['Machined components', 'Assembly fixtures', 'Wear parts', 'Tooling support'],
-    relatedServices: [SERVICE_LINKS.cncMachining, SERVICE_LINKS.fixtures, SERVICE_LINKS.tooling],
+    relatedServices: getIndustryServiceLinks('material-handling'),
     icon: Package,
   },
   {
@@ -94,7 +84,7 @@ export const INDUSTRIES_SERVED = [
     description:
       'Tight-tolerance components, enclosures, and fixture support for electronics manufacturing and assembly applications.',
     commonProjectTypes: ['Precision components', 'Enclosure details', 'Assembly fixtures', 'Prototype parts'],
-    relatedServices: [SERVICE_LINKS.cncMilling, SERVICE_LINKS.prototype, SERVICE_LINKS.fixtures],
+    relatedServices: getIndustryServiceLinks('electronics'),
     icon: Cpu,
   },
   {
@@ -103,7 +93,7 @@ export const INDUSTRIES_SERVED = [
     description:
       'Machined components for food service equipment and commercial kitchen-related manufacturing applications.',
     commonProjectTypes: ['Machined components', 'Assembly details', 'Replacement parts', 'Fixture components'],
-    relatedServices: [SERVICE_LINKS.cncMachining, SERVICE_LINKS.production, SERVICE_LINKS.cncTurning],
+    relatedServices: getIndustryServiceLinks('food-service'),
     icon: UtensilsCrossed,
   },
   {
@@ -112,7 +102,7 @@ export const INDUSTRIES_SERVED = [
     description:
       'Precision machining support for military-related industrial applications. Industry served only — not a certification or compliance claim.',
     commonProjectTypes: ['Machined components', 'Fixtures', 'Tooling details', 'Inspection gauges'],
-    relatedServices: [SERVICE_LINKS.cncMachining, SERVICE_LINKS.fixtures, SERVICE_LINKS.gauges],
+    relatedServices: getIndustryServiceLinks('military'),
     icon: Shield,
   },
   {
@@ -121,7 +111,7 @@ export const INDUSTRIES_SERVED = [
     description:
       'Purpose-built inspection and assembly fixtures designed to support repeatable quality verification and production workflows.',
     commonProjectTypes: ['Inspection fixtures', 'Assembly fixtures', 'Functional check fixtures', 'Gauge integration'],
-    relatedServices: [SERVICE_LINKS.fixtures, SERVICE_LINKS.gauges, SERVICE_LINKS.cncMachining],
+    relatedServices: getIndustryServiceLinks('custom-inspection-fixtures'),
     icon: ScanSearch,
   },
   {
@@ -130,7 +120,7 @@ export const INDUSTRIES_SERVED = [
     description:
       'Custom go/no-go gauges and measurement tools built to customer specifications for production and inspection support.',
     commonProjectTypes: ['Go/no-go gauges', 'Custom measurement tools', 'Inspection gauges', 'Production checking'],
-    relatedServices: [SERVICE_LINKS.gauges, SERVICE_LINKS.fixtures, SERVICE_LINKS.cncMachining],
+    relatedServices: getIndustryServiceLinks('gauges'),
     icon: Gauge,
   },
 ];
@@ -140,7 +130,8 @@ export function getIndustryById(id) {
 }
 
 export function getIndustriesForService(slug) {
-  return INDUSTRIES_SERVED.filter((industry) =>
-    industry.relatedServices.some((service) => service.slug === slug),
-  ).slice(0, 6);
+  return getIndustriesForServiceSlug(slug)
+    .map((industryId) => getIndustryById(industryId))
+    .filter(Boolean)
+    .slice(0, 6);
 }
