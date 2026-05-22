@@ -63,10 +63,14 @@ export function EquipmentCard({
   variant = 'featured',
   className = '',
   showFeatures = true,
+  showSpecs = true,
+  showRepresentativeMeta = true,
+  maxBadges,
   ctaTo,
   ctaLabel,
 }) {
   const alt = imageAlt || title;
+  const visibleBadges = maxBadges ? badges.slice(0, maxBadges) : badges;
 
   if (variant === 'gallery') {
     return (
@@ -84,9 +88,9 @@ export function EquipmentCard({
             {title}
           </h3>
           {description ? <p className="equipment-gallery-card__description">{description}</p> : null}
-          {badges.length > 0 ? (
+          {visibleBadges.length > 0 ? (
             <div className="equipment-gallery-card__badges">
-              {badges.map((badge) => (
+              {visibleBadges.map((badge) => (
                 <span key={badge} className="equipment-gallery-badge">
                   {badge}
                 </span>
@@ -150,23 +154,29 @@ export function EquipmentCard({
         <EquipmentImage src={image} alt={alt} priority className="equipment-featured-card__media" />
 
         <div className="equipment-featured-card__content">
-          <div className="flex flex-wrap items-start justify-between gap-4">
-            <div>
-              {disclaimer ? <p className="equipment-featured-card__disclaimer">{disclaimer}</p> : null}
-              {representativeLabel ? (
-                <p className="equipment-featured-card__label">{representativeLabel}</p>
-              ) : null}
+          {showRepresentativeMeta ? (
+            <div className="flex flex-wrap items-start justify-between gap-4">
+              <div>
+                {disclaimer ? <p className="equipment-featured-card__disclaimer">{disclaimer}</p> : null}
+                {representativeLabel ? (
+                  <p className="equipment-featured-card__label">{representativeLabel}</p>
+                ) : null}
+              </div>
+              <div className="flex gap-2" aria-hidden="true">
+                {FEATURED_ICONS.map((Icon, index) => (
+                  <span key={`featured-equipment-icon-${index}`} className="equipment-featured-card__icon">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                ))}
+              </div>
             </div>
-            <div className="flex gap-2" aria-hidden="true">
-              {FEATURED_ICONS.map((Icon, index) => (
-                <span key={`featured-equipment-icon-${index}`} className="equipment-featured-card__icon">
-                  <Icon className="h-5 w-5" />
-                </span>
-              ))}
-            </div>
-          </div>
+          ) : null}
 
-          {category ? <p className="equipment-featured-card__category">{category}</p> : null}
+          {category ? (
+            <p className={`equipment-featured-card__category ${showRepresentativeMeta ? 'mt-6' : 'mt-0'}`}>
+              {category}
+            </p>
+          ) : null}
           <h3
             id={title ? `equipment-card-${title.replace(/\s+/g, '-').toLowerCase()}` : undefined}
             className="equipment-featured-card__title"
@@ -175,9 +185,9 @@ export function EquipmentCard({
           </h3>
           {description ? <p className="equipment-featured-card__description">{description}</p> : null}
 
-          {badges.length > 0 ? (
+          {visibleBadges.length > 0 ? (
             <div className="equipment-featured-card__badges">
-              {badges.map((badge) => (
+              {visibleBadges.map((badge) => (
                 <span key={badge} className="equipment-spec-badge">
                   {badge}
                 </span>
@@ -185,7 +195,7 @@ export function EquipmentCard({
             </div>
           ) : null}
 
-          {specs.length > 0 ? (
+          {showSpecs && specs.length > 0 ? (
             <ul className="equipment-featured-card__specs">
               {specs.map((spec) => (
                 <li key={spec}>
@@ -260,7 +270,7 @@ export function EquipmentPreviewCard({ className = '' }) {
   );
 }
 
-export function FeaturedEquipmentShowcase({ className = '' }) {
+export function FeaturedEquipmentShowcase({ className = '', compact = false }) {
   const equipment = FEATURED_EQUIPMENT;
 
   return (
@@ -271,9 +281,12 @@ export function FeaturedEquipmentShowcase({ className = '' }) {
       description={equipment.description}
       image={equipment.image}
       imageAlt={equipment.imageAlt}
-      specs={equipment.specs}
       badges={equipment.badges}
-      features={equipment.features}
+      specs={compact ? [] : equipment.specs}
+      features={[]}
+      showFeatures={false}
+      showSpecs={!compact}
+      showRepresentativeMeta={!compact}
       representativeLabel={equipment.representativeLabel}
       disclaimer={equipment.disclaimer}
     />

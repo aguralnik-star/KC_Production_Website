@@ -402,7 +402,15 @@
   }
 
   .equipment-featured-card__category {
-    @apply mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400;
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-slate-400;
+  }
+
+  .equipment-featured-card__category.mt-6 {
+    @apply mt-6;
+  }
+
+  .equipment-featured-card__category.mt-0 {
+    @apply mt-0;
   }
 
   .equipment-featured-card__title {
@@ -442,7 +450,11 @@
   }
 
   .equipment-gallery-grid {
-    @apply grid list-none grid-cols-1 gap-6 p-0 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5;
+    @apply grid list-none grid-cols-1 gap-6 p-0 sm:grid-cols-2 xl:grid-cols-3;
+  }
+
+  .equipment-gallery-grid__item {
+    @apply h-full min-w-0;
   }
 
   .equipment-gallery-card {
@@ -479,11 +491,11 @@
   }
 
   .equipment-gallery-card__title {
-    @apply mt-2 text-lg font-bold tracking-tight text-charcoal;
+    @apply mt-2 text-base font-bold leading-snug tracking-tight text-charcoal sm:text-lg;
   }
 
   .equipment-gallery-card__description {
-    @apply mt-2 flex-1 text-sm leading-relaxed text-metallic;
+    @apply mt-2 flex-1 text-sm leading-relaxed text-metallic line-clamp-3;
   }
 
   .equipment-gallery-card__badges {

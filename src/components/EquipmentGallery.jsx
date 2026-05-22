@@ -1,22 +1,20 @@
 import { REPRESENTATIVE_EQUIPMENT_GALLERY } from '../data/company';
 import { EquipmentCard } from './EquipmentCard';
 
-export default function EquipmentGallery({ className = '' }) {
+export default function EquipmentGallery({ className = '', id }) {
   const { title, disclaimer, items } = REPRESENTATIVE_EQUIPMENT_GALLERY;
 
   return (
     <section
+      id={id}
       className={`section-padding ${className}`.trim()}
       aria-labelledby="representative-equipment-gallery-heading"
     >
       <div className="section-container">
         <div className="max-w-4xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-primary">
-            Representative Equipment
-          </p>
           <h2
             id="representative-equipment-gallery-heading"
-            className="mt-3 text-3xl font-bold tracking-tight text-charcoal sm:text-4xl"
+            className="text-3xl font-bold tracking-tight text-charcoal sm:text-4xl"
           >
             {title}
           </h2>
@@ -25,7 +23,7 @@ export default function EquipmentGallery({ className = '' }) {
 
         <ul className="equipment-gallery-grid mt-10">
           {items.map((item) => (
-            <li key={item.id}>
+            <li key={item.id} className="equipment-gallery-grid__item">
               <EquipmentCard
                 variant="gallery"
                 title={item.name}
@@ -34,6 +32,7 @@ export default function EquipmentGallery({ className = '' }) {
                 image={item.image}
                 imageAlt={item.imageAlt}
                 badges={item.badges}
+                maxBadges={3}
                 ctaTo="/contact"
                 ctaLabel="Learn More"
               />
