@@ -9,7 +9,7 @@ import ProjectShowcaseGrid from '../components/projects/ProjectShowcaseGrid';
 import ProjectDetailModal from '../components/projects/ProjectDetailModal';
 import ProjectProcessSummary from '../components/projects/ProjectProcessSummary';
 import PublishedCaseStudyCard from '../components/projects/PublishedCaseStudyCard';
-import TestimonialSection from '../components/trust/TestimonialSection';
+import ApprovedTestimonialsSection from '../components/trust/ApprovedTestimonialsSection';
 import TrustCTA from '../components/trust/TrustCTA';
 import { getPublicProjects } from '../data/projects';
 import { getPublishedCaseStudies } from '../services/caseStudyService';
@@ -127,7 +127,7 @@ export default function Projects() {
 
       <ProjectProcessSummary />
       <RelatedProjects className="bg-white !pt-0" />
-      <TestimonialSection limit={2} className="bg-slate-50" />
+      <ApprovedTestimonialsSection limit={2} className="bg-slate-50" />
       <TrustCTA
         headline="Have a similar machining, fixture, gauge, or tooling project?"
         body="Send your drawings, specifications, and project requirements. K&C will review your RFQ and follow up with next steps."

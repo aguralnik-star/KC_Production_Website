@@ -35,6 +35,7 @@ const AdminOwnerHandoff = lazy(() => lazyWithRetry(() => import('./pages/AdminOw
 const AdminGoLiveCommandCenter = lazy(() => lazyWithRetry(() => import('./pages/AdminGoLiveCommandCenter')));
 const AdminRealContentReplacement = lazy(() => lazyWithRetry(() => import('./pages/AdminRealContentReplacement')));
 const AdminCaseStudyBuilder = lazy(() => lazyWithRetry(() => import('./pages/AdminCaseStudyBuilder')));
+const AdminTestimonials = lazy(() => lazyWithRetry(() => import('./pages/AdminTestimonials')));
 
 function PublicRoutes() {
   return (
@@ -80,6 +81,7 @@ export default function App() {
           <Route path="/admin/real-content" element={<AdminRealContentReplacement />} />
           <Route path="/admin/case-studies" element={<AdminCaseStudyBuilder />} />
           <Route path="/admin/case-studies/:id" element={<AdminCaseStudyBuilder />} />
+          <Route path="/admin/testimonials" element={<AdminTestimonials />} />
         </Route>
 
         <Route path="/admin" element={<Navigate to="/admin/rfqs" replace />} />

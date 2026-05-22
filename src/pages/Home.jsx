@@ -12,7 +12,7 @@ import HomeQualityPreview from '../components/home/HomeQualityPreview';
 import IndustriesServedModern from '../components/trust/IndustriesServedModern';
 import HomeWhyKC from '../components/home/HomeWhyKC';
 import HomeStatsBand from '../components/home/HomeStatsBand';
-import TestimonialSection from '../components/trust/TestimonialSection';
+import ApprovedTestimonialsSection from '../components/trust/ApprovedTestimonialsSection';
 import HomeRFQCTA from '../components/home/HomeRFQCTA';
 import { HOME_EXPLORE_LINKS } from '../data/internalLinksData';
 
@@ -40,7 +40,7 @@ export default function Home() {
       />
       <HomeWhyKC />
       <HomeStatsBand />
-      <TestimonialSection limit={4} />
+      <ApprovedTestimonialsSection limit={4} />
       <InternalLinkGrid
         title="Explore K&C Manufacturing"
         description="Navigate capabilities, industries, projects, and RFQ resources across the K&C website."

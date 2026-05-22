@@ -1,6 +1,7 @@
-import { getPublicTestimonials } from '../../data/testimonialsData';
+import { getRepresentativeTestimonials } from '../../data/testimonialsData';
 import { TESTIMONIAL_SECTION_NOTE } from '../../data/trustSignalsData';
 import TestimonialCard from './TestimonialCard';
+import ApprovedTestimonialCard from './ApprovedTestimonialCard';
 
 export default function TestimonialSection({
   testimonials,
@@ -11,8 +12,9 @@ export default function TestimonialSection({
   title = 'The Kind of Partnership K&C Is Built to Provide',
   description = 'These examples reflect representative feedback themes — not verified customer endorsements.',
   className = '',
+  useApprovedCard = false,
 }) {
-  const resolved = testimonials ?? getPublicTestimonials(limit);
+  const resolved = testimonials ?? getRepresentativeTestimonials(limit);
   const items = limit ? resolved.slice(0, limit) : resolved;
   const isDark = variant === 'dark';
 
@@ -47,7 +49,11 @@ export default function TestimonialSection({
         <ul className="mt-10 grid gap-6 lg:grid-cols-2">
           {items.map((testimonial) => (
             <li key={testimonial.id}>
-              <TestimonialCard testimonial={testimonial} />
+              {useApprovedCard && testimonial.isApproved ? (
+                <ApprovedTestimonialCard testimonial={testimonial} />
+              ) : (
+                <TestimonialCard testimonial={testimonial} />
+              )}
             </li>
           ))}
         </ul>

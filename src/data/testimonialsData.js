@@ -1,3 +1,5 @@
+import { mapPublishedTestimonial } from './testimonialWorkflowData';
+
 const CONTENT_METADATA = {
   isRepresentative: true,
   isCustomerApproved: false,
@@ -43,8 +45,12 @@ export const REPRESENTATIVE_TESTIMONIALS = [
   },
 ];
 
-/** Customer-approved testimonials — add only after explicit customer approval. */
+/** Static fallback — prefer Supabase published testimonials via ApprovedTestimonialsSection. */
 export const REAL_TESTIMONIALS = [];
+
+export function getRepresentativeTestimonials(limit) {
+  return limit ? REPRESENTATIVE_TESTIMONIALS.slice(0, limit) : REPRESENTATIVE_TESTIMONIALS;
+}
 
 export function isContentPublishReady(item) {
   return Boolean(
@@ -56,6 +62,7 @@ export function isContentPublishReady(item) {
   );
 }
 
+/** @deprecated Use ApprovedTestimonialsSection for Supabase-backed public testimonials. */
 export function getPublicTestimonials(limit) {
   const approvedReal = REAL_TESTIMONIALS.filter(isContentPublishReady);
   const source = approvedReal.length > 0 ? approvedReal : REPRESENTATIVE_TESTIMONIALS;
@@ -66,8 +73,10 @@ export function getTestimonialDisplayLabel(testimonial) {
   if (testimonial?.isRepresentative || testimonial?.sourceType === 'representative') {
     return 'Representative Example';
   }
-  if (isContentPublishReady(testimonial)) {
-    return null;
+  if (testimonial?.isApproved || isContentPublishReady(testimonial)) {
+    return 'Approved Testimonial';
   }
   return 'Representative Example';
 }
+
+export { mapPublishedTestimonial };

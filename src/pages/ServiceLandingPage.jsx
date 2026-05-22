@@ -13,6 +13,7 @@ import ServiceMaterials from '../components/services/ServiceMaterials';
 import ServiceProcess from '../components/services/ServiceProcess';
 import ServiceWhyKC from '../components/services/ServiceWhyKC';
 import ServiceFAQ from '../components/services/ServiceFAQ';
+import ApprovedTestimonialsSection from '../components/trust/ApprovedTestimonialsSection';
 import ServiceCTA from '../components/services/ServiceCTA';
 import CredibilityBand from '../components/trust/CredibilityBand';
 import { getServiceBySlug } from '../data/seoServicePages';
@@ -64,6 +65,7 @@ export default function ServiceLandingPage() {
       <RelatedServices serviceSlug={slug} />
       <RelatedIndustries serviceSlug={slug} />
       <RelatedProjects className="bg-brand-light" />
+      <ApprovedTestimonialsSection limit={2} />
       <ServiceCTA serviceSlug={slug} />
     </>
   );

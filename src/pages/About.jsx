@@ -7,6 +7,7 @@ import AboutTimeline from '../components/about/AboutTimeline';
 import AboutValues from '../components/about/AboutValues';
 import TrustSignalsSection from '../components/trust/TrustSignalsSection';
 import AboutExperienceStrip from '../components/about/AboutExperienceStrip';
+import ApprovedTestimonialsSection from '../components/trust/ApprovedTestimonialsSection';
 import AboutCTA from '../components/about/AboutCTA';
 
 export default function About() {
@@ -29,6 +30,8 @@ export default function About() {
       <TrustSignalsSection limit={8} variant="light" />
 
       <AboutExperienceStrip />
+
+      <ApprovedTestimonialsSection limit={2} className="bg-slate-50" eyebrow="Customer Experience" />
 
       <AboutCTA />
     </>
