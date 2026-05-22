@@ -36,8 +36,8 @@ create table if not exists public.customer_approval_requests (
   customer_name text,
   customer_company text,
   customer_email text,
-  related_testimonial_id uuid references public.testimonials(id) on delete set null,
-  related_case_study_id uuid references public.case_studies(id) on delete set null,
+  related_testimonial_id uuid,
+  related_case_study_id uuid,
   status text not null default 'draft',
   subject text,
   body text,
@@ -64,6 +64,24 @@ create index if not exists customer_approval_requests_status_idx
 
 create index if not exists customer_approval_requests_type_idx
   on public.customer_approval_requests (request_type, created_at desc);
+
+-- Optional FKs when content workflow tables exist
+DO $$
+BEGIN
+  IF to_regclass('public.testimonials') IS NOT NULL
+     AND NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'customer_approval_requests_related_testimonial_id_fkey') THEN
+    ALTER TABLE public.customer_approval_requests
+      ADD CONSTRAINT customer_approval_requests_related_testimonial_id_fkey
+      FOREIGN KEY (related_testimonial_id) REFERENCES public.testimonials(id) ON DELETE SET NULL;
+  END IF;
+
+  IF to_regclass('public.case_studies') IS NOT NULL
+     AND NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'customer_approval_requests_related_case_study_id_fkey') THEN
+    ALTER TABLE public.customer_approval_requests
+      ADD CONSTRAINT customer_approval_requests_related_case_study_id_fkey
+      FOREIGN KEY (related_case_study_id) REFERENCES public.case_studies(id) ON DELETE SET NULL;
+  END IF;
+END $$;
 
 -- ---------------------------------------------------------------------------
 -- updated_at trigger

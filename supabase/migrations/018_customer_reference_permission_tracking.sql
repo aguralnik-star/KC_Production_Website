@@ -125,32 +125,79 @@ create index if not exists customer_reference_activity_ref_idx
   on public.customer_reference_activity (customer_reference_id, created_at desc);
 
 -- ---------------------------------------------------------------------------
--- Link existing content tables
+-- Link existing content tables (skip when prerequisite tables are not deployed)
 -- ---------------------------------------------------------------------------
 
-alter table public.testimonials
-  add column if not exists customer_reference_id uuid references public.customer_references(id) on delete set null;
+DO $$
+BEGIN
+  IF to_regclass('public.testimonials') IS NOT NULL THEN
+    ALTER TABLE public.testimonials
+      ADD COLUMN IF NOT EXISTS customer_reference_id uuid;
 
-alter table public.case_studies
-  add column if not exists customer_reference_id uuid references public.customer_references(id) on delete set null;
+    IF NOT EXISTS (
+      SELECT 1 FROM pg_constraint
+      WHERE conname = 'testimonials_customer_reference_id_fkey'
+    ) THEN
+      ALTER TABLE public.testimonials
+        ADD CONSTRAINT testimonials_customer_reference_id_fkey
+        FOREIGN KEY (customer_reference_id) REFERENCES public.customer_references(id) ON DELETE SET NULL;
+    END IF;
 
-alter table public.case_study_photos
-  add column if not exists customer_reference_id uuid references public.customer_references(id) on delete set null;
+    CREATE INDEX IF NOT EXISTS testimonials_customer_reference_idx
+      ON public.testimonials (customer_reference_id);
+  END IF;
 
-alter table public.customer_approval_requests
-  add column if not exists customer_reference_id uuid references public.customer_references(id) on delete set null;
+  IF to_regclass('public.case_studies') IS NOT NULL THEN
+    ALTER TABLE public.case_studies
+      ADD COLUMN IF NOT EXISTS customer_reference_id uuid;
 
-create index if not exists testimonials_customer_reference_idx
-  on public.testimonials (customer_reference_id);
+    IF NOT EXISTS (
+      SELECT 1 FROM pg_constraint
+      WHERE conname = 'case_studies_customer_reference_id_fkey'
+    ) THEN
+      ALTER TABLE public.case_studies
+        ADD CONSTRAINT case_studies_customer_reference_id_fkey
+        FOREIGN KEY (customer_reference_id) REFERENCES public.customer_references(id) ON DELETE SET NULL;
+    END IF;
 
-create index if not exists case_studies_customer_reference_idx
-  on public.case_studies (customer_reference_id);
+    CREATE INDEX IF NOT EXISTS case_studies_customer_reference_idx
+      ON public.case_studies (customer_reference_id);
+  END IF;
 
-create index if not exists case_study_photos_customer_reference_idx
-  on public.case_study_photos (customer_reference_id);
+  IF to_regclass('public.case_study_photos') IS NOT NULL THEN
+    ALTER TABLE public.case_study_photos
+      ADD COLUMN IF NOT EXISTS customer_reference_id uuid;
 
-create index if not exists customer_approval_requests_reference_idx
-  on public.customer_approval_requests (customer_reference_id);
+    IF NOT EXISTS (
+      SELECT 1 FROM pg_constraint
+      WHERE conname = 'case_study_photos_customer_reference_id_fkey'
+    ) THEN
+      ALTER TABLE public.case_study_photos
+        ADD CONSTRAINT case_study_photos_customer_reference_id_fkey
+        FOREIGN KEY (customer_reference_id) REFERENCES public.customer_references(id) ON DELETE SET NULL;
+    END IF;
+
+    CREATE INDEX IF NOT EXISTS case_study_photos_customer_reference_idx
+      ON public.case_study_photos (customer_reference_id);
+  END IF;
+
+  IF to_regclass('public.customer_approval_requests') IS NOT NULL THEN
+    ALTER TABLE public.customer_approval_requests
+      ADD COLUMN IF NOT EXISTS customer_reference_id uuid;
+
+    IF NOT EXISTS (
+      SELECT 1 FROM pg_constraint
+      WHERE conname = 'customer_approval_requests_customer_reference_id_fkey'
+    ) THEN
+      ALTER TABLE public.customer_approval_requests
+        ADD CONSTRAINT customer_approval_requests_customer_reference_id_fkey
+        FOREIGN KEY (customer_reference_id) REFERENCES public.customer_references(id) ON DELETE SET NULL;
+    END IF;
+
+    CREATE INDEX IF NOT EXISTS customer_approval_requests_reference_idx
+      ON public.customer_approval_requests (customer_reference_id);
+  END IF;
+END $$;
 
 -- ---------------------------------------------------------------------------
 -- updated_at triggers
