@@ -31,6 +31,7 @@ const AdminPostLaunchDashboard = lazy(() => lazyWithRetry(() => import('./pages/
 const AdminMobileBrowserQA = lazy(() => lazyWithRetry(() => import('./pages/AdminMobileBrowserQA')));
 const AdminContentQAAudit = lazy(() => lazyWithRetry(() => import('./pages/AdminContentQAAudit')));
 const AdminOwnerHandoff = lazy(() => lazyWithRetry(() => import('./pages/AdminOwnerHandoff')));
+const AdminGoLiveCommandCenter = lazy(() => lazyWithRetry(() => import('./pages/AdminGoLiveCommandCenter')));
 
 function PublicRoutes() {
   return (
@@ -71,6 +72,7 @@ export default function App() {
           <Route path="/admin/mobile-browser-qa" element={<AdminMobileBrowserQA />} />
           <Route path="/admin/content-qa" element={<AdminContentQAAudit />} />
           <Route path="/admin/owner-handoff" element={<AdminOwnerHandoff />} />
+          <Route path="/admin/go-live" element={<AdminGoLiveCommandCenter />} />
         </Route>
 
         <Route path="/admin" element={<Navigate to="/admin/rfqs" replace />} />

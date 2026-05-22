@@ -9,6 +9,7 @@ const NAV_ITEMS = [
   { to: '/admin/launch-checklist', label: 'Launch', match: (location) => location.pathname === '/admin/launch-checklist' },
   { to: '/admin/launch-go-no-go', label: 'Go/No-Go', match: (location) => location.pathname === '/admin/launch-go-no-go' },
   { to: '/admin/handoff', label: 'Handoff', match: (location) => location.pathname === '/admin/handoff' },
+  { to: '/admin/go-live', label: 'Go-Live', match: (location) => location.pathname === '/admin/go-live' },
   { to: '/admin/post-launch', label: 'Post-Launch', match: (location) => location.pathname === '/admin/post-launch' },
   { to: '/admin/mobile-browser-qa', label: 'Mobile & Browser QA', match: (location) => location.pathname === '/admin/mobile-browser-qa' },
   { to: '/admin/content-qa', label: 'Content QA', match: (location) => location.pathname === '/admin/content-qa' },

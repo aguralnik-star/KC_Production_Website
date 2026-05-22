@@ -8,6 +8,8 @@ export default function EquipmentHero() {
           label="Equipment"
           title="Precision Manufacturing Equipment"
           description="K&C Design and Manufacturing uses CNC machining equipment, inspection systems, and CAD/CAM programming tools to support precision machining, tooling, fixtures, gauges, and production manufacturing."
+          titleId="equipment-hero-heading"
+          headingLevel="h1"
           dark
         />
       </div>

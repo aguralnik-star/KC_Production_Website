@@ -37,19 +37,23 @@ create trigger launch_checklist_items_updated_at
 
 alter table public.launch_checklist_items enable row level security;
 
+drop policy if exists "admin_select_launch_checklist_items" on public.launch_checklist_items;
 create policy "admin_select_launch_checklist_items"
   on public.launch_checklist_items for select to authenticated
   using (public.is_admin());
 
+drop policy if exists "admin_insert_launch_checklist_items" on public.launch_checklist_items;
 create policy "admin_insert_launch_checklist_items"
   on public.launch_checklist_items for insert to authenticated
   with check (public.is_admin());
 
+drop policy if exists "admin_update_launch_checklist_items" on public.launch_checklist_items;
 create policy "admin_update_launch_checklist_items"
   on public.launch_checklist_items for update to authenticated
   using (public.is_admin())
   with check (public.is_admin());
 
+drop policy if exists "admin_delete_launch_checklist_items" on public.launch_checklist_items;
 create policy "admin_delete_launch_checklist_items"
   on public.launch_checklist_items for delete to authenticated
   using (public.is_admin());
