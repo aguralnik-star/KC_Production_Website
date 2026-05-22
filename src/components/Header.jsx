@@ -60,6 +60,9 @@ export default function Header() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
+          <Link to="/rfq/status" className="hidden text-sm font-medium text-charcoal/70 hover:text-accent xl:inline">
+            Check RFQ Status
+          </Link>
           <CTAButton to="/capabilities" variant="secondary">View Capabilities</CTAButton>
           <CTAButton to="/contact">Request a Quote</CTAButton>
         </div>
@@ -89,6 +92,13 @@ export default function Header() {
           <div className="mt-4 flex flex-col gap-2 border-t border-slate-100 pt-4">
             <CTAButton to="/capabilities" variant="secondary" className="w-full" onClick={() => setMobileOpen(false)}>View Capabilities</CTAButton>
             <CTAButton to="/contact" className="w-full" onClick={() => setMobileOpen(false)}>Request a Quote</CTAButton>
+            <Link
+              to="/rfq/status"
+              className="block rounded-lg px-3 py-2.5 text-center text-sm font-medium text-charcoal hover:bg-slate-50"
+              onClick={() => setMobileOpen(false)}
+            >
+              Check RFQ Status
+            </Link>
           </div>
         </nav>
       )}

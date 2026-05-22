@@ -1,6 +1,7 @@
 import { supabase } from '../lib/supabaseClient';
 import { getCurrentUser, isCurrentUserAdmin } from './authService';
 import { COMPANY } from '../data/company';
+import { buildPublicStatusUpdateForManualQuoteSend } from './rfqWorkflowService';
 
 export const DRAFT_TYPES = [
   { value: 'initial_quote', label: 'Initial Quote' },
@@ -335,7 +336,7 @@ export async function markDraftManuallySent(draftId, sendData) {
 
   const { data: existingRfq } = await supabase
     .from('rfq_requests')
-    .select('next_follow_up_at')
+    .select('next_follow_up_at, customer_status_message')
     .eq('id', draft.rfq_request_id)
     .single();
 
@@ -346,6 +347,7 @@ export async function markDraftManuallySent(draftId, sendData) {
     quote_manually_sent_by: user?.id ?? null,
     quote_send_method: sendData.send_method ?? 'manual_email',
     quote_send_notes: sendData.notes ?? null,
+    ...buildPublicStatusUpdateForManualQuoteSend(existingRfq),
   };
 
   if (!existingRfq?.next_follow_up_at) {

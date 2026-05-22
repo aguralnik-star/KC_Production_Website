@@ -1,5 +1,6 @@
 import { supabase, RFQ_BUCKET } from '../lib/supabaseClient';
 import { isCurrentUserAdmin } from './authService';
+import { buildPublicStatusUpdateForInternalChange } from './rfqWorkflowService';
 
 export const RFQ_STATUSES = [
   'new',
@@ -68,9 +69,21 @@ export async function updateRFQStatus(id, status) {
     throw new Error('Invalid status.');
   }
 
+  const { data: existing, error: existingError } = await supabase
+    .from('rfq_requests')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (existingError || !existing) {
+    throw new Error('RFQ request not found.');
+  }
+
+  const publicUpdates = buildPublicStatusUpdateForInternalChange(existing, status);
+
   const { data, error } = await supabase
     .from('rfq_requests')
-    .update({ status })
+    .update({ status, ...publicUpdates })
     .eq('id', id)
     .select('*')
     .single();

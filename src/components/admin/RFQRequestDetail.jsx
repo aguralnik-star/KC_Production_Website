@@ -3,7 +3,9 @@ import { X, Mail, Phone, Building2, Loader2, FileText, DollarSign, AlertCircle }
 import RFQStatusBadge from './RFQStatusBadge';
 import RFQFileList from './RFQFileList';
 import RFQWorkflowPanel from './RFQWorkflowPanel';
+import RFQPublicStatusEditor from './RFQPublicStatusEditor';
 import { RFQ_STATUSES } from '../../services/adminRfqService';
+import { CUSTOMER_STATUS_LABELS } from '../../services/rfqWorkflowService';
 
 function DetailRow({ label, value }) {
   return (
@@ -153,13 +155,30 @@ export default function RFQRequestDetail({
                   label="Confirmation Sent At"
                   value={request.customer_confirmation_email_sent_at ? formatDate(request.customer_confirmation_email_sent_at) : null}
                 />
+                <DetailRow
+                  label="Public Status"
+                  value={CUSTOMER_STATUS_LABELS[request.public_status] || request.public_status}
+                />
+                <DetailRow
+                  label="Last Status Viewed"
+                  value={request.last_customer_status_viewed_at ? formatDate(request.last_customer_status_viewed_at) : null}
+                />
               </dl>
+              {request.customer_status_message && (
+                <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm text-charcoal">
+                  {request.customer_status_message}
+                </div>
+              )}
               {request.customer_confirmation_email_status === 'failed' && request.customer_confirmation_email_error && (
                 <div className="mt-3 flex items-start gap-2 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs text-red-800">
                   <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
                   {request.customer_confirmation_email_error}
                 </div>
               )}
+            </section>
+
+            <section className="mb-6">
+              <RFQPublicStatusEditor request={request} onRequestUpdated={onRequestUpdated} />
             </section>
 
             <section className="mb-6">

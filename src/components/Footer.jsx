@@ -11,6 +11,8 @@ const footerLinks = {
     { to: '/industries', label: 'Industries' },
   ],
   Services: [
+    { to: '/contact', label: 'Request a Quote' },
+    { to: '/rfq/status', label: 'Check RFQ Status' },
     { to: '/capabilities', label: 'CNC Machining' },
     { to: '/capabilities', label: 'Fixtures & Gauges' },
     { to: '/capabilities', label: 'Production Tooling' },
