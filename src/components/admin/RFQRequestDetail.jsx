@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { X, Mail, Phone, Building2, Loader2, FileText, DollarSign, AlertCircle } from 'lucide-react';
+import { X, Mail, Phone, Building2, Loader2, FileText, DollarSign, AlertCircle, MessageSquare } from 'lucide-react';
 import RFQStatusBadge from './RFQStatusBadge';
 import RFQFileList from './RFQFileList';
 import RFQWorkflowPanel from './RFQWorkflowPanel';
-import RFQPublicStatusEditor from './RFQPublicStatusEditor';
+import CustomerStatusEmailPanel from './CustomerStatusEmailPanel';
 import { RFQ_STATUSES } from '../../services/adminRfqService';
 import { CUSTOMER_STATUS_LABELS } from '../../services/rfqWorkflowService';
 
@@ -29,6 +29,7 @@ function formatDate(dateString) {
 
 const TABS = [
   { id: 'details', label: 'Details', icon: FileText },
+  { id: 'customer-updates', label: 'Customer Updates', icon: MessageSquare },
   { id: 'quote', label: 'Quote', icon: DollarSign },
 ];
 
@@ -163,6 +164,10 @@ export default function RFQRequestDetail({
                   label="Last Status Viewed"
                   value={request.last_customer_status_viewed_at ? formatDate(request.last_customer_status_viewed_at) : null}
                 />
+                <DetailRow
+                  label="Last Status Email"
+                  value={request.last_customer_status_email_sent_at ? formatDate(request.last_customer_status_email_sent_at) : null}
+                />
               </dl>
               {request.customer_status_message && (
                 <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm text-charcoal">
@@ -175,10 +180,6 @@ export default function RFQRequestDetail({
                   {request.customer_confirmation_email_error}
                 </div>
               )}
-            </section>
-
-            <section className="mb-6">
-              <RFQPublicStatusEditor request={request} onRequestUpdated={onRequestUpdated} />
             </section>
 
             <section className="mb-6">
@@ -238,6 +239,8 @@ export default function RFQRequestDetail({
 
             <p className="mt-6 font-mono text-xs text-slate-400">ID: {request.id}</p>
           </>
+        ) : activeTab === 'customer-updates' ? (
+          <CustomerStatusEmailPanel request={request} onRequestUpdated={onRequestUpdated} />
         ) : (
           <RFQWorkflowPanel
             request={request}

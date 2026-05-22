@@ -15,7 +15,6 @@ import {
   updateQuoteDraft,
 } from '../../services/quoteDraftService';
 import { resendCustomerConfirmationEmail } from '../../services/adminRfqService';
-import RFQPublicStatusEditor from './RFQPublicStatusEditor';
 
 export default function RFQWorkflowPanel({ request, files, onRequestUpdated }) {
   const [drafts, setDrafts] = useState([]);
@@ -215,7 +214,6 @@ export default function RFQWorkflowPanel({ request, files, onRequestUpdated }) {
             onResendConfirmation={handleResendConfirmation}
             resending={resendingConfirmation}
           />
-          <RFQPublicStatusEditor request={request} onRequestUpdated={onRequestUpdated} />
           <QuoteEmailDraftGenerator request={request} files={files} onGenerate={handleGenerate} />
           <QuoteDraftPreview
             draft={activeDraft}
