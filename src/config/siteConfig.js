@@ -111,15 +111,8 @@ export const LOCAL_BUSINESS_SCHEMA = {
     latitude: 41.9312,
     longitude: -88.0029,
   },
-  areaServed: {
-    '@type': 'GeoCircle',
-    geoMidpoint: {
-      '@type': 'GeoCoordinates',
-      latitude: 41.9312,
-      longitude: -88.0029,
-    },
-    geoRadius: '800000',
-  },
+  areaServed: 'Midwest United States',
+  serviceType: 'Precision CNC Machining',
   description: DEFAULT_SEO.description,
   foundingDate: '1987',
   priceRange: '$$',

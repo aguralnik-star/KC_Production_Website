@@ -40,7 +40,7 @@ export default function Footer() {
             </div>
 
             {Object.entries(footerLinks).map(([title, links]) => (
-              <div key={title}>
+              <nav key={title} aria-label={`${title} footer links`}>
                 <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-slate-300">{title}</h2>
                 <ul className="space-y-2.5">
                   {links.map(({ to, label }) => (
@@ -49,7 +49,7 @@ export default function Footer() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </nav>
             ))}
 
             <div>
