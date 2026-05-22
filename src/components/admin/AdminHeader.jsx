@@ -21,6 +21,12 @@ export default function AdminHeader({ email, onSignOut }) {
             >
               RFQ Dashboard
             </Link>
+            <Link
+              to="/admin/rfq-readiness"
+              className="rounded-lg border border-slate-200 px-3 py-1 text-xs font-semibold text-charcoal hover:border-accent hover:text-accent"
+            >
+              Production Readiness
+            </Link>
           </div>
         </div>
 
