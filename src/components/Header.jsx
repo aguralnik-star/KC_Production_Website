@@ -5,6 +5,7 @@ import CTAButton from './CTAButton';
 import Logo from './Logo';
 import { COMPANY } from '../data/company';
 import { trapFocus } from '../utils/accessibilityUtils';
+import { ServicesMobileSection, ServicesNavDropdown } from './services/ServicesNavDropdown';
 
 const navLinks = [
   { to: '/', label: 'Home' },
@@ -104,7 +105,15 @@ export default function Header() {
           aria-label="Mobile navigation"
         >
           <ul className="flex flex-col gap-1">
-            {navLinks.map(({ to, label }) => (
+            {navLinks.slice(0, 3).map(({ to, label }) => (
+              <li key={to}>
+                <NavLink to={to} end={to === '/'} className={linkClass} onClick={() => setMobileOpen(false)}>
+                  <span className="block rounded-lg px-3 py-2.5 hover:bg-slate-50">{label}</span>
+                </NavLink>
+              </li>
+            ))}
+            <ServicesMobileSection linkClass={linkClass} onNavigate={() => setMobileOpen(false)} />
+            {navLinks.slice(3).map(({ to, label }) => (
               <li key={to}>
                 <NavLink to={to} end={to === '/'} className={linkClass} onClick={() => setMobileOpen(false)}>
                   <span className="block rounded-lg px-3 py-2.5 hover:bg-slate-50">{label}</span>

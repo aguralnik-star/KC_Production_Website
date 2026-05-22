@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Printer } from 'lucide-react';
 import Logo from './Logo';
 import { COMPANY } from '../data/company';
+import { SERVICE_NAV_LINKS } from '../data/seoServicePages';
 
 const footerLinks = {
   Company: [
@@ -13,12 +14,9 @@ const footerLinks = {
     { to: '/industries', label: 'Industries' },
   ],
   Services: [
+    ...SERVICE_NAV_LINKS.map(({ slug, label }) => ({ to: `/services/${slug}`, label })),
     { to: '/contact', label: 'Request a Quote' },
     { to: '/rfq/status', label: 'Check RFQ Status' },
-    { to: '/capabilities', label: 'CNC Machining' },
-    { to: '/capabilities', label: 'Fixtures & Gauges' },
-    { to: '/capabilities', label: 'Production Tooling' },
-    { to: '/capabilities', label: 'Prototype Machining' },
   ],
 };
 
