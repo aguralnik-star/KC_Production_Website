@@ -141,3 +141,30 @@ export function filterRFQRequests(requests, { statusFilter = 'all', searchQuery 
     (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
   );
 }
+
+export async function resendCustomerConfirmationEmail(rfqRequestId) {
+  await requireAdminAccess();
+
+  const { data, error } = await supabase.functions.invoke('send-rfq-notification', {
+    body: {
+      rfq_request_id: rfqRequestId,
+      mode: 'customer_confirmation_only',
+    },
+  });
+
+  if (error || data?.error || !data?.customer_confirmation_sent) {
+    throw new Error(data?.customer_confirmation_error || 'Unable to resend confirmation email.');
+  }
+
+  const { data: updated, error: fetchError } = await supabase
+    .from('rfq_requests')
+    .select('*')
+    .eq('id', rfqRequestId)
+    .single();
+
+  if (fetchError || !updated) {
+    throw new Error('Confirmation email sent, but RFQ record could not be refreshed.');
+  }
+
+  return updated;
+}

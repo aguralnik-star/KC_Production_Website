@@ -99,20 +99,34 @@ export async function uploadRFQFiles(rfqRequestId, files) {
   return uploaded;
 }
 
-export async function notifyRFQSubmission(rfqRequestId) {
+export async function notifyRFQSubmission(rfqRequestId, mode = 'full_notification') {
   const { data, error } = await supabase.functions.invoke('send-rfq-notification', {
-    body: { rfq_request_id: rfqRequestId },
+    body: { rfq_request_id: rfqRequestId, mode },
   });
 
   if (error) {
-    throw new Error('Your RFQ was saved, but we could not send the notification email. Our team will still review your submission.');
+    return {
+      internal_notification_sent: false,
+      customer_confirmation_sent: false,
+      customer_confirmation_status: 'failed',
+    };
   }
 
   if (data?.error) {
-    throw new Error('Your RFQ was saved, but notification delivery failed. Our team will still review your submission.');
+    return {
+      internal_notification_sent: false,
+      customer_confirmation_sent: false,
+      customer_confirmation_status: data.customer_confirmation_status ?? 'failed',
+      ...data,
+    };
   }
 
-  return data;
+  return {
+    internal_notification_sent: Boolean(data?.internal_notification_sent),
+    customer_confirmation_sent: Boolean(data?.customer_confirmation_sent),
+    customer_confirmation_status: data?.customer_confirmation_status ?? 'not_sent',
+    ...data,
+  };
 }
 
 export async function submitRFQ(formData, files = []) {
@@ -149,10 +163,15 @@ export async function submitRFQ(formData, files = []) {
   }
 
   const rfqRequestId = rfqRecord.id;
+  let notification = {
+    internal_notification_sent: false,
+    customer_confirmation_sent: false,
+    customer_confirmation_status: 'not_sent',
+  };
 
   try {
     await uploadRFQFiles(rfqRequestId, files);
-    await notifyRFQSubmission(rfqRequestId);
+    notification = await notifyRFQSubmission(rfqRequestId);
   } catch (err) {
     throw err instanceof Error ? err : new Error('RFQ submission failed. Please try again.');
   }
@@ -161,6 +180,8 @@ export async function submitRFQ(formData, files = []) {
     id: rfqRequestId,
     reference_number: rfqRecord.reference_number,
     submitted_at: rfqRecord.submitted_at,
+    email: formData.email.trim(),
+    notification,
   };
 }
 

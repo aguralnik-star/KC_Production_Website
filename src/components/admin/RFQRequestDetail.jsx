@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { X, Mail, Phone, Building2, Loader2, FileText, DollarSign } from 'lucide-react';
+import { X, Mail, Phone, Building2, Loader2, FileText, DollarSign, AlertCircle } from 'lucide-react';
 import RFQStatusBadge from './RFQStatusBadge';
 import RFQFileList from './RFQFileList';
 import RFQWorkflowPanel from './RFQWorkflowPanel';
@@ -120,6 +120,47 @@ export default function RFQRequestDetail({
                 </select>
               </div>
             </div>
+
+            <section className="mb-6">
+              <h3 className="mb-3 text-sm font-semibold text-charcoal">Submission Details</h3>
+              <dl className="grid gap-4 sm:grid-cols-2">
+                <DetailRow label="Reference Number" value={request.reference_number} />
+                <div>
+                  <dt className="text-xs font-semibold uppercase tracking-wider text-metallic">Confirmation Email</dt>
+                  <dd className="mt-1 flex flex-wrap items-center gap-2">
+                    <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold ${
+                      request.customer_confirmation_email_status === 'sent'
+                        ? 'border-emerald-200 bg-emerald-100 text-emerald-800'
+                        : request.customer_confirmation_email_status === 'failed'
+                          ? 'border-red-200 bg-red-100 text-red-800'
+                          : 'border-slate-200 bg-slate-100 text-slate-700'
+                    }`}>
+                      {request.customer_confirmation_email_status === 'sent'
+                        ? 'Sent'
+                        : request.customer_confirmation_email_status === 'failed'
+                          ? 'Failed'
+                          : 'Not Sent'}
+                    </span>
+                    {request.customer_confirmation_email_status === 'failed' && (
+                      <span className="inline-flex items-center gap-1 rounded-full border border-amber-200 bg-amber-50 px-2.5 py-0.5 text-xs font-semibold text-amber-800">
+                        Action needed
+                      </span>
+                    )}
+                  </dd>
+                </div>
+                <DetailRow label="Submitted At" value={request.submitted_at ? formatDate(request.submitted_at) : formatDate(request.created_at)} />
+                <DetailRow
+                  label="Confirmation Sent At"
+                  value={request.customer_confirmation_email_sent_at ? formatDate(request.customer_confirmation_email_sent_at) : null}
+                />
+              </dl>
+              {request.customer_confirmation_email_status === 'failed' && request.customer_confirmation_email_error && (
+                <div className="mt-3 flex items-start gap-2 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs text-red-800">
+                  <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+                  {request.customer_confirmation_email_error}
+                </div>
+              )}
+            </section>
 
             <section className="mb-6">
               <h3 className="mb-3 text-sm font-semibold text-charcoal">Contact Information</h3>

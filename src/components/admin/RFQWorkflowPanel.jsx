@@ -14,6 +14,7 @@ import {
   saveQuoteDraft,
   updateQuoteDraft,
 } from '../../services/quoteDraftService';
+import { resendCustomerConfirmationEmail } from '../../services/adminRfqService';
 
 export default function RFQWorkflowPanel({ request, files, onRequestUpdated }) {
   const [drafts, setDrafts] = useState([]);
@@ -23,6 +24,7 @@ export default function RFQWorkflowPanel({ request, files, onRequestUpdated }) {
   const [saving, setSaving] = useState(false);
   const [loadingAction, setLoadingAction] = useState(false);
   const [archivingId, setArchivingId] = useState(null);
+  const [resendingConfirmation, setResendingConfirmation] = useState(false);
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
@@ -174,6 +176,22 @@ export default function RFQWorkflowPanel({ request, files, onRequestUpdated }) {
     }
   };
 
+  const handleResendConfirmation = async () => {
+    if (!request?.id) return;
+    setResendingConfirmation(true);
+    setError('');
+    try {
+      const updated = await resendCustomerConfirmationEmail(request.id);
+      onRequestUpdated?.(updated);
+      setSuccessMessage('Customer confirmation email resent.');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Unable to resend confirmation email.');
+      throw err;
+    } finally {
+      setResendingConfirmation(false);
+    }
+  };
+
   if (!request) return null;
 
   return (
@@ -191,7 +209,11 @@ export default function RFQWorkflowPanel({ request, files, onRequestUpdated }) {
         </div>
       ) : (
         <>
-          <RFQQuoteSummary request={request} />
+          <RFQQuoteSummary
+            request={request}
+            onResendConfirmation={handleResendConfirmation}
+            resending={resendingConfirmation}
+          />
           <QuoteEmailDraftGenerator request={request} files={files} onGenerate={handleGenerate} />
           <QuoteDraftPreview
             draft={activeDraft}

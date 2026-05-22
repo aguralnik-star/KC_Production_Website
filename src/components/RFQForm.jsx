@@ -117,9 +117,11 @@ export default function RFQForm() {
             submittedAt: result.submitted_at,
             company: form.company.trim() || null,
             name: form.name.trim(),
-            email: form.email.trim(),
+            email: result.email,
             projectType: form.projectType || null,
             timeline: form.timeline || null,
+            customerConfirmationSent: result.notification?.customer_confirmation_sent ?? false,
+            customerConfirmationStatus: result.notification?.customer_confirmation_status ?? 'not_sent',
           },
         },
       });

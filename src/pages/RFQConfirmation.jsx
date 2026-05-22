@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
-import { CheckCircle2 } from 'lucide-react';
+import { AlertCircle, CheckCircle2 } from 'lucide-react';
 import PageHead from '../components/PageHead';
 import SectionHeading from '../components/SectionHeading';
 import CTAButton from '../components/CTAButton';
@@ -24,8 +24,28 @@ export default function RFQConfirmation() {
       email: routeState.email || null,
       projectType: routeState.projectType || null,
       timeline: routeState.timeline || null,
+      customerConfirmationSent: routeState.customerConfirmationSent ?? null,
+      customerConfirmationStatus: routeState.customerConfirmationStatus ?? null,
     };
   }, [location.state, searchParams]);
+
+  const emailNotice = useMemo(() => {
+    if (confirmation.customerConfirmationSent === true && confirmation.email) {
+      return {
+        type: 'success',
+        message: `A confirmation email has been sent to ${confirmation.email}.`,
+      };
+    }
+
+    if (confirmation.customerConfirmationStatus === 'failed') {
+      return {
+        type: 'warning',
+        message: 'Your RFQ was submitted successfully, but the confirmation email could not be sent. Please save your reference number.',
+      };
+    }
+
+    return null;
+  }, [confirmation.customerConfirmationSent, confirmation.customerConfirmationStatus, confirmation.email]);
 
   const hasDetails = Boolean(
     confirmation.name
@@ -67,6 +87,26 @@ export default function RFQConfirmation() {
               </p>
             </div>
           </div>
+
+          {emailNotice && (
+            <div
+              className={`mb-8 flex items-start gap-3 rounded-xl px-5 py-4 print:hidden ${
+                emailNotice.type === 'success'
+                  ? 'border border-blue-200 bg-blue-50'
+                  : 'border border-amber-200 bg-amber-50'
+              }`}
+              role="status"
+            >
+              {emailNotice.type === 'success' ? (
+                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-blue-600" aria-hidden="true" />
+              ) : (
+                <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden="true" />
+              )}
+              <p className={`text-sm ${emailNotice.type === 'success' ? 'text-blue-900' : 'text-amber-900'}`}>
+                {emailNotice.message}
+              </p>
+            </div>
+          )}
 
           <div className="space-y-8">
             <RFQConfirmationCard confirmation={confirmation} />
