@@ -55,7 +55,7 @@ export function CaseStudyPublishPanel({ publishReadiness, onPublish, onArchive, 
         <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3" role="alert">
           <p className="text-sm font-semibold text-amber-900">Publish blocked — missing requirements:</p>
           <ul className="mt-2 list-disc pl-5 text-sm text-amber-900">
-            {publishReadiness.missing.map((item) => (
+            {(publishReadiness.missing ?? []).map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
@@ -63,6 +63,17 @@ export function CaseStudyPublishPanel({ publishReadiness, onPublish, onArchive, 
       ) : (
         <p className="mt-3 text-sm text-emerald-700">All publish requirements met.</p>
       )}
+
+      {(publishReadiness.warnings ?? []).length > 0 ? (
+        <div className="mt-4 rounded-lg border border-blue-200 bg-blue-50 px-4 py-3" role="status">
+          <p className="text-sm font-semibold text-blue-900">Permission warnings:</p>
+          <ul className="mt-2 list-disc pl-5 text-sm text-blue-900">
+            {publishReadiness.warnings.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
 
       <div className="mt-4 flex flex-wrap gap-3">
         <AccessibleButton

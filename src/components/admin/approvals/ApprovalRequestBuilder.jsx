@@ -16,6 +16,8 @@ export default function ApprovalRequestBuilder({
   templates,
   testimonials,
   caseStudies,
+  customerReferences = [],
+  onCreateCustomerReference,
   activeRequest,
   onGenerate,
   onSaveRequest,
@@ -33,6 +35,7 @@ export default function ApprovalRequestBuilder({
 
   const [selectedTemplateId, setSelectedTemplateId] = useState(defaultTemplate?.id ?? '');
   const [form, setForm] = useState({
+    customer_reference_id: '',
     customer_name: '',
     customer_company: '',
     customer_email: '',
@@ -59,6 +62,7 @@ export default function ApprovalRequestBuilder({
         customer_name: activeRequest.customer_name ?? f.customer_name,
         customer_company: activeRequest.customer_company ?? f.customer_company,
         customer_email: activeRequest.customer_email ?? f.customer_email,
+        customer_reference_id: activeRequest.customer_reference_id ?? f.customer_reference_id,
         related_testimonial_id: activeRequest.related_testimonial_id ?? f.related_testimonial_id,
         related_case_study_id: activeRequest.related_case_study_id ?? f.related_case_study_id,
         internal_notes: activeRequest.internal_notes ?? f.internal_notes,
@@ -68,6 +72,19 @@ export default function ApprovalRequestBuilder({
   }, [activeRequest]);
 
   const selectedTemplate = templates.find((t) => t.id === selectedTemplateId) ?? defaultTemplate;
+
+  const selectedReference = customerReferences.find((r) => r.id === form.customer_reference_id);
+
+  const applyReference = (refId) => {
+    const ref = customerReferences.find((r) => r.id === refId);
+    setForm((f) => ({
+      ...f,
+      customer_reference_id: refId,
+      customer_name: ref?.customer_name ?? f.customer_name,
+      customer_company: ref?.customer_company ?? f.customer_company,
+      customer_email: ref?.customer_email ?? f.customer_email,
+    }));
+  };
 
   const relatedTestimonial = testimonials.find((t) => t.id === form.related_testimonial_id);
   const relatedCaseStudy = caseStudies.find((c) => c.id === form.related_case_study_id);
@@ -96,6 +113,7 @@ export default function ApprovalRequestBuilder({
       customer_email: form.customer_email,
       related_testimonial_id: form.related_testimonial_id || null,
       related_case_study_id: form.related_case_study_id || null,
+      customer_reference_id: form.customer_reference_id || null,
       subject: result.subject,
       body: result.body,
       internal_notes: form.internal_notes,
@@ -122,6 +140,7 @@ export default function ApprovalRequestBuilder({
       customer_email: form.customer_email,
       related_testimonial_id: form.related_testimonial_id || null,
       related_case_study_id: form.related_case_study_id || null,
+      customer_reference_id: form.customer_reference_id || null,
       subject: result.subject,
       body: result.body,
       internal_notes: form.internal_notes,
@@ -174,6 +193,44 @@ export default function ApprovalRequestBuilder({
                 </option>
               ))}
             </select>
+          </label>
+
+          <label className="block text-xs font-semibold uppercase tracking-wider text-metallic md:col-span-2">
+            Customer Reference
+            <div className="mt-1 flex flex-wrap gap-2">
+              <select
+                value={form.customer_reference_id}
+                onChange={(e) => applyReference(e.target.value)}
+                className={`flex-1 ${inputClass}`}
+              >
+                <option value="">None — enter customer manually</option>
+                {customerReferences.map((ref) => (
+                  <option key={ref.id} value={ref.id}>
+                    {ref.customer_company || ref.customer_name || ref.id}
+                    {ref.do_not_contact ? ' (DNC)' : ''}
+                  </option>
+                ))}
+              </select>
+              {onCreateCustomerReference ? (
+                <AccessibleButton
+                  type="button"
+                  onClick={async () => {
+                    const created = await onCreateCustomerReference({
+                      customer_name: form.customer_name,
+                      customer_company: form.customer_company,
+                      customer_email: form.customer_email,
+                    });
+                    if (created?.id) applyReference(created.id);
+                  }}
+                  className="rounded-lg border border-slate-200 px-3 py-2 text-xs font-semibold text-charcoal"
+                >
+                  New Reference
+                </AccessibleButton>
+              ) : null}
+            </div>
+            {selectedReference?.do_not_contact ? (
+              <p className="mt-1 text-xs text-red-700" role="alert">This customer reference is marked do not contact.</p>
+            ) : null}
           </label>
 
           <label className="block text-xs font-semibold uppercase tracking-wider text-metallic">

@@ -20,6 +20,7 @@ export async function createRequest(data) {
       customer_email: data.customer_email ?? null,
       related_testimonial_id: data.related_testimonial_id ?? null,
       related_case_study_id: data.related_case_study_id ?? null,
+      customer_reference_id: data.customer_reference_id ?? null,
       status: data.status ?? 'draft',
       subject: data.subject ?? null,
       body: data.body ?? null,

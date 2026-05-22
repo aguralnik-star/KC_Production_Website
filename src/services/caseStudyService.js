@@ -1,5 +1,7 @@
 import { supabase } from '../lib/supabaseClient';
 import { DEFAULT_APPROVAL_CHECKLIST, slugifyTitle, validatePublishRequirements } from '../data/caseStudyData';
+import { validateCaseStudyReferencePermissions } from '../data/customerReferencePermissionData';
+import { getReferencePermissionsForPublish } from './customerPermissionService';
 import { getCurrentUser, isCurrentUserAdmin } from './authService';
 import { getCaseStudyPhotos } from './caseStudyPhotoService';
 
@@ -165,7 +167,22 @@ export async function getPublishReadiness(caseStudyId) {
     getApprovalChecklist(caseStudyId),
   ]);
 
-  return validatePublishRequirements(caseStudy, photos, checklist);
+  const base = validatePublishRequirements(caseStudy, photos, checklist);
+  const warnings = [];
+
+  if (caseStudy.customer_reference_id) {
+    const { reference, permissions } = await getReferencePermissionsForPublish(caseStudy.customer_reference_id);
+    const refCheck = validateCaseStudyReferencePermissions(reference, permissions, caseStudy, photos);
+    warnings.push(...refCheck.warnings);
+    return {
+      canPublish: base.canPublish && refCheck.canPublish,
+      missing: [...base.missing, ...refCheck.missing],
+      warnings,
+    };
+  }
+
+  warnings.push('No linked customer reference. Permission must be verified manually.');
+  return { ...base, warnings };
 }
 
 export async function publishCaseStudy(caseStudyId) {
@@ -177,7 +194,7 @@ export async function publishCaseStudy(caseStudyId) {
     getApprovalChecklist(caseStudyId),
   ]);
 
-  const { canPublish, missing } = validatePublishRequirements(caseStudy, photos, checklist);
+  const { canPublish, missing } = await getPublishReadiness(caseStudyId);
   if (!canPublish) {
     throw new Error(`Publish blocked: ${missing.join(' ')}`);
   }

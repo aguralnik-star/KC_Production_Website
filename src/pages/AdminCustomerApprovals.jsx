@@ -9,6 +9,7 @@ import ApprovalTemplateManager from '../components/admin/approvals/ApprovalTempl
 import ApprovalRequestHistory from '../components/admin/approvals/ApprovalRequestHistory';
 import { computeDashboardStats } from '../data/customerApprovalWorkflowData';
 import { getCaseStudies } from '../services/caseStudyService';
+import { createCustomerReference, getCustomerReferences } from '../services/customerReferenceService';
 import {
   createRequest,
   getRequests,
@@ -39,6 +40,7 @@ export default function AdminCustomerApprovals() {
   const [requests, setRequests] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
   const [caseStudies, setCaseStudies] = useState([]);
+  const [customerReferences, setCustomerReferences] = useState([]);
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -50,16 +52,18 @@ export default function AdminCustomerApprovals() {
   );
 
   const loadAll = useCallback(async () => {
-    const [tmpl, reqs, tRows, cRows] = await Promise.all([
+    const [tmpl, reqs, tRows, cRows, refs] = await Promise.all([
       getTemplates(),
       getRequests(),
       getTestimonials(),
       getCaseStudies(),
+      getCustomerReferences(),
     ]);
     setTemplates(tmpl);
     setRequests(reqs);
     setTestimonials(tRows);
     setCaseStudies(cRows);
+    setCustomerReferences(refs);
   }, []);
 
   useEffect(() => {
@@ -152,6 +156,12 @@ export default function AdminCustomerApprovals() {
             templates={templates}
             testimonials={testimonials}
             caseStudies={caseStudies}
+            customerReferences={customerReferences}
+            onCreateCustomerReference={async (data) => {
+              const created = await createCustomerReference(data);
+              await loadAll();
+              return created;
+            }}
             activeRequest={selectedRequest}
             saving={saving}
             onSaveRequest={handleSaveRequest}

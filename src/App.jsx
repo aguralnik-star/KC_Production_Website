@@ -37,6 +37,7 @@ const AdminRealContentReplacement = lazy(() => lazyWithRetry(() => import('./pag
 const AdminCaseStudyBuilder = lazy(() => lazyWithRetry(() => import('./pages/AdminCaseStudyBuilder')));
 const AdminTestimonials = lazy(() => lazyWithRetry(() => import('./pages/AdminTestimonials')));
 const AdminCustomerApprovals = lazy(() => lazyWithRetry(() => import('./pages/AdminCustomerApprovals')));
+const AdminCustomerReferences = lazy(() => lazyWithRetry(() => import('./pages/AdminCustomerReferences')));
 
 function PublicRoutes() {
   return (
@@ -84,6 +85,7 @@ export default function App() {
           <Route path="/admin/case-studies/:id" element={<AdminCaseStudyBuilder />} />
           <Route path="/admin/testimonials" element={<AdminTestimonials />} />
           <Route path="/admin/customer-approvals" element={<AdminCustomerApprovals />} />
+          <Route path="/admin/customer-references" element={<AdminCustomerReferences />} />
         </Route>
 
         <Route path="/admin" element={<Navigate to="/admin/rfqs" replace />} />

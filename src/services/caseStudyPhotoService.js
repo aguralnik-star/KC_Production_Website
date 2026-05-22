@@ -5,6 +5,8 @@ import {
   MAX_CASE_STUDY_PHOTOS,
   MAX_PHOTO_SIZE_BYTES,
 } from '../data/caseStudyData';
+import { validatePhotoReferencePermissions } from '../data/customerReferencePermissionData';
+import { getReferencePermissionsForPublish } from './customerPermissionService';
 import { getCurrentUser, isCurrentUserAdmin } from './authService';
 
 const SIGNED_URL_TTL_SECONDS = 3600;
@@ -131,6 +133,24 @@ export async function updateCaseStudyPhoto(photoId, updates) {
 }
 
 export async function approveCaseStudyPhoto(photoId) {
+  await requireAdminAccess();
+
+  const { data: photo, error } = await supabase
+    .from('case_study_photos')
+    .select('*')
+    .eq('id', photoId)
+    .single();
+
+  if (error || !photo) throw new Error('Photo not found.');
+
+  if (photo.customer_reference_id) {
+    const { reference, permissions } = await getReferencePermissionsForPublish(photo.customer_reference_id);
+    const { canPublish, missing } = validatePhotoReferencePermissions(reference, permissions, photo);
+    if (!canPublish) {
+      throw new Error(`Photo approval blocked: ${missing.join(' ')}`);
+    }
+  }
+
   return updateCaseStudyPhoto(photoId, {
     status: 'approved',
     approved_for_public_use: true,

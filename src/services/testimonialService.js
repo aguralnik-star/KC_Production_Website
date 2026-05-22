@@ -3,6 +3,8 @@ import {
   DEFAULT_APPROVAL_CHECKLIST,
   validatePublishRequirements,
 } from '../data/testimonialWorkflowData';
+import { validateTestimonialReferencePermissions } from '../data/customerReferencePermissionData';
+import { getReferencePermissionsForPublish } from './customerPermissionService';
 import { getCurrentUser, isCurrentUserAdmin } from './authService';
 
 async function requireAdminAccess() {
@@ -144,7 +146,22 @@ export async function getPublishReadiness(testimonialId) {
     getTestimonialById(testimonialId),
     getTestimonialApprovalChecklist(testimonialId),
   ]);
-  return validatePublishRequirements(testimonial, checklist);
+  const base = validatePublishRequirements(testimonial, checklist);
+  const warnings = [];
+
+  if (testimonial.customer_reference_id) {
+    const { reference, permissions } = await getReferencePermissionsForPublish(testimonial.customer_reference_id);
+    const refCheck = validateTestimonialReferencePermissions(reference, permissions, testimonial);
+    warnings.push(...refCheck.warnings);
+    return {
+      canPublish: base.canPublish && refCheck.canPublish,
+      missing: [...base.missing, ...refCheck.missing],
+      warnings,
+    };
+  }
+
+  warnings.push('No linked customer reference. Permission must be verified manually.');
+  return { ...base, warnings };
 }
 
 export async function approveTestimonial(testimonialId) {
@@ -159,7 +176,7 @@ export async function publishTestimonial(testimonialId) {
     getTestimonialApprovalChecklist(testimonialId),
   ]);
 
-  const { canPublish, missing } = validatePublishRequirements(testimonial, checklist);
+  const { canPublish, missing } = await getPublishReadiness(testimonialId);
   if (!canPublish) {
     throw new Error(`Publish blocked: ${missing.join(' ')}`);
   }
