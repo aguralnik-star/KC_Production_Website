@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import SEO from '../components/SEO';
 import { PAGE_SEO } from '../config/siteConfig';
 import Breadcrumbs from '../components/seo/Breadcrumbs';
@@ -8,14 +8,55 @@ import ProjectCategoryFilter from '../components/projects/ProjectCategoryFilter'
 import ProjectShowcaseGrid from '../components/projects/ProjectShowcaseGrid';
 import ProjectDetailModal from '../components/projects/ProjectDetailModal';
 import ProjectProcessSummary from '../components/projects/ProjectProcessSummary';
+import PublishedCaseStudyCard from '../components/projects/PublishedCaseStudyCard';
 import TestimonialSection from '../components/trust/TestimonialSection';
 import TrustCTA from '../components/trust/TrustCTA';
 import { getPublicProjects } from '../data/projects';
+import { getPublishedCaseStudies } from '../services/caseStudyService';
+import { createSignedPhotoUrl, getPublishedCaseStudyPhotos } from '../services/caseStudyPhotoService';
 import { trackProjectCategoryFilter, trackProjectShowcaseView } from '../utils/analytics';
 
 export default function Projects() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [selectedProject, setSelectedProject] = useState(null);
+  const [publishedCaseStudies, setPublishedCaseStudies] = useState([]);
+  const [caseStudyHeroUrls, setCaseStudyHeroUrls] = useState({});
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadPublished() {
+      try {
+        const studies = await getPublishedCaseStudies();
+        if (cancelled) return;
+        setPublishedCaseStudies(studies);
+
+        const urlMap = {};
+        await Promise.all(
+          studies.map(async (study) => {
+            try {
+              const photos = await getPublishedCaseStudyPhotos(study.id);
+              const hero = photos[0];
+              if (hero) {
+                urlMap[study.id] = await createSignedPhotoUrl(hero.file_path, { requirePublished: true });
+              }
+            } catch {
+              urlMap[study.id] = null;
+            }
+          }),
+        );
+        if (!cancelled) setCaseStudyHeroUrls(urlMap);
+      } catch {
+        if (!cancelled) {
+          setPublishedCaseStudies([]);
+          setCaseStudyHeroUrls({});
+        }
+      }
+    }
+
+    loadPublished();
+    return () => { cancelled = true; };
+  }, []);
 
   const filteredProjects = useMemo(
     () => getPublicProjects(activeCategory),
@@ -42,6 +83,28 @@ export default function Projects() {
 
       <ProjectsHero />
 
+      {publishedCaseStudies.length > 0 ? (
+        <section className="section-padding bg-slate-50" aria-labelledby="approved-case-studies-heading">
+          <div className="section-container">
+            <h2 id="approved-case-studies-heading" className="text-center text-3xl font-bold tracking-tight text-charcoal sm:text-4xl">
+              Approved Case Studies
+            </h2>
+            <p className="mx-auto mt-4 max-w-3xl text-center text-lg leading-relaxed text-metallic">
+              Customer-approved project stories published with documented approval and confidentiality review.
+            </p>
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+              {publishedCaseStudies.map((study) => (
+                <PublishedCaseStudyCard
+                  key={study.id}
+                  caseStudy={study}
+                  heroUrl={caseStudyHeroUrls[study.id]}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
       <section className="section-padding" aria-labelledby="projects-showcase-heading">
         <div className="section-container">
           <h2 id="projects-showcase-heading" className="text-center text-3xl font-bold tracking-tight text-charcoal sm:text-4xl">
@@ -49,7 +112,7 @@ export default function Projects() {
           </h2>
           <p className="mx-auto mt-4 max-w-3xl text-center text-lg leading-relaxed text-metallic">
             These examples illustrate the types of machining, tooling, fixture, gauge, and production work K&amp;C
-            supports. They are representative only and do not depict actual customer projects.
+            supports. They are representative only and do not depict actual customer projects unless labeled as approved case studies.
           </p>
 
           <div className="mt-8">

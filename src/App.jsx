@@ -15,6 +15,7 @@ const Equipment = lazy(() => lazyWithRetry(() => import('./pages/Equipment')));
 const Quality = lazy(() => lazyWithRetry(() => import('./pages/Quality')));
 const Industries = lazy(() => lazyWithRetry(() => import('./pages/Industries')));
 const Projects = lazy(() => lazyWithRetry(() => import('./pages/Projects')));
+const CaseStudyDetail = lazy(() => lazyWithRetry(() => import('./pages/CaseStudyDetail')));
 const ServiceLandingPage = lazy(() => lazyWithRetry(() => import('./pages/ServiceLandingPage')));
 const Contact = lazy(() => lazyWithRetry(() => import('./pages/Contact')));
 const RFQConfirmation = lazy(() => lazyWithRetry(() => import('./pages/RFQConfirmation')));
@@ -33,6 +34,7 @@ const AdminContentQAAudit = lazy(() => lazyWithRetry(() => import('./pages/Admin
 const AdminOwnerHandoff = lazy(() => lazyWithRetry(() => import('./pages/AdminOwnerHandoff')));
 const AdminGoLiveCommandCenter = lazy(() => lazyWithRetry(() => import('./pages/AdminGoLiveCommandCenter')));
 const AdminRealContentReplacement = lazy(() => lazyWithRetry(() => import('./pages/AdminRealContentReplacement')));
+const AdminCaseStudyBuilder = lazy(() => lazyWithRetry(() => import('./pages/AdminCaseStudyBuilder')));
 
 function PublicRoutes() {
   return (
@@ -44,6 +46,7 @@ function PublicRoutes() {
         <Route path="/equipment" element={<Equipment />} />
         <Route path="/quality" element={<Quality />} />
         <Route path="/industries" element={<Industries />} />
+        <Route path="/projects/:slug" element={<CaseStudyDetail />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/services/:slug" element={<ServiceLandingPage />} />
         <Route path="/contact" element={<Contact />} />
@@ -75,6 +78,8 @@ export default function App() {
           <Route path="/admin/owner-handoff" element={<AdminOwnerHandoff />} />
           <Route path="/admin/go-live" element={<AdminGoLiveCommandCenter />} />
           <Route path="/admin/real-content" element={<AdminRealContentReplacement />} />
+          <Route path="/admin/case-studies" element={<AdminCaseStudyBuilder />} />
+          <Route path="/admin/case-studies/:id" element={<AdminCaseStudyBuilder />} />
         </Route>
 
         <Route path="/admin" element={<Navigate to="/admin/rfqs" replace />} />

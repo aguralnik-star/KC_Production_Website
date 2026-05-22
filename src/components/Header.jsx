@@ -12,7 +12,7 @@ const navLinks = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About' },
   { to: '/capabilities', label: 'Capabilities' },
-  { to: '/projects', label: 'Projects' },
+  { to: '/projects', label: 'Projects', title: 'Approved case studies and representative project examples' },
   { to: '/equipment', label: 'Equipment' },
   { to: '/quality', label: 'Quality' },
   { to: '/industries', label: 'Industries' },
@@ -85,8 +85,8 @@ export default function Header() {
             </NavLink>
           ))}
           <ServicesNavDropdown linkClass={linkClass} />
-          {navLinks.slice(3).map(({ to, label }) => (
-            <NavLink key={to} to={to} end={to === '/'} className={linkClass}>
+          {navLinks.slice(3).map(({ to, label, title }) => (
+            <NavLink key={to} to={to} end={to === '/'} className={linkClass} title={title}>
               {label}
             </NavLink>
           ))}

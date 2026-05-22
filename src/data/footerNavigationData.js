@@ -17,6 +17,7 @@ export const FOOTER_NAV_COLUMNS = [
       { to: '/equipment', label: 'Equipment' },
       { to: '/industries', label: 'Industries' },
       { to: '/projects', label: 'Projects' },
+      { to: '/projects', label: 'Approved Case Studies', trackAs: 'cta', ctaLabel: 'Approved Case Studies' },
       { to: '/contact', label: 'Contact' },
     ],
   },

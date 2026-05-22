@@ -23,3 +23,4 @@ if (!isSupabaseConfigured) {
 export const supabase = createClient(supabaseUrl ?? '', supabaseAnonKey ?? '');
 
 export const RFQ_BUCKET = 'rfq-files';
+export const CASE_STUDY_PHOTOS_BUCKET = 'case-study-photos';

@@ -12,7 +12,14 @@ export default function ProjectShowcaseCard({ project, onViewDetails }) {
       <ProjectImage src={project.image} alt={project.imageAlt} icon={Icon} />
 
       <div className="flex flex-1 flex-col p-5 sm:p-6">
-        <span className="project-showcase-card__badge">{project.category}</span>
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="project-showcase-card__badge">{project.category}</span>
+          {project.isRepresentative !== false ? (
+            <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-metallic">
+              Representative Example
+            </span>
+          ) : null}
+        </div>
         <h3 className="mt-3 text-lg font-bold text-charcoal">{project.title}</h3>
         <dl className="mt-3 space-y-1.5 text-sm">
           <div className="flex gap-2">
