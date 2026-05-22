@@ -66,7 +66,8 @@ export default function Contact() {
               <div className="mt-10 rounded-xl border border-slate-200 bg-slate-50 p-6">
                 <h3 className="text-sm font-semibold text-charcoal">Tips for a faster quote</h3>
                 <ul className="mt-3 space-y-2 text-sm text-metallic">
-                  <li>• Attach drawings or 3D models (STEP, PDF)</li>
+                  <li>• Attach drawings or 3D models (PDF, STEP, DWG, DXF, ZIP)</li>
+                  <li>• Up to 5 files, 20 MB each</li>
                   <li>• Specify material and quantity</li>
                   <li>• Note tolerance and finish requirements</li>
                   <li>• Include your target delivery date</li>

@@ -34,7 +34,7 @@ export default function CTAButton({
   }
 
   return (
-    <button type="button" className={classes} {...props}>
+    <button type="button" className={`${classes} disabled:cursor-not-allowed disabled:opacity-60`} {...props}>
       {children}
     </button>
   );
