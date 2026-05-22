@@ -256,6 +256,103 @@
     @apply relative overflow-hidden rounded-2xl border border-white/10;
     background: linear-gradient(145deg, #1a3d5c 0%, var(--color-brand-navy) 50%, #061525 100%);
   }
+
+  .equipment-preview-card {
+    @apply rounded-2xl border p-6 sm:p-8;
+    border-color: rgba(13, 79, 139, 0.18);
+    background: linear-gradient(180deg, #ffffff 0%, var(--color-brand-light) 100%);
+    box-shadow: 0 16px 40px rgba(10, 39, 69, 0.08);
+  }
+
+  .equipment-preview-card__label {
+    @apply text-xs font-semibold uppercase tracking-[0.16em] text-brand-primary;
+  }
+
+  .equipment-preview-card__title {
+    @apply mt-3 text-2xl font-bold tracking-tight text-charcoal;
+  }
+
+  .equipment-preview-card__subtitle {
+    @apply mt-2 text-sm leading-relaxed text-metallic;
+  }
+
+  .equipment-preview-card__list {
+    @apply mt-6 space-y-3;
+  }
+
+  .equipment-preview-card__list li {
+    @apply flex items-start gap-3 text-sm font-medium text-charcoal;
+  }
+
+  .equipment-featured-card {
+    @apply relative overflow-hidden rounded-2xl border shadow-2xl;
+    border-color: rgba(255, 255, 255, 0.14);
+    background:
+      linear-gradient(145deg, rgba(46, 109, 164, 0.18) 0%, rgba(10, 39, 69, 0.96) 45%, rgba(6, 21, 37, 0.98) 100%);
+    box-shadow:
+      0 24px 60px rgba(0, 0, 0, 0.28),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+
+  .equipment-featured-card__glow {
+    @apply absolute -right-8 -top-8 h-44 w-44 rounded-full blur-3xl;
+    background: rgba(46, 109, 164, 0.35);
+  }
+
+  .equipment-featured-card__lines {
+    @apply absolute inset-0 opacity-25;
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 30px,
+      rgba(255, 255, 255, 0.08) 30px,
+      rgba(255, 255, 255, 0.08) 31px
+    );
+  }
+
+  .equipment-featured-card__content {
+    @apply relative p-6 sm:p-8 lg:p-10;
+  }
+
+  .equipment-featured-card__disclaimer {
+    @apply inline-flex rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-200;
+  }
+
+  .equipment-featured-card__label {
+    @apply mt-3 text-sm font-medium text-brand-accent;
+  }
+
+  .equipment-featured-card__category {
+    @apply mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400;
+  }
+
+  .equipment-featured-card__title {
+    @apply mt-2 text-2xl font-bold tracking-tight text-white sm:text-3xl;
+  }
+
+  .equipment-featured-card__description {
+    @apply mt-4 max-w-4xl text-base leading-relaxed text-slate-300;
+  }
+
+  .equipment-featured-card__icon {
+    @apply flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/10 text-brand-accent;
+  }
+
+  .equipment-featured-card__badges {
+    @apply mt-6 flex flex-wrap gap-2;
+  }
+
+  .equipment-spec-badge {
+    @apply rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-slate-200;
+  }
+
+  .equipment-featured-card__features {
+    @apply mt-8 grid gap-3 border-t border-white/10 pt-6 sm:grid-cols-2;
+  }
+
+  .equipment-featured-card__features li {
+    @apply flex items-start gap-3 text-sm text-slate-200;
+  }
 }
 
 @media print {

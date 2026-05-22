@@ -1,16 +1,13 @@
-import { Link } from 'react-router-dom';
-import { ArrowRight, Cpu, RotateCw, FlaskConical, Factory, Ruler, Wrench } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import SEO from '../components/SEO';
 import { PAGE_SEO } from '../config/siteConfig';
 import Hero from '../components/Hero';
+import CapabilitiesSection from '../components/Capabilities';
 import SectionHeading from '../components/SectionHeading';
-import CapabilityCard from '../components/CapabilityCard';
 import IndustryCard from '../components/IndustryCard';
 import QualityFeature from '../components/QualityFeature';
 import CTAButton from '../components/CTAButton';
-import { CAPABILITIES, CORE_MESSAGE, INDUSTRIES, MATERIALS, QUALITY_PILLARS } from '../data/company';
-
-const capabilityIcons = [Cpu, RotateCw, FlaskConical, Factory, Ruler, Wrench];
+import { CORE_MESSAGE, INDUSTRIES, QUALITY_PILLARS } from '../data/company';
 
 export default function Home() {
   return (
@@ -29,34 +26,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-padding bg-brand-light" aria-labelledby="capabilities-heading">
-        <div className="section-container">
-          <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
-            <SectionHeading
-              label="Capabilities"
-              title="Precision Machining & Manufacturing"
-              description="From CNC milling and turning to custom fixtures, gauges, and production tooling — K&C delivers the precision and service Midwest manufacturers depend on."
-            />
-            <CTAButton to="/capabilities" variant="secondary" className="shrink-0">
-              All Capabilities
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </CTAButton>
-          </div>
-          <div id="capabilities-heading" className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {CAPABILITIES.map((cap, i) => (
-              <CapabilityCard key={cap.title} icon={capabilityIcons[i]} {...cap} />
-            ))}
-          </div>
-          <div className="mt-10 rounded-xl border border-slate-200 bg-white p-6 sm:p-8">
-            <p className="text-sm font-semibold uppercase tracking-wider text-metallic">Materials We Machine</p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {MATERIALS.map((material) => (
-                <span key={material} className="rounded-full border border-slate-200 bg-slate-50 px-4 py-1.5 text-sm font-medium text-charcoal">{material}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <CapabilitiesSection />
 
       <section className="section-padding" aria-labelledby="industries-heading">
         <div className="section-container">

@@ -103,6 +103,48 @@ export const EQUIPMENT_SECTIONS = [
   },
 ];
 
+export const FEATURED_EQUIPMENT = {
+  name: 'Haas VF-7/50 CNC Vertical Machining Center',
+  category: 'CNC Milling',
+  representativeLabel: 'Representative CNC Machining Capability Example',
+  disclaimer: 'Representative Equipment',
+  description:
+    'The Haas VF-7/50 provides high-performance CNC milling capability for large precision components, tooling, fixtures, production parts, and custom machined assemblies. Its rigid construction and large work envelope support both prototype and production manufacturing requirements.',
+  specifications: [
+    'Travels: 84" x 32" x 30"',
+    '50-taper spindle',
+    'High-rigidity machining platform',
+    'Large-part machining capability',
+    'Precision CNC milling',
+    'Prototype and production work',
+    'Multi-material machining',
+  ],
+  features: [
+    'Large machining envelope',
+    'High horsepower spindle',
+    'Precision repeatability',
+    'Production-ready throughput',
+    'Fixture and tooling capability',
+    'Aluminum, steel, stainless, brass and engineering plastics',
+  ],
+  homepagePreview: {
+    title: 'Large Capacity CNC Milling',
+    subtitle: 'Powered by modern Haas machining technology',
+    bullets: [
+      'Large-part machining',
+      'Precision CNC milling',
+      'Production machining',
+      'Prototype machining',
+      'Tight tolerance manufacturing',
+    ],
+  },
+  featurePanel: {
+    headline: 'Modern CNC Manufacturing Equipment',
+    body:
+      'K&C Design and Manufacturing utilizes modern CNC machining equipment, inspection systems, and CAD/CAM programming tools to support precision manufacturing requirements across multiple industries.',
+  },
+};
+
 export const MATERIALS = [
   'Aluminum',
   'Stainless Steel',

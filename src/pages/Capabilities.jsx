@@ -1,12 +1,9 @@
-import { ArrowRight, Cpu, RotateCw, FlaskConical, Factory, Ruler, Wrench } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import SEO from '../components/SEO';
 import { PAGE_SEO } from '../config/siteConfig';
+import CapabilitiesSection from '../components/Capabilities';
 import SectionHeading from '../components/SectionHeading';
-import CapabilityCard from '../components/CapabilityCard';
 import CTAButton from '../components/CTAButton';
-import { CAPABILITIES, MATERIALS } from '../data/company';
-
-const icons = [Cpu, RotateCw, FlaskConical, Factory, Ruler, Wrench];
 
 const detailedCapabilities = [
   {
@@ -57,23 +54,7 @@ export default function Capabilities() {
         </div>
       </section>
 
-      <section className="section-padding bg-slate-50">
-        <div className="section-container">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {CAPABILITIES.map((cap, i) => (
-              <CapabilityCard key={cap.title} icon={icons[i]} {...cap} />
-            ))}
-          </div>
-          <div className="mt-10 rounded-xl border border-slate-200 bg-white p-6 sm:p-8">
-            <p className="text-sm font-semibold uppercase tracking-wider text-metallic">Materials We Machine</p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {MATERIALS.map((material) => (
-                <span key={material} className="rounded-full border border-slate-200 bg-slate-50 px-4 py-1.5 text-sm font-medium text-charcoal">{material}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <CapabilitiesSection showHeadingActions={false} showEquipmentPreview={false} className="bg-white" />
 
       <section className="section-padding">
         <div className="section-container space-y-8">

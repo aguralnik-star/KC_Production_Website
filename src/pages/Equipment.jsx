@@ -2,9 +2,9 @@ import { ArrowRight, Monitor, ScanLine, Ruler, Layers } from 'lucide-react';
 import SEO from '../components/SEO';
 import { PAGE_SEO } from '../config/siteConfig';
 import SectionHeading from '../components/SectionHeading';
-import EquipmentCard from '../components/EquipmentCard';
+import EquipmentCard, { FeaturedEquipmentShowcase } from '../components/EquipmentCard';
 import CTAButton from '../components/CTAButton';
-import { EQUIPMENT_SECTIONS } from '../data/company';
+import { EQUIPMENT_SECTIONS, FEATURED_EQUIPMENT } from '../data/company';
 
 const icons = [Monitor, ScanLine, Ruler, Layers];
 
@@ -24,6 +24,26 @@ export default function Equipment() {
         </div>
       </section>
 
+      <section className="section-padding bg-brand-light" aria-labelledby="equipment-feature-panel-heading">
+        <div className="section-container">
+          <div className="max-w-3xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-primary">
+              {FEATURED_EQUIPMENT.disclaimer}
+            </p>
+            <h2 id="equipment-feature-panel-heading" className="mt-3 text-3xl font-bold tracking-tight text-charcoal sm:text-4xl">
+              {FEATURED_EQUIPMENT.featurePanel.headline}
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-metallic">
+              {FEATURED_EQUIPMENT.featurePanel.body}
+            </p>
+          </div>
+
+          <div className="mt-10">
+            <FeaturedEquipmentShowcase />
+          </div>
+        </div>
+      </section>
+
       <section className="section-padding">
         <div className="section-container grid gap-6 sm:grid-cols-2">
           {EQUIPMENT_SECTIONS.map((section, i) => (
@@ -32,7 +52,7 @@ export default function Equipment() {
         </div>
       </section>
 
-      <section className="section-padding bg-slate-50">
+      <section className="section-padding bg-brand-light">
         <div className="section-container">
           <SectionHeading
             label="Inspection Highlight"
