@@ -90,9 +90,18 @@ export async function uploadRFQFiles(rfqRequestId, files) {
   }
 
   if (uploaded.length > 0) {
-    const { error: insertError } = await supabase.from('rfq_files').insert(uploaded);
-    if (insertError) {
-      throw new Error('Files uploaded but could not be linked to your request. Please contact us directly.');
+    for (const fileRow of uploaded) {
+      const { error: insertError } = await supabase.rpc('submit_public_rfq_file', {
+        p_rfq_request_id: fileRow.rfq_request_id,
+        p_file_name: fileRow.file_name,
+        p_file_path: fileRow.file_path,
+        p_file_type: fileRow.file_type,
+        p_file_size: fileRow.file_size,
+      });
+
+      if (insertError) {
+        throw new Error('Files uploaded but could not be linked to your request. Please contact us directly.');
+      }
     }
   }
 
@@ -152,11 +161,19 @@ export async function submitRFQ(formData, files = []) {
     status: 'new',
   };
 
-  const { data: rfqRecord, error: insertError } = await supabase
-    .from('rfq_requests')
-    .insert(payload)
-    .select('id, reference_number, submitted_at')
-    .single();
+  const { data: rfqRows, error: insertError } = await supabase.rpc('submit_public_rfq', {
+    p_name: payload.name,
+    p_company: payload.company,
+    p_email: payload.email,
+    p_phone: payload.phone,
+    p_project_type: payload.project_type,
+    p_material: payload.material,
+    p_quantity: payload.quantity,
+    p_timeline: payload.timeline,
+    p_notes: payload.notes,
+  });
+
+  const rfqRecord = Array.isArray(rfqRows) ? rfqRows[0] : rfqRows;
 
   if (insertError || !rfqRecord?.id) {
     throw new Error('Unable to submit your RFQ right now. Please try again or contact us directly.');
