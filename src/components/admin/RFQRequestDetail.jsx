@@ -1,6 +1,8 @@
-import { X, Mail, Phone, Building2, Loader2 } from 'lucide-react';
+import { useState } from 'react';
+import { X, Mail, Phone, Building2, Loader2, FileText, DollarSign } from 'lucide-react';
 import RFQStatusBadge from './RFQStatusBadge';
 import RFQFileList from './RFQFileList';
+import RFQWorkflowPanel from './RFQWorkflowPanel';
 import { RFQ_STATUSES } from '../../services/adminRfqService';
 
 function DetailRow({ label, value }) {
@@ -23,6 +25,11 @@ function formatDate(dateString) {
   });
 }
 
+const TABS = [
+  { id: 'details', label: 'Details', icon: FileText },
+  { id: 'quote', label: 'Quote', icon: DollarSign },
+];
+
 export default function RFQRequestDetail({
   request,
   files,
@@ -30,7 +37,10 @@ export default function RFQRequestDetail({
   savingStatus,
   onClose,
   onStatusChange,
+  onRequestUpdated,
 }) {
+  const [activeTab, setActiveTab] = useState('details');
+
   if (loading) {
     return (
       <aside className="flex h-full items-center justify-center rounded-xl border border-slate-200 bg-white p-8 shadow-sm">
@@ -49,7 +59,7 @@ export default function RFQRequestDetail({
   }
 
   return (
-    <aside className="flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+    <aside className="flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm xl:min-h-[720px]">
       <div className="flex items-start justify-between border-b border-slate-100 px-5 py-4">
         <div>
           <p className="text-xs font-semibold uppercase tracking-wider text-metallic">RFQ Details</p>
@@ -66,83 +76,115 @@ export default function RFQRequestDetail({
         </button>
       </div>
 
-      <div className="flex-1 overflow-y-auto px-5 py-5">
-        <div className="mb-6 flex items-center justify-between gap-3">
-          <RFQStatusBadge status={request.status} />
-          <div className="min-w-[160px]">
-            <label htmlFor="rfq-status" className="sr-only">Update status</label>
-            <select
-              id="rfq-status"
-              value={request.status}
-              onChange={(e) => onStatusChange(e.target.value)}
-              disabled={savingStatus}
-              className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-charcoal focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 disabled:opacity-50"
+      <div className="border-b border-slate-100 px-5">
+        <div className="flex gap-1" role="tablist" aria-label="RFQ detail tabs">
+          {TABS.map(({ id, label, icon: Icon }) => (
+            <button
+              key={id}
+              type="button"
+              role="tab"
+              aria-selected={activeTab === id}
+              onClick={() => setActiveTab(id)}
+              className={`inline-flex items-center gap-1.5 border-b-2 px-3 py-3 text-sm font-semibold transition-colors ${
+                activeTab === id
+                  ? 'border-accent text-accent'
+                  : 'border-transparent text-metallic hover:text-charcoal'
+              }`}
             >
-              {RFQ_STATUSES.map((status) => (
-                <option key={status} value={status}>
-                  {status.replace('_', ' ')}
-                </option>
-              ))}
-            </select>
-          </div>
+              <Icon className="h-4 w-4" aria-hidden="true" />
+              {label}
+            </button>
+          ))}
         </div>
+      </div>
 
-        <section className="mb-6">
-          <h3 className="mb-3 text-sm font-semibold text-charcoal">Contact Information</h3>
-          <dl className="grid gap-4 sm:grid-cols-2">
-            <DetailRow label="Name" value={request.name} />
-            <DetailRow label="Company" value={request.company} />
-            <div>
-              <dt className="text-xs font-semibold uppercase tracking-wider text-metallic">Email</dt>
-              <dd className="mt-1">
-                <a href={`mailto:${request.email}`} className="inline-flex items-center gap-1.5 text-sm text-accent hover:underline">
-                  <Mail className="h-3.5 w-3.5" aria-hidden="true" />
-                  {request.email}
-                </a>
-              </dd>
+      <div className="flex-1 overflow-y-auto px-5 py-5">
+        {activeTab === 'details' ? (
+          <>
+            <div className="mb-6 flex items-center justify-between gap-3">
+              <RFQStatusBadge status={request.status} />
+              <div className="min-w-[160px]">
+                <label htmlFor="rfq-status" className="sr-only">Update status</label>
+                <select
+                  id="rfq-status"
+                  value={request.status}
+                  onChange={(e) => onStatusChange(e.target.value)}
+                  disabled={savingStatus}
+                  className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-charcoal focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 disabled:opacity-50"
+                >
+                  {RFQ_STATUSES.map((status) => (
+                    <option key={status} value={status}>
+                      {status.replace('_', ' ')}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
-            <div>
-              <dt className="text-xs font-semibold uppercase tracking-wider text-metallic">Phone</dt>
-              <dd className="mt-1">
-                {request.phone ? (
-                  <a href={`tel:${request.phone}`} className="inline-flex items-center gap-1.5 text-sm text-charcoal hover:text-accent">
-                    <Phone className="h-3.5 w-3.5" aria-hidden="true" />
-                    {request.phone}
-                  </a>
-                ) : (
-                  <span className="text-sm text-charcoal">—</span>
-                )}
-              </dd>
-            </div>
-          </dl>
-        </section>
 
-        <section className="mb-6">
-          <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold text-charcoal">
-            <Building2 className="h-4 w-4 text-accent" aria-hidden="true" />
-            Project Details
-          </h3>
-          <dl className="grid gap-4 sm:grid-cols-2">
-            <DetailRow label="Project Type" value={request.project_type} />
-            <DetailRow label="Material" value={request.material} />
-            <DetailRow label="Quantity" value={request.quantity} />
-            <DetailRow label="Timeline" value={request.timeline} />
-          </dl>
-        </section>
+            <section className="mb-6">
+              <h3 className="mb-3 text-sm font-semibold text-charcoal">Contact Information</h3>
+              <dl className="grid gap-4 sm:grid-cols-2">
+                <DetailRow label="Name" value={request.name} />
+                <DetailRow label="Company" value={request.company} />
+                <div>
+                  <dt className="text-xs font-semibold uppercase tracking-wider text-metallic">Email</dt>
+                  <dd className="mt-1">
+                    <a href={`mailto:${request.email}`} className="inline-flex items-center gap-1.5 text-sm text-accent hover:underline">
+                      <Mail className="h-3.5 w-3.5" aria-hidden="true" />
+                      {request.email}
+                    </a>
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-xs font-semibold uppercase tracking-wider text-metallic">Phone</dt>
+                  <dd className="mt-1">
+                    {request.phone ? (
+                      <a href={`tel:${request.phone}`} className="inline-flex items-center gap-1.5 text-sm text-charcoal hover:text-accent">
+                        <Phone className="h-3.5 w-3.5" aria-hidden="true" />
+                        {request.phone}
+                      </a>
+                    ) : (
+                      <span className="text-sm text-charcoal">—</span>
+                    )}
+                  </dd>
+                </div>
+              </dl>
+            </section>
 
-        <section className="mb-6">
-          <h3 className="mb-3 text-sm font-semibold text-charcoal">Notes</h3>
-          <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm leading-relaxed text-charcoal">
-            {request.notes || 'No notes provided.'}
-          </div>
-        </section>
+            <section className="mb-6">
+              <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold text-charcoal">
+                <Building2 className="h-4 w-4 text-accent" aria-hidden="true" />
+                Project Details
+              </h3>
+              <dl className="grid gap-4 sm:grid-cols-2">
+                <DetailRow label="Project Type" value={request.project_type} />
+                <DetailRow label="Material" value={request.material} />
+                <DetailRow label="Quantity" value={request.quantity} />
+                <DetailRow label="Timeline" value={request.timeline} />
+              </dl>
+            </section>
 
-        <section>
-          <h3 className="mb-3 text-sm font-semibold text-charcoal">Uploaded Files</h3>
-          <RFQFileList files={files} />
-        </section>
+            <section className="mb-6">
+              <h3 className="mb-3 text-sm font-semibold text-charcoal">Notes</h3>
+              <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm leading-relaxed text-charcoal">
+                {request.notes || 'No notes provided.'}
+              </div>
+            </section>
 
-        <p className="mt-6 font-mono text-xs text-slate-400">ID: {request.id}</p>
+            <section>
+              <h3 className="mb-3 text-sm font-semibold text-charcoal">Uploaded Files</h3>
+              <RFQFileList files={files} />
+            </section>
+
+            <p className="mt-6 font-mono text-xs text-slate-400">ID: {request.id}</p>
+          </>
+        ) : (
+          <RFQWorkflowPanel
+            request={request}
+            files={files}
+            onRequestUpdated={onRequestUpdated}
+          />
+        )}
       </div>
     </aside>
   );

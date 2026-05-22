@@ -4,6 +4,10 @@ const STATUS_CONFIG = {
   quoted: { label: 'Quoted', className: 'bg-emerald-100 text-emerald-800 border-emerald-200' },
   closed: { label: 'Closed', className: 'bg-slate-100 text-slate-700 border-slate-200' },
   rejected: { label: 'Rejected', className: 'bg-red-100 text-red-800 border-red-200' },
+  draft: { label: 'Draft', className: 'bg-slate-100 text-slate-700 border-slate-200' },
+  copied: { label: 'Copied', className: 'bg-indigo-100 text-indigo-800 border-indigo-200' },
+  manually_sent: { label: 'Manually Sent', className: 'bg-emerald-100 text-emerald-800 border-emerald-200' },
+  archived: { label: 'Archived', className: 'bg-slate-100 text-slate-500 border-slate-200' },
 };
 
 export default function RFQStatusBadge({ status }) {

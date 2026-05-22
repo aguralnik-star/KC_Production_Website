@@ -85,6 +85,11 @@ export default function AdminRFQDashboard() {
     }
   };
 
+  const handleRequestUpdated = (updatedRequest) => {
+    setSelectedRequest(updatedRequest);
+    setRequests((prev) => prev.map((req) => (req.id === updatedRequest.id ? updatedRequest : req)));
+  };
+
   const onSignOut = async () => {
     await handleSignOut();
     navigate('/admin/login', { replace: true });
@@ -169,6 +174,7 @@ export default function AdminRFQDashboard() {
                   setSelectedFiles([]);
                 }}
                 onStatusChange={handleStatusChange}
+                onRequestUpdated={handleRequestUpdated}
               />
             </div>
           </div>
