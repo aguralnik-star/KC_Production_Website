@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --color-charcoal: #1e293b;
-  --color-charcoal-light: #334155;
+  --color-charcoal: #1a2332;
+  --color-charcoal-light: #2d3748;
+  --color-graphite: #374151;
   --color-metallic: #64748b;
   --color-metallic-light: #94a3b8;
   --color-accent: #2563eb;
@@ -35,27 +36,29 @@
     @apply mx-auto max-w-7xl;
   }
 
-  .section-label {
-    @apply mb-3 text-sm font-semibold uppercase tracking-widest text-accent;
-  }
-
-  .section-title {
-    @apply text-3xl font-bold tracking-tight text-charcoal sm:text-4xl lg:text-[2.75rem] lg:leading-tight;
-  }
-
-  .section-subtitle {
-    @apply mt-4 max-w-2xl text-lg leading-relaxed text-metallic;
-  }
-
-  .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:bg-accent-dark hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
-  }
-
-  .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-charcoal/15 bg-white px-6 py-3 text-sm font-semibold text-charcoal transition-all hover:border-charcoal/30 hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+  .page-hero {
+    @apply bg-charcoal py-16 sm:py-20;
   }
 
   .card {
     @apply rounded-xl border border-slate-200/80 bg-white p-6 shadow-sm transition-all hover:border-slate-300 hover:shadow-md;
+  }
+
+  .hero-gradient {
+    background:
+      linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, transparent 45%),
+      linear-gradient(180deg, #1a2332 0%, #111827 100%);
+  }
+
+  .hero-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .cnc-panel {
+    @apply relative overflow-hidden rounded-2xl border border-white/10;
+    background: linear-gradient(145deg, #334155 0%, #1e293b 50%, #0f172a 100%);
   }
 }

@@ -3,9 +3,10 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
-import CapabilitiesPage from './pages/CapabilitiesPage';
-import EquipmentPage from './pages/EquipmentPage';
-import QualityPage from './pages/QualityPage';
+import Capabilities from './pages/Capabilities';
+import Equipment from './pages/Equipment';
+import Quality from './pages/Quality';
+import Industries from './pages/Industries';
 import Contact from './pages/Contact';
 
 export default function App() {
@@ -16,9 +17,10 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/capabilities" element={<CapabilitiesPage />} />
-          <Route path="/equipment" element={<EquipmentPage />} />
-          <Route path="/quality" element={<QualityPage />} />
+          <Route path="/capabilities" element={<Capabilities />} />
+          <Route path="/equipment" element={<Equipment />} />
+          <Route path="/quality" element={<Quality />} />
+          <Route path="/industries" element={<Industries />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>
