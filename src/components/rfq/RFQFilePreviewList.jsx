@@ -15,7 +15,7 @@ export default function RFQFilePreviewList({ files, onRemove, disabled = false }
               <FileText className="h-5 w-5" />
             </div>
             <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-medium text-charcoal">{file.name}</p>
+              <p className="break-all text-sm font-medium text-charcoal">{file.name}</p>
               <p className="text-xs text-metallic">
                 {getFileTypeLabel(file.name)} · {formatFileSize(file.size)}
               </p>

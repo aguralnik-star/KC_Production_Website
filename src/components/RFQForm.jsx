@@ -38,6 +38,14 @@ const initialForm = {
   notes: '',
 };
 
+const SCROLL_SECTIONS = [
+  { stepId: 'contact', refKey: 'contact' },
+  { stepId: 'project', refKey: 'project' },
+  { stepId: 'project', refKey: 'notes' },
+  { stepId: 'files', refKey: 'files' },
+  { stepId: 'submit', refKey: 'submit' },
+];
+
 const inputClass =
   'mt-1.5 w-full min-h-[44px] rounded-lg border border-slate-200 px-4 py-2.5 text-sm transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 disabled:bg-slate-50';
 
@@ -80,15 +88,15 @@ export default function RFQForm() {
   useEffect(() => {
     const observers = [];
 
-    RFQ_PROGRESS_STEPS.forEach(({ id }) => {
-      const node = sectionRefs.current[id];
+    SCROLL_SECTIONS.forEach(({ stepId, refKey }) => {
+      const node = sectionRefs.current[refKey];
       if (!node) return;
 
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting && entry.intersectionRatio >= 0.35) {
-              setActiveStep(id);
+              setActiveStep(stepId);
             }
           });
         },
@@ -467,11 +475,19 @@ export default function RFQForm() {
             )}
           </AccessibleFormField>
         </div>
+      </RFQFormSection>
 
+      <RFQFormSection
+        id="rfq-section-notes"
+        sectionRef={(node) => {
+          sectionRefs.current.notes = node;
+        }}
+        title="Project Notes"
+        description="Optional details that help K&C understand tolerances, finish, delivery, and special requirements."
+      >
         <AccessibleFormField
           id="notes"
-          label="Project Notes / Requirements"
-          className="mt-5"
+          label="Notes / Requirements"
           helpText="Optional details about tolerances, finish, delivery, revision level, or special manufacturing needs."
         >
           {({ id, describedBy, helpId }) => (
@@ -525,6 +541,10 @@ export default function RFQForm() {
             <div>
               <dt>Email</dt>
               <dd>{form.email || '—'}</dd>
+            </div>
+            <div>
+              <dt>Phone</dt>
+              <dd>{form.phone || '—'}</dd>
             </div>
             <div>
               <dt>Company</dt>

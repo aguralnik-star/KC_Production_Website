@@ -20,6 +20,8 @@ export const ALLOWED_ANALYTICS_PARAM_KEYS = new Set([
   'file_count',
   'error_type',
   'error_category',
+  'step',
+  'category',
 ]);
 
 export const RFQ_REFERENCE_PATTERN = /^KC-RFQ-\d{8}-\d{4}$/i;

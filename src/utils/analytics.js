@@ -151,31 +151,37 @@ export function trackCTAClick(label, location, destination = '') {
   });
 }
 
+const RFQ_CATEGORY = 'rfq_conversion';
+
 export function trackRFQStart(location = 'contact_form') {
-  trackOnce('rfq_form_start', location, { location });
+  trackOnce('rfq_form_start', location, { category: RFQ_CATEGORY, step: 'contact', location });
 }
 
 export function trackRFQSubmitAttempt() {
-  trackEvent('rfq_form_submit_attempt');
+  trackEvent('rfq_form_submit_attempt', { category: RFQ_CATEGORY, step: 'submit' });
 }
 
 export function trackRFQSubmitSuccess(referenceNumber) {
-  const params = {};
+  const params = { category: RFQ_CATEGORY, step: 'submit' };
   const ref = sanitizeReferenceNumber(referenceNumber);
   if (ref) params.reference_number = ref;
   trackEvent('rfq_form_submit_success', params);
 }
 
 export function trackRFQSubmitError(errorType = 'submit') {
-  trackEvent('rfq_form_submit_error', { error_type: errorType });
+  trackEvent('rfq_form_submit_error', { category: RFQ_CATEGORY, step: 'submit', error_type: errorType });
 }
 
 export function trackFileUploadAdded(fileCount) {
-  trackEvent('rfq_file_upload_added', { file_count: Number(fileCount) || 0 });
+  trackEvent('rfq_file_upload_added', {
+    category: RFQ_CATEGORY,
+    step: 'files',
+    file_count: Number(fileCount) || 0,
+  });
 }
 
 export function trackFileUploadError(errorType = 'validation') {
-  trackEvent('rfq_file_upload_error', { error_type: errorType });
+  trackEvent('rfq_file_upload_error', { category: RFQ_CATEGORY, step: 'files', error_type: errorType });
 }
 
 export function trackStatusLookupAttempt() {

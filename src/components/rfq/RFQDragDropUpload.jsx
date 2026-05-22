@@ -43,6 +43,7 @@ export default function RFQDragDropUpload({
         onKeyDown={handleKeyDown}
         role="button"
         tabIndex={disabled || atLimit ? -1 : 0}
+        aria-label="Upload drawings and project files"
         aria-disabled={disabled || atLimit}
         aria-describedby="rfq-upload-help rfq-upload-types"
       >
