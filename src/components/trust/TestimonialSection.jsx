@@ -1,9 +1,9 @@
-import { REPRESENTATIVE_TESTIMONIALS } from '../../data/testimonialsData';
+import { getPublicTestimonials } from '../../data/testimonialsData';
 import { TESTIMONIAL_SECTION_NOTE } from '../../data/trustSignalsData';
 import TestimonialCard from './TestimonialCard';
 
 export default function TestimonialSection({
-  testimonials = REPRESENTATIVE_TESTIMONIALS,
+  testimonials,
   limit,
   showSectionNote = true,
   variant = 'light',
@@ -12,7 +12,8 @@ export default function TestimonialSection({
   description = 'These examples reflect representative feedback themes — not verified customer endorsements.',
   className = '',
 }) {
-  const items = limit ? testimonials.slice(0, limit) : testimonials;
+  const resolved = testimonials ?? getPublicTestimonials(limit);
+  const items = limit ? resolved.slice(0, limit) : resolved;
   const isDark = variant === 'dark';
 
   return (

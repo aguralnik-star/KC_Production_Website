@@ -12,6 +12,7 @@ const NAV_ITEMS = [
   { to: '/admin/go-live', label: 'Go-Live', match: (location) => location.pathname === '/admin/go-live' },
   { to: '/admin/post-launch', label: 'Post-Launch', match: (location) => location.pathname === '/admin/post-launch' },
   { to: '/admin/mobile-browser-qa', label: 'Mobile & Browser QA', match: (location) => location.pathname === '/admin/mobile-browser-qa' },
+  { to: '/admin/real-content', label: 'Real Content', match: (location) => location.pathname === '/admin/real-content' },
   { to: '/admin/content-qa', label: 'Content QA', match: (location) => location.pathname === '/admin/content-qa' },
   { to: '/admin/owner-handoff', label: 'Owner Handoff', match: (location) => location.pathname === '/admin/owner-handoff' },
 ];

@@ -10,7 +10,7 @@ import ProjectDetailModal from '../components/projects/ProjectDetailModal';
 import ProjectProcessSummary from '../components/projects/ProjectProcessSummary';
 import TestimonialSection from '../components/trust/TestimonialSection';
 import TrustCTA from '../components/trust/TrustCTA';
-import { SHOWCASE_PROJECTS, filterProjects } from '../data/projects';
+import { getPublicProjects } from '../data/projects';
 import { trackProjectCategoryFilter, trackProjectShowcaseView } from '../utils/analytics';
 
 export default function Projects() {
@@ -18,7 +18,7 @@ export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
 
   const filteredProjects = useMemo(
-    () => filterProjects(SHOWCASE_PROJECTS, activeCategory),
+    () => getPublicProjects(activeCategory),
     [activeCategory],
   );
 
