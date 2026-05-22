@@ -39,6 +39,7 @@ const AdminTestimonials = lazy(() => lazyWithRetry(() => import('./pages/AdminTe
 const AdminCustomerApprovals = lazy(() => lazyWithRetry(() => import('./pages/AdminCustomerApprovals')));
 const AdminCustomerReferences = lazy(() => lazyWithRetry(() => import('./pages/AdminCustomerReferences')));
 const AdminCRM = lazy(() => lazyWithRetry(() => import('./pages/AdminCRM')));
+const AdminLiveRfqMonitoring = lazy(() => lazyWithRetry(() => import('./pages/AdminLiveRfqMonitoring')));
 
 function PublicRoutes() {
   return (
@@ -88,6 +89,7 @@ export default function App() {
           <Route path="/admin/customer-approvals" element={<AdminCustomerApprovals />} />
           <Route path="/admin/customer-references" element={<AdminCustomerReferences />} />
           <Route path="/admin/crm" element={<AdminCRM />} />
+          <Route path="/crm/live-rfq-monitoring" element={<AdminLiveRfqMonitoring />} />
         </Route>
 
         <Route path="/admin" element={<Navigate to="/admin/rfqs" replace />} />
