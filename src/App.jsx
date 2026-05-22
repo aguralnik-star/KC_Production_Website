@@ -22,6 +22,7 @@ const AdminRFQDashboard = lazy(() => lazyWithRetry(() => import('./pages/AdminRF
 const AdminRFQProductionReadiness = lazy(() => lazyWithRetry(() => import('./pages/AdminRFQProductionReadiness')));
 const AdminRFQOperationsCommandCenter = lazy(() => lazyWithRetry(() => import('./pages/AdminRFQOperationsCommandCenter')));
 const LaunchChecklist = lazy(() => lazyWithRetry(() => import('./pages/LaunchChecklist')));
+const AdminLaunchGoNoGoReview = lazy(() => lazyWithRetry(() => import('./pages/AdminLaunchGoNoGoReview')));
 
 function PublicRoutes() {
   return (
@@ -53,6 +54,7 @@ export default function App() {
           <Route path="/admin/rfq-readiness" element={<AdminRFQProductionReadiness />} />
           <Route path="/admin/rfq-operations" element={<AdminRFQOperationsCommandCenter />} />
           <Route path="/admin/launch-checklist" element={<LaunchChecklist />} />
+          <Route path="/admin/launch-go-no-go" element={<AdminLaunchGoNoGoReview />} />
         </Route>
 
         <Route path="/admin" element={<Navigate to="/admin/rfqs" replace />} />

@@ -7,6 +7,7 @@ const NAV_ITEMS = [
   { to: '/admin/rfq-readiness', label: 'Readiness', match: (location) => location.pathname === '/admin/rfq-readiness' },
   { to: '/admin/rfq-operations', label: 'Operations', match: (location) => location.pathname === '/admin/rfq-operations' && location.hash !== '#analytics' },
   { to: '/admin/launch-checklist', label: 'Launch', match: (location) => location.pathname === '/admin/launch-checklist' },
+  { to: '/admin/launch-go-no-go', label: 'Go/No-Go', match: (location) => location.pathname === '/admin/launch-go-no-go' },
 ];
 
 export default function AdminNav() {

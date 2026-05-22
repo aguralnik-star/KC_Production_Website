@@ -103,12 +103,23 @@
 }
 
 @media print {
-  .launch-checklist {
+  .launch-checklist,
+  .launch-go-no-go {
     color: #111827;
   }
 
   .launch-checklist button,
-  .launch-checklist input[type='checkbox'] {
+  .launch-checklist input[type='checkbox'],
+  .launch-go-no-go button,
+  .launch-go-no-go select {
     display: none;
+  }
+
+  .launch-go-no-go .print\:hidden {
+    display: none !important;
+  }
+
+  .launch-go-no-go .hidden.print\:inline {
+    display: inline !important;
   }
 }
