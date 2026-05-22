@@ -1,7 +1,18 @@
 import { supabase, RFQ_BUCKET } from '../lib/supabaseClient';
 import { isCurrentUserAdmin } from './authService';
 
-export const RFQ_STATUSES = ['new', 'in_review', 'quoted', 'closed', 'rejected'];
+export const RFQ_STATUSES = [
+  'new',
+  'in_review',
+  'quote_ready',
+  'quoted',
+  'waiting_on_customer',
+  'follow_up_needed',
+  'won',
+  'lost',
+  'closed',
+  'rejected',
+];
 
 const SIGNED_URL_TTL_SECONDS = 3600;
 
