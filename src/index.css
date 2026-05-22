@@ -660,6 +660,34 @@
   .capability-industry-tag {
     @apply inline-flex rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-charcoal shadow-sm transition-colors hover:border-brand-primary/30 hover:text-brand-primary;
   }
+
+  .quality-process-timeline {
+    @apply grid gap-6 sm:grid-cols-2 lg:grid-cols-5;
+  }
+
+  .quality-process-timeline__step {
+    @apply relative text-left;
+  }
+
+  .quality-process-timeline__icon-wrap {
+    @apply flex h-12 w-12 items-center justify-center rounded-xl bg-brand-primary/10 text-brand-primary;
+  }
+
+  .quality-process-timeline__number {
+    @apply mt-4 text-xs font-semibold uppercase tracking-[0.16em] text-brand-accent;
+  }
+
+  .quality-process-timeline__title {
+    @apply mt-2 text-base font-semibold text-charcoal;
+  }
+
+  .quality-process-timeline__description {
+    @apply mt-2 text-sm leading-relaxed text-metallic;
+  }
+
+  .quality-process-timeline__connector {
+    @apply absolute -right-3 top-8 h-0.5 w-6 bg-brand-accent/40;
+  }
 }
 
 @media print {
