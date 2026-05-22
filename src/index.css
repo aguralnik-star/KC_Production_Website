@@ -688,6 +688,26 @@
   .quality-process-timeline__connector {
     @apply absolute -right-3 top-8 h-0.5 w-6 bg-brand-accent/40;
   }
+
+  .about-story-callout {
+    @apply max-w-4xl;
+  }
+
+  .about-timeline {
+    @apply grid gap-6 sm:grid-cols-2 lg:grid-cols-3;
+  }
+
+  .about-timeline__year {
+    @apply text-sm font-bold uppercase tracking-[0.12em] text-brand-accent;
+  }
+
+  .about-timeline__title {
+    @apply mt-2 text-lg font-semibold text-charcoal;
+  }
+
+  .about-timeline__description {
+    @apply mt-2 text-sm leading-relaxed text-metallic;
+  }
 }
 
 @media print {
