@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { AlertCircle, CheckCircle2 } from 'lucide-react';
 import SEO from '../components/SEO';
@@ -7,11 +7,13 @@ import SectionHeading from '../components/SectionHeading';
 import CTAButton from '../components/CTAButton';
 import RFQConfirmationCard from '../components/RFQConfirmationCard';
 import RFQNextSteps from '../components/RFQNextSteps';
+import { useConversionTracking } from '../hooks/useConversionTracking';
 import { COMPANY } from '../data/company';
 
 export default function RFQConfirmation() {
   const location = useLocation();
   const [searchParams] = useSearchParams();
+  const { trackConfirmationView } = useConversionTracking();
 
   const confirmation = useMemo(() => {
     const routeState = location.state?.confirmation ?? {};
@@ -29,6 +31,12 @@ export default function RFQConfirmation() {
       customerConfirmationStatus: routeState.customerConfirmationStatus ?? null,
     };
   }, [location.state, searchParams]);
+
+  useEffect(() => {
+    if (confirmation.referenceNumber) {
+      trackConfirmationView(confirmation.referenceNumber);
+    }
+  }, [confirmation.referenceNumber, trackConfirmationView]);
 
   const emailNotice = useMemo(() => {
     if (confirmation.customerConfirmationSent === true && confirmation.email) {
@@ -67,6 +75,8 @@ export default function RFQConfirmation() {
             label="RFQ Confirmation"
             title="Thank you — your RFQ has been received."
             description="Your submission is in our queue for review. Save your reference number below for future communication."
+            titleId="rfq-confirmation-heading"
+            headingLevel="h1"
             dark
           />
         </div>
@@ -74,7 +84,7 @@ export default function RFQConfirmation() {
 
       <section className="section-padding">
         <div className="section-container max-w-3xl">
-          <div className="mb-8 flex items-start gap-3 rounded-xl border border-green-200 bg-green-50 px-5 py-4 print:hidden">
+          <div className="mb-8 flex items-start gap-3 rounded-xl border border-green-200 bg-green-50 px-5 py-4 print:hidden" role="status">
             <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-green-600" aria-hidden="true" />
             <div>
               <p className="font-semibold text-green-900">Submission successful</p>
@@ -112,8 +122,15 @@ export default function RFQConfirmation() {
 
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap print:hidden">
               <CTAButton to="/contact">Submit Another RFQ</CTAButton>
-              <CTAButton to="/" variant="secondary">Return to Home</CTAButton>
-              <CTAButton href={`mailto:${COMPANY.email}`} variant="secondary">Contact K&amp;C</CTAButton>
+              <CTAButton to="/rfq/status" variant="secondary">
+                Check RFQ Status
+              </CTAButton>
+              <CTAButton to="/" variant="secondary">
+                Return to Home
+              </CTAButton>
+              <CTAButton href={`mailto:${COMPANY.email}`} variant="secondary">
+                Contact K&amp;C
+              </CTAButton>
             </div>
           </div>
         </div>

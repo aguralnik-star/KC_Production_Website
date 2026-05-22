@@ -3,6 +3,7 @@ import SEO from '../components/SEO';
 import { PAGE_SEO } from '../config/siteConfig';
 import SectionHeading from '../components/SectionHeading';
 import RFQForm from '../components/RFQForm';
+import RFQTrustPanel from '../components/rfq/RFQTrustPanel';
 import { COMPANY } from '../data/company';
 
 export default function Contact() {
@@ -16,26 +17,38 @@ export default function Contact() {
             label="Contact / RFQ"
             title="Request a Prompt, Competitive Quote"
             description="Complete the form below or call us directly. When you contact K&C, you'll speak with someone knowledgeable who can respond to your needs — no phone maze."
+            titleId="contact-hero-heading"
+            headingLevel="h1"
             dark
           />
         </div>
       </section>
 
-      <section className="section-padding">
+      <section className="section-padding bg-brand-light">
         <div className="section-container">
-          <div className="grid gap-12 lg:grid-cols-5">
-            <aside className="lg:col-span-2">
-              <h2 className="text-2xl font-bold text-charcoal">Get in Touch</h2>
-              <p className="mt-3 leading-relaxed text-metallic">
-                What can we help you with? Call us or email — we respond quickly and provide prompt quotations.
-              </p>
+          <div className="rfq-contact-layout">
+            <div className="order-2 lg:order-1 lg:col-span-7">
+              <RFQForm />
+            </div>
 
-              <address className="mt-8 space-y-5 not-italic">
+            <div className="order-1 lg:order-2 lg:col-span-5">
+              <div className="lg:sticky lg:top-28">
+                <RFQTrustPanel />
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 grid gap-6 lg:grid-cols-3">
+            <div className="card lg:col-span-2">
+              <h2 className="text-xl font-bold text-charcoal">Contact Information</h2>
+              <address className="mt-6 grid gap-5 not-italic sm:grid-cols-2">
                 <div className="flex items-start gap-3">
                   <Phone className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
                   <div>
                     <p className="font-medium text-charcoal">Phone</p>
-                    <a href={`tel:${COMPANY.phoneTel}`} className="text-sm text-metallic hover:text-accent">{COMPANY.phone}</a>
+                    <a href={`tel:${COMPANY.phoneTel}`} className="text-sm text-metallic hover:text-accent">
+                      {COMPANY.phone}
+                    </a>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
@@ -49,32 +62,42 @@ export default function Contact() {
                   <Mail className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
                   <div>
                     <p className="font-medium text-charcoal">Email</p>
-                    <a href={`mailto:${COMPANY.email}`} className="text-sm text-metallic hover:text-accent">{COMPANY.email}</a>
+                    <a href={`mailto:${COMPANY.email}`} className="text-sm text-metallic hover:text-accent">
+                      {COMPANY.email}
+                    </a>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
                   <div>
                     <p className="font-medium text-charcoal">Location</p>
-                    <p className="text-sm text-metallic">{COMPANY.address}<br />{COMPANY.city}</p>
+                    <p className="text-sm text-metallic">
+                      {COMPANY.address}
+                      <br />
+                      {COMPANY.city}
+                    </p>
                   </div>
                 </div>
               </address>
+            </div>
 
-              <div className="mt-10 rounded-xl border border-slate-200 bg-slate-50 p-6">
-                <h3 className="text-sm font-semibold text-charcoal">Tips for a faster quote</h3>
-                <ul className="mt-3 space-y-2 text-sm text-metallic">
-                  <li>• Attach drawings or 3D models (PDF, STEP, DWG, DXF, ZIP)</li>
-                  <li>• Up to 5 files, 20 MB each</li>
-                  <li>• Specify material and quantity</li>
-                  <li>• Note tolerance and finish requirements</li>
-                  <li>• Include your target delivery date</li>
-                </ul>
-              </div>
-            </aside>
-
-            <div className="lg:col-span-3">
-              <RFQForm />
+            <div className="card rfq-talk-first-card">
+              <h2 className="text-xl font-bold text-charcoal">Prefer to talk first?</h2>
+              <p className="mt-3 text-sm leading-relaxed text-metallic">
+                Call K&amp;C to discuss your machining, tooling, fixture, or gauge project before submitting drawings.
+              </p>
+              <a
+                href={`tel:${COMPANY.phoneTel}`}
+                className="mt-5 inline-flex min-h-[44px] items-center justify-center rounded-lg bg-charcoal px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-charcoal-light"
+              >
+                Call {COMPANY.phone}
+              </a>
+              <p className="mt-4 text-sm text-metallic">
+                Or email{' '}
+                <a href={`mailto:${COMPANY.email}`} className="font-semibold text-brand-primary hover:text-brand-accent">
+                  {COMPANY.email}
+                </a>
+              </p>
             </div>
           </div>
         </div>

@@ -1,63 +1,14 @@
 import { supabase, RFQ_BUCKET, isSupabaseConfigured } from '../lib/supabaseClient';
+import {
+  ALLOWED_EXTENSIONS,
+  MAX_FILES,
+  MAX_FILE_SIZE_BYTES,
+  sanitizeFileName,
+  getFileExtension,
+} from '../utils/rfqFileUtils';
+import { validateRFQInput } from '../utils/rfqValidation';
 
-const MAX_FILES = 5;
-const MAX_FILE_SIZE_BYTES = 20 * 1024 * 1024;
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-const ALLOWED_EXTENSIONS = new Set([
-  'pdf',
-  'png',
-  'jpg',
-  'jpeg',
-  'dwg',
-  'dxf',
-  'step',
-  'stp',
-  'x_t',
-  'sldprt',
-  'sldasm',
-  'zip',
-]);
-
-export function sanitizeFileName(fileName) {
-  const base = fileName.split(/[/\\]/).pop() ?? 'file';
-  return base.replace(/[^a-zA-Z0-9._-]/g, '_').slice(0, 180) || 'file';
-}
-
-export function getFileExtension(fileName) {
-  const parts = fileName.toLowerCase().split('.');
-  return parts.length > 1 ? parts.pop() : '';
-}
-
-export function validateRFQInput(formData, files = []) {
-  const errors = [];
-
-  if (!formData.name?.trim()) {
-    errors.push('Name is required.');
-  }
-
-  if (!formData.email?.trim()) {
-    errors.push('Email is required.');
-  } else if (!EMAIL_PATTERN.test(formData.email.trim())) {
-    errors.push('Please enter a valid email address.');
-  }
-
-  if (files.length > MAX_FILES) {
-    errors.push(`You can upload up to ${MAX_FILES} files.`);
-  }
-
-  for (const file of files) {
-    const extension = getFileExtension(file.name);
-    if (!ALLOWED_EXTENSIONS.has(extension)) {
-      errors.push(`"${file.name}" is not an allowed file type.`);
-    }
-    if (file.size > MAX_FILE_SIZE_BYTES) {
-      errors.push(`"${file.name}" exceeds the 20 MB limit.`);
-    }
-  }
-
-  return errors;
-}
+export { MAX_FILES, MAX_FILE_SIZE_BYTES, ALLOWED_EXTENSIONS, sanitizeFileName, getFileExtension };
 
 export async function uploadRFQFiles(rfqRequestId, files) {
   if (!files.length) return [];
@@ -144,8 +95,8 @@ export async function submitRFQ(formData, files = []) {
   }
 
   const validationErrors = validateRFQInput(formData, files);
-  if (validationErrors.length > 0) {
-    throw new Error(validationErrors[0]);
+  if (validationErrors.messages.length > 0) {
+    throw new Error(validationErrors.messages[0]);
   }
 
   const payload = {
@@ -202,4 +153,3 @@ export async function submitRFQ(formData, files = []) {
   };
 }
 
-export { MAX_FILES, MAX_FILE_SIZE_BYTES, ALLOWED_EXTENSIONS };

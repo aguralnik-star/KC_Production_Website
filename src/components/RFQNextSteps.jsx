@@ -1,17 +1,20 @@
 import { ClipboardList } from 'lucide-react';
 
 const steps = [
-  'Our team will review your RFQ and drawings.',
-  'We may contact you if additional details are needed.',
-  'A quote or follow-up response will be provided after review.',
+  'K&C reviews your RFQ and drawings.',
+  'We contact you if more details are needed.',
+  'Your project is reviewed for machining, tooling, fixture, or gauge requirements.',
+  'You receive a quote or next-step follow-up.',
 ];
 
 export default function RFQNextSteps() {
   return (
-    <section className="rounded-xl border border-slate-200 bg-slate-50 p-6 print:border-charcoal/20 print:bg-white">
+    <section className="rfq-next-steps print:border print:border-charcoal/20 print:bg-white" aria-labelledby="rfq-next-steps-heading">
       <div className="flex items-center gap-2">
         <ClipboardList className="h-5 w-5 text-accent" aria-hidden="true" />
-        <h2 className="text-lg font-semibold text-charcoal">What Happens Next</h2>
+        <h2 id="rfq-next-steps-heading" className="text-lg font-semibold text-charcoal">
+          What Happens Next
+        </h2>
       </div>
       <ol className="mt-4 space-y-3">
         {steps.map((step, index) => (
@@ -24,7 +27,7 @@ export default function RFQNextSteps() {
         ))}
       </ol>
       <p className="mt-5 text-sm font-medium text-charcoal">
-        Please save this reference number for future communication.
+        Please save your reference number for future communication and RFQ status checks.
       </p>
     </section>
   );
