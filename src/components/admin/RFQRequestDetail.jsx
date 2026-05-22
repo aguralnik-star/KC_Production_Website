@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { X, Mail, Phone, Building2, Loader2, FileText, DollarSign, AlertCircle, MessageSquare } from 'lucide-react';
+import { X, Mail, Phone, Building2, Loader2, FileText, DollarSign, AlertCircle, MessageSquare, Users } from 'lucide-react';
 import RFQStatusBadge from './RFQStatusBadge';
 import RFQFileList from './RFQFileList';
 import RFQWorkflowPanel from './RFQWorkflowPanel';
 import CustomerStatusEmailPanel from './CustomerStatusEmailPanel';
 import AdditionalInfoRequestPanel from './AdditionalInfoRequestPanel';
+import RFQToCRMConversionPanel from './crm/RFQToCRMConversionPanel';
 import { RFQ_STATUSES } from '../../services/adminRfqService';
 import { CUSTOMER_STATUS_LABELS } from '../../services/rfqWorkflowService';
 
@@ -32,6 +33,7 @@ const TABS = [
   { id: 'details', label: 'Details', icon: FileText },
   { id: 'customer-updates', label: 'Customer Updates', icon: MessageSquare },
   { id: 'quote', label: 'Quote', icon: DollarSign },
+  { id: 'crm', label: 'CRM', icon: Users },
 ];
 
 export default function RFQRequestDetail({
@@ -261,6 +263,8 @@ export default function RFQRequestDetail({
             <AdditionalInfoRequestPanel request={request} onRequestUpdated={onRequestUpdated} />
             <CustomerStatusEmailPanel request={request} onRequestUpdated={onRequestUpdated} />
           </div>
+        ) : activeTab === 'crm' ? (
+          <RFQToCRMConversionPanel request={request} onConverted={onRequestUpdated} />
         ) : (
           <RFQWorkflowPanel
             request={request}

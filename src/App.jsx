@@ -38,6 +38,7 @@ const AdminCaseStudyBuilder = lazy(() => lazyWithRetry(() => import('./pages/Adm
 const AdminTestimonials = lazy(() => lazyWithRetry(() => import('./pages/AdminTestimonials')));
 const AdminCustomerApprovals = lazy(() => lazyWithRetry(() => import('./pages/AdminCustomerApprovals')));
 const AdminCustomerReferences = lazy(() => lazyWithRetry(() => import('./pages/AdminCustomerReferences')));
+const AdminCRM = lazy(() => lazyWithRetry(() => import('./pages/AdminCRM')));
 
 function PublicRoutes() {
   return (
@@ -86,6 +87,7 @@ export default function App() {
           <Route path="/admin/testimonials" element={<AdminTestimonials />} />
           <Route path="/admin/customer-approvals" element={<AdminCustomerApprovals />} />
           <Route path="/admin/customer-references" element={<AdminCustomerReferences />} />
+          <Route path="/admin/crm" element={<AdminCRM />} />
         </Route>
 
         <Route path="/admin" element={<Navigate to="/admin/rfqs" replace />} />

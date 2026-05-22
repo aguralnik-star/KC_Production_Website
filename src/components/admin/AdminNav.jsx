@@ -15,6 +15,7 @@ const NAV_ITEMS = [
   { to: '/admin/testimonials', label: 'Testimonials', match: (location) => location.pathname === '/admin/testimonials' },
   { to: '/admin/customer-approvals', label: 'Customer Approvals', match: (location) => location.pathname === '/admin/customer-approvals' },
   { to: '/admin/customer-references', label: 'Customer References', match: (location) => location.pathname === '/admin/customer-references' },
+  { to: '/admin/crm', label: 'CRM', match: (location) => location.pathname === '/admin/crm' },
   { to: '/admin/case-studies', label: 'Case Studies', match: (location) => location.pathname.startsWith('/admin/case-studies') },
   { to: '/admin/real-content', label: 'Real Content', match: (location) => location.pathname === '/admin/real-content' },
   { to: '/admin/content-qa', label: 'Content QA', match: (location) => location.pathname === '/admin/content-qa' },
