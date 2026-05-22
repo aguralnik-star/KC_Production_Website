@@ -1,0 +1,149 @@
+import { X, Mail, Phone, Building2, Loader2 } from 'lucide-react';
+import RFQStatusBadge from './RFQStatusBadge';
+import RFQFileList from './RFQFileList';
+import { RFQ_STATUSES } from '../../services/adminRfqService';
+
+function DetailRow({ label, value }) {
+  return (
+    <div>
+      <dt className="text-xs font-semibold uppercase tracking-wider text-metallic">{label}</dt>
+      <dd className="mt-1 text-sm text-charcoal">{value || '—'}</dd>
+    </div>
+  );
+}
+
+function formatDate(dateString) {
+  return new Date(dateString).toLocaleString('en-US', {
+    weekday: 'short',
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+  });
+}
+
+export default function RFQRequestDetail({
+  request,
+  files,
+  loading,
+  savingStatus,
+  onClose,
+  onStatusChange,
+}) {
+  if (loading) {
+    return (
+      <aside className="flex h-full items-center justify-center rounded-xl border border-slate-200 bg-white p-8 shadow-sm">
+        <Loader2 className="h-8 w-8 animate-spin text-accent" aria-label="Loading details" />
+      </aside>
+    );
+  }
+
+  if (!request) {
+    return (
+      <aside className="flex h-full flex-col items-center justify-center rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center shadow-sm">
+        <p className="text-lg font-semibold text-charcoal">Select an RFQ</p>
+        <p className="mt-2 text-sm text-metallic">Choose a request from the table to review details and files.</p>
+      </aside>
+    );
+  }
+
+  return (
+    <aside className="flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+      <div className="flex items-start justify-between border-b border-slate-100 px-5 py-4">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wider text-metallic">RFQ Details</p>
+          <h2 className="mt-1 text-lg font-bold text-charcoal">{request.company || request.name}</h2>
+          <p className="text-sm text-metallic">{formatDate(request.created_at)}</p>
+        </div>
+        <button
+          type="button"
+          onClick={onClose}
+          className="rounded-lg p-2 text-metallic hover:bg-slate-100 hover:text-charcoal lg:hidden"
+          aria-label="Close details panel"
+        >
+          <X className="h-5 w-5" />
+        </button>
+      </div>
+
+      <div className="flex-1 overflow-y-auto px-5 py-5">
+        <div className="mb-6 flex items-center justify-between gap-3">
+          <RFQStatusBadge status={request.status} />
+          <div className="min-w-[160px]">
+            <label htmlFor="rfq-status" className="sr-only">Update status</label>
+            <select
+              id="rfq-status"
+              value={request.status}
+              onChange={(e) => onStatusChange(e.target.value)}
+              disabled={savingStatus}
+              className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-charcoal focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 disabled:opacity-50"
+            >
+              {RFQ_STATUSES.map((status) => (
+                <option key={status} value={status}>
+                  {status.replace('_', ' ')}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        <section className="mb-6">
+          <h3 className="mb-3 text-sm font-semibold text-charcoal">Contact Information</h3>
+          <dl className="grid gap-4 sm:grid-cols-2">
+            <DetailRow label="Name" value={request.name} />
+            <DetailRow label="Company" value={request.company} />
+            <div>
+              <dt className="text-xs font-semibold uppercase tracking-wider text-metallic">Email</dt>
+              <dd className="mt-1">
+                <a href={`mailto:${request.email}`} className="inline-flex items-center gap-1.5 text-sm text-accent hover:underline">
+                  <Mail className="h-3.5 w-3.5" aria-hidden="true" />
+                  {request.email}
+                </a>
+              </dd>
+            </div>
+            <div>
+              <dt className="text-xs font-semibold uppercase tracking-wider text-metallic">Phone</dt>
+              <dd className="mt-1">
+                {request.phone ? (
+                  <a href={`tel:${request.phone}`} className="inline-flex items-center gap-1.5 text-sm text-charcoal hover:text-accent">
+                    <Phone className="h-3.5 w-3.5" aria-hidden="true" />
+                    {request.phone}
+                  </a>
+                ) : (
+                  <span className="text-sm text-charcoal">—</span>
+                )}
+              </dd>
+            </div>
+          </dl>
+        </section>
+
+        <section className="mb-6">
+          <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold text-charcoal">
+            <Building2 className="h-4 w-4 text-accent" aria-hidden="true" />
+            Project Details
+          </h3>
+          <dl className="grid gap-4 sm:grid-cols-2">
+            <DetailRow label="Project Type" value={request.project_type} />
+            <DetailRow label="Material" value={request.material} />
+            <DetailRow label="Quantity" value={request.quantity} />
+            <DetailRow label="Timeline" value={request.timeline} />
+          </dl>
+        </section>
+
+        <section className="mb-6">
+          <h3 className="mb-3 text-sm font-semibold text-charcoal">Notes</h3>
+          <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm leading-relaxed text-charcoal">
+            {request.notes || 'No notes provided.'}
+          </div>
+        </section>
+
+        <section>
+          <h3 className="mb-3 text-sm font-semibold text-charcoal">Uploaded Files</h3>
+          <RFQFileList files={files} />
+        </section>
+
+        <p className="mt-6 font-mono text-xs text-slate-400">ID: {request.id}</p>
+      </div>
+    </aside>
+  );
+}

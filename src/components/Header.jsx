@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { Menu, X, Phone, Mail } from 'lucide-react';
+import { Menu, X, Phone, Mail, LayoutDashboard } from 'lucide-react';
 import CTAButton from './CTAButton';
 import { COMPANY } from '../data/company';
+import { getAuthSession } from '../services/adminRfqService';
+import { supabase } from '../lib/supabaseClient';
 
 const navLinks = [
   { to: '/', label: 'Home' },
@@ -16,6 +18,17 @@ const navLinks = [
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    getAuthSession().then((session) => setIsAuthenticated(Boolean(session)));
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setIsAuthenticated(Boolean(session));
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   const linkClass = ({ isActive }) =>
     `text-sm font-medium transition-colors ${isActive ? 'text-accent' : 'text-charcoal/80 hover:text-accent'}`;
@@ -57,6 +70,14 @@ export default function Header() {
               {label}
             </NavLink>
           ))}
+          {isAuthenticated && (
+            <NavLink to="/admin/rfqs" className={linkClass}>
+              <span className="inline-flex items-center gap-1.5">
+                <LayoutDashboard className="h-4 w-4" aria-hidden="true" />
+                RFQ Admin
+              </span>
+            </NavLink>
+          )}
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
@@ -85,6 +106,16 @@ export default function Header() {
                 </NavLink>
               </li>
             ))}
+            {isAuthenticated && (
+              <li>
+                <NavLink to="/admin/rfqs" className={linkClass} onClick={() => setMobileOpen(false)}>
+                  <span className="flex items-center gap-2 rounded-lg px-3 py-2.5 hover:bg-slate-50">
+                    <LayoutDashboard className="h-4 w-4" aria-hidden="true" />
+                    RFQ Admin
+                  </span>
+                </NavLink>
+              </li>
+            )}
           </ul>
           <div className="mt-4 flex flex-col gap-2 border-t border-slate-100 pt-4">
             <CTAButton to="/capabilities" variant="secondary" className="w-full" onClick={() => setMobileOpen(false)}>View Capabilities</CTAButton>
