@@ -1,9 +1,12 @@
 import { DEFAULT_SEO, LOCAL_BUSINESS_SCHEMA, SITE_URL } from '../config/siteConfig';
 
+import { GOOGLE_SITE_VERIFICATION } from '../config/analyticsConfig';
+
 const MANAGED_META_NAMES = new Set([
   'description',
   'keywords',
   'robots',
+  'google-site-verification',
   'twitter:card',
   'twitter:title',
   'twitter:description',
@@ -118,4 +121,13 @@ export function cleanupManagedSeoTags() {
   });
   document.head.querySelector('link[rel="canonical"]')?.remove();
   document.getElementById('kc-json-ld')?.remove();
+}
+
+export function applyGoogleSiteVerification(content = GOOGLE_SITE_VERIFICATION) {
+  if (!content || typeof document === 'undefined') return;
+
+  upsertMeta('meta[name="google-site-verification"]', {
+    name: 'google-site-verification',
+    content,
+  });
 }

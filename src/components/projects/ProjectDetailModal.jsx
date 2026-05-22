@@ -103,7 +103,12 @@ export default function ProjectDetailModal({ project, open, onClose }) {
           </p>
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <CTAButton to="/contact" className="w-full sm:w-auto">
+            <CTAButton
+              to="/contact"
+              className="w-full sm:w-auto"
+              analyticsLabel="Request a Quote for Similar Work"
+              analyticsLocation="projects_modal"
+            >
               Request a Quote for Similar Work
             </CTAButton>
             <button

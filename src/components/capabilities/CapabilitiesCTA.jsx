@@ -12,7 +12,7 @@ export default function CapabilitiesCTA() {
           Send your drawings, specifications, and project requirements. K&C will review your RFQ and follow up with
           next steps.
         </p>
-        <CTAButton to="/contact" className="mt-8">
+        <CTAButton to="/contact" className="mt-8" analyticsLabel="Request a Quote" analyticsLocation="capabilities">
           Request a Quote
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </CTAButton>

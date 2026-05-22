@@ -5,6 +5,7 @@ import SectionHeading from '../components/SectionHeading';
 import RFQForm from '../components/RFQForm';
 import RFQTrustPanel from '../components/rfq/RFQTrustPanel';
 import { COMPANY } from '../data/company';
+import { trackEmailClick, trackPhoneClick } from '../utils/analytics';
 
 export default function Contact() {
   return (
@@ -46,7 +47,11 @@ export default function Contact() {
                   <Phone className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
                   <div>
                     <p className="font-medium text-charcoal">Phone</p>
-                    <a href={`tel:${COMPANY.phoneTel}`} className="text-sm text-metallic hover:text-accent">
+                    <a
+                      href={`tel:${COMPANY.phoneTel}`}
+                      className="text-sm text-metallic hover:text-accent"
+                      onClick={() => trackPhoneClick('contact_sidebar')}
+                    >
                       {COMPANY.phone}
                     </a>
                   </div>
@@ -62,7 +67,11 @@ export default function Contact() {
                   <Mail className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
                   <div>
                     <p className="font-medium text-charcoal">Email</p>
-                    <a href={`mailto:${COMPANY.email}`} className="text-sm text-metallic hover:text-accent">
+                    <a
+                      href={`mailto:${COMPANY.email}`}
+                      className="text-sm text-metallic hover:text-accent"
+                      onClick={() => trackEmailClick('contact_sidebar')}
+                    >
                       {COMPANY.email}
                     </a>
                   </div>
@@ -89,12 +98,17 @@ export default function Contact() {
               <a
                 href={`tel:${COMPANY.phoneTel}`}
                 className="mt-5 inline-flex min-h-[44px] items-center justify-center rounded-lg bg-charcoal px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-charcoal-light"
+                onClick={() => trackPhoneClick('contact_call_card')}
               >
                 Call {COMPANY.phone}
               </a>
               <p className="mt-4 text-sm text-metallic">
                 Or email{' '}
-                <a href={`mailto:${COMPANY.email}`} className="font-semibold text-brand-primary hover:text-brand-accent">
+                <a
+                  href={`mailto:${COMPANY.email}`}
+                  className="font-semibold text-brand-primary hover:text-brand-accent"
+                  onClick={() => trackEmailClick('contact_call_card')}
+                >
                   {COMPANY.email}
                 </a>
               </p>

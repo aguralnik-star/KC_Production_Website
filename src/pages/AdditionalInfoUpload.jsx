@@ -9,6 +9,7 @@ import AdditionalInfoUploadForm from '../components/rfq/AdditionalInfoUploadForm
 import AdditionalInfoSuccess from '../components/rfq/AdditionalInfoSuccess';
 import AdditionalInfoExpired from '../components/rfq/AdditionalInfoExpired';
 import { validateAdditionalInfoToken } from '../services/additionalInfoService';
+import { trackAdditionalInfoUploadStart, trackAdditionalInfoUploadSuccess } from '../utils/analytics';
 
 export default function AdditionalInfoUpload() {
   const { token } = useParams();
@@ -56,6 +57,12 @@ export default function AdditionalInfoUpload() {
     };
   }, [token]);
 
+  useEffect(() => {
+    if (requestData?.valid) {
+      trackAdditionalInfoUploadStart();
+    }
+  }, [requestData]);
+
   return (
     <>
       <SEO {...PAGE_SEO.additionalInfo} />
@@ -93,7 +100,10 @@ export default function AdditionalInfoUpload() {
                   <AdditionalInfoUploadForm
                     requestToken={token}
                     requestData={requestData}
-                    onSuccess={() => setSubmitted(true)}
+                    onSuccess={() => {
+                      trackAdditionalInfoUploadSuccess();
+                      setSubmitted(true);
+                    }}
                   />
                 </div>
               </div>

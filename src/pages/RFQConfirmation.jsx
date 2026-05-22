@@ -13,7 +13,7 @@ import { COMPANY } from '../data/company';
 export default function RFQConfirmation() {
   const location = useLocation();
   const [searchParams] = useSearchParams();
-  const { trackConfirmationView } = useConversionTracking();
+  const { trackConfirmationConversion } = useConversionTracking();
 
   const confirmation = useMemo(() => {
     const routeState = location.state?.confirmation ?? {};
@@ -34,9 +34,9 @@ export default function RFQConfirmation() {
 
   useEffect(() => {
     if (confirmation.referenceNumber) {
-      trackConfirmationView(confirmation.referenceNumber);
+      trackConfirmationConversion(confirmation.referenceNumber);
     }
-  }, [confirmation.referenceNumber, trackConfirmationView]);
+  }, [confirmation.referenceNumber, trackConfirmationConversion]);
 
   const emailNotice = useMemo(() => {
     if (confirmation.customerConfirmationSent === true && confirmation.email) {
@@ -121,14 +121,21 @@ export default function RFQConfirmation() {
             <RFQNextSteps />
 
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap print:hidden">
-              <CTAButton to="/contact">Submit Another RFQ</CTAButton>
-              <CTAButton to="/rfq/status" variant="secondary">
+              <CTAButton to="/contact" analyticsLabel="Submit Another RFQ" analyticsLocation="rfq_confirmation">
+                Submit Another RFQ
+              </CTAButton>
+              <CTAButton to="/rfq/status" variant="secondary" analyticsLabel="Check RFQ Status" analyticsLocation="rfq_confirmation">
                 Check RFQ Status
               </CTAButton>
-              <CTAButton to="/" variant="secondary">
+              <CTAButton to="/" variant="secondary" analyticsLabel="Return to Home" analyticsLocation="rfq_confirmation">
                 Return to Home
               </CTAButton>
-              <CTAButton href={`mailto:${COMPANY.email}`} variant="secondary">
+              <CTAButton
+                href={`mailto:${COMPANY.email}`}
+                variant="secondary"
+                analyticsLabel="Contact K&C"
+                analyticsLocation="rfq_confirmation"
+              >
                 Contact K&amp;C
               </CTAButton>
             </div>

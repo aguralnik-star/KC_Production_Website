@@ -13,11 +13,11 @@ export default function HomeRFQCTA() {
           with next steps.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <CTAButton to="/contact">
+          <CTAButton to="/contact" analyticsLabel="Request a Quote" analyticsLocation="home_rfq_cta">
             Request a Quote
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </CTAButton>
-          <CTAButton to="/rfq/status" variant="light">
+          <CTAButton to="/rfq/status" variant="light" analyticsLabel="Check RFQ Status" analyticsLocation="home_rfq_cta">
             Check RFQ Status
           </CTAButton>
         </div>

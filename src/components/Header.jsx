@@ -5,6 +5,7 @@ import CTAButton from './CTAButton';
 import Logo from './Logo';
 import { COMPANY } from '../data/company';
 import { trapFocus } from '../utils/accessibilityUtils';
+import { trackEmailClick, trackPhoneClick, trackCTAClick } from '../utils/analytics';
 import { ServicesMobileSection, ServicesNavDropdown } from './services/ServicesNavDropdown';
 
 const navLinks = [
@@ -48,11 +49,19 @@ export default function Header() {
             Precision CNC Machining • Fixtures • Tooling • Production Manufacturing
           </p>
           <div className="flex w-full items-center justify-end gap-4 text-xs sm:w-auto">
-            <a href={`tel:${COMPANY.phoneTel}`} className="flex items-center gap-1.5 text-slate-300 hover:text-white">
+            <a
+              href={`tel:${COMPANY.phoneTel}`}
+              className="flex items-center gap-1.5 text-slate-300 hover:text-white"
+              onClick={() => trackPhoneClick('header')}
+            >
               <Phone className="h-3.5 w-3.5" aria-hidden="true" />
               {COMPANY.phone}
             </a>
-            <a href={`mailto:${COMPANY.email}`} className="flex items-center gap-1.5 text-slate-300 hover:text-white">
+            <a
+              href={`mailto:${COMPANY.email}`}
+              className="flex items-center gap-1.5 text-slate-300 hover:text-white"
+              onClick={() => trackEmailClick('header')}
+            >
               <Mail className="h-3.5 w-3.5" aria-hidden="true" />
               {COMPANY.email}
             </a>
@@ -78,11 +87,19 @@ export default function Header() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <Link to="/rfq/status" className="hidden text-sm font-medium text-charcoal/70 hover:text-accent xl:inline">
+          <Link
+            to="/rfq/status"
+            className="hidden text-sm font-medium text-charcoal/70 hover:text-accent xl:inline"
+            onClick={() => trackCTAClick('Check RFQ Status', 'header', '/rfq/status')}
+          >
             Check RFQ Status
           </Link>
-          <CTAButton to="/capabilities" variant="secondary">View Capabilities</CTAButton>
-          <CTAButton to="/contact">Request a Quote</CTAButton>
+          <CTAButton to="/capabilities" variant="secondary" analyticsLabel="View Capabilities" analyticsLocation="header">
+            View Capabilities
+          </CTAButton>
+          <CTAButton to="/contact" analyticsLabel="Request a Quote" analyticsLocation="header">
+            Request a Quote
+          </CTAButton>
         </div>
 
         <button
@@ -122,12 +139,32 @@ export default function Header() {
             ))}
           </ul>
           <div className="mt-4 flex flex-col gap-2 border-t border-slate-100 pt-4">
-            <CTAButton to="/capabilities" variant="secondary" className="w-full" onClick={() => setMobileOpen(false)}>View Capabilities</CTAButton>
-            <CTAButton to="/contact" className="w-full" onClick={() => setMobileOpen(false)}>Request a Quote</CTAButton>
+            <CTAButton
+              to="/capabilities"
+              variant="secondary"
+              className="w-full"
+              analyticsLabel="View Capabilities"
+              analyticsLocation="header_mobile"
+              onClick={() => setMobileOpen(false)}
+            >
+              View Capabilities
+            </CTAButton>
+            <CTAButton
+              to="/contact"
+              className="w-full"
+              analyticsLabel="Request a Quote"
+              analyticsLocation="header_mobile"
+              onClick={() => setMobileOpen(false)}
+            >
+              Request a Quote
+            </CTAButton>
             <Link
               to="/rfq/status"
               className="block rounded-lg px-3 py-2.5 text-center text-sm font-medium text-charcoal hover:bg-slate-50"
-              onClick={() => setMobileOpen(false)}
+              onClick={() => {
+                trackCTAClick('Check RFQ Status', 'header_mobile', '/rfq/status');
+                setMobileOpen(false);
+              }}
             >
               Check RFQ Status
             </Link>

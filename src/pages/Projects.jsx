@@ -8,6 +8,7 @@ import ProjectDetailModal from '../components/projects/ProjectDetailModal';
 import ProjectProcessSummary from '../components/projects/ProjectProcessSummary';
 import ProjectCTA from '../components/projects/ProjectCTA';
 import { SHOWCASE_PROJECTS, filterProjects } from '../data/projects';
+import { trackProjectCategoryFilter, trackProjectShowcaseView } from '../utils/analytics';
 
 export default function Projects() {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -17,6 +18,16 @@ export default function Projects() {
     () => filterProjects(SHOWCASE_PROJECTS, activeCategory),
     [activeCategory],
   );
+
+  const handleCategoryChange = (category) => {
+    setActiveCategory(category);
+    trackProjectCategoryFilter(category);
+  };
+
+  const handleViewDetails = (project) => {
+    setSelectedProject(project);
+    trackProjectShowcaseView(project.title, project.category);
+  };
 
   return (
     <>
@@ -35,11 +46,11 @@ export default function Projects() {
           </p>
 
           <div className="mt-8">
-            <ProjectCategoryFilter activeCategory={activeCategory} onChange={setActiveCategory} />
+            <ProjectCategoryFilter activeCategory={activeCategory} onChange={handleCategoryChange} />
           </div>
 
           <div className="mt-10">
-            <ProjectShowcaseGrid projects={filteredProjects} onViewDetails={setSelectedProject} />
+            <ProjectShowcaseGrid projects={filteredProjects} onViewDetails={handleViewDetails} />
           </div>
         </div>
       </section>

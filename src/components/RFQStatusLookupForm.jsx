@@ -2,6 +2,12 @@ import { useState } from 'react';
 import { AlertCircle, Loader2, Search, ShieldCheck } from 'lucide-react';
 import CTAButton from './CTAButton';
 import { lookupRFQStatus } from '../services/publicRfqStatusService';
+import {
+  trackStatusLookupAttempt,
+  trackStatusLookupError,
+  trackStatusLookupNotFound,
+  trackStatusLookupSuccess,
+} from '../utils/analytics';
 
 const inputClass =
   'mt-1.5 w-full rounded-lg border border-slate-200 px-4 py-2.5 text-sm transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20';
@@ -16,13 +22,16 @@ export default function RFQStatusLookupForm({ onResult, onNotFound, onError }) {
     e.preventDefault();
     setFieldError('');
     setLoading(true);
+    trackStatusLookupAttempt();
 
     try {
       const data = await lookupRFQStatus(referenceNumber, email);
 
       if (data?.found) {
+        trackStatusLookupSuccess(data.reference_number || referenceNumber);
         onResult?.(data);
       } else {
+        trackStatusLookupNotFound();
         onNotFound?.(data?.message);
       }
     } catch (err) {
@@ -30,6 +39,7 @@ export default function RFQStatusLookupForm({ onResult, onNotFound, onError }) {
         ? err.message
         : 'Unable to check RFQ status right now. Please try again or contact K&C.';
       setFieldError(message);
+      trackStatusLookupError('request_failed');
       onError?.(message);
     } finally {
       setLoading(false);
@@ -82,7 +92,13 @@ export default function RFQStatusLookupForm({ onResult, onNotFound, onError }) {
         />
       </div>
 
-      <CTAButton type="submit" className="w-full sm:w-auto disabled:cursor-not-allowed disabled:opacity-60" disabled={loading}>
+      <CTAButton
+        type="submit"
+        className="w-full sm:w-auto disabled:cursor-not-allowed disabled:opacity-60"
+        disabled={loading}
+        analyticsLabel="Check Status"
+        analyticsLocation="rfq_status_lookup"
+      >
         {loading ? (
           <>
             <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />

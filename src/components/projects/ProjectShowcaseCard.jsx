@@ -41,7 +41,13 @@ export default function ProjectShowcaseCard({ project, onViewDetails }) {
           >
             View Details
           </button>
-          <CTAButton to="/contact" variant="secondary" className="w-full sm:w-auto">
+          <CTAButton
+            to="/contact"
+            variant="secondary"
+            className="w-full sm:w-auto"
+            analyticsLabel="Start Similar RFQ"
+            analyticsLocation="projects_card"
+          >
             Start Similar RFQ
           </CTAButton>
         </div>

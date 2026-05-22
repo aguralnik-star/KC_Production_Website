@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
-import { applySeoToDocument, buildJsonLd, buildPageSeo } from '../utils/seoUtils';
+import { applySeoToDocument, applyGoogleSiteVerification, buildJsonLd, buildPageSeo } from '../utils/seoUtils';
+import { hasGoogleSiteVerification } from '../config/analyticsConfig';
 
 export default function SEO({
   title,
@@ -35,6 +36,10 @@ export default function SEO({
     }
 
     applySeoToDocument(seo, buildJsonLd(schema, jsonLd));
+
+    if (hasGoogleSiteVerification()) {
+      applyGoogleSiteVerification();
+    }
   }, [
     title,
     description,

@@ -3,6 +3,7 @@ import { MapPin, Phone, Mail, Printer } from 'lucide-react';
 import Logo from './Logo';
 import { COMPANY } from '../data/company';
 import { SERVICE_NAV_LINKS } from '../data/seoServicePages';
+import { trackCTAClick, trackEmailClick, trackPhoneClick } from '../utils/analytics';
 
 const footerLinks = {
   Company: [
@@ -47,7 +48,19 @@ export default function Footer() {
                 <ul className="space-y-2.5">
                   {links.map(({ to, label }) => (
                     <li key={label}>
-                      <Link to={to} className="text-sm text-slate-400 hover:text-white">{label}</Link>
+                      <Link
+                        to={to}
+                        className="text-sm text-slate-400 hover:text-white"
+                        onClick={() => {
+                          if (label === 'Request a Quote') {
+                            trackCTAClick('Request a Quote', 'footer', to);
+                          } else if (label === 'Check RFQ Status') {
+                            trackCTAClick('Check RFQ Status', 'footer', to);
+                          }
+                        }}
+                      >
+                        {label}
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -63,7 +76,9 @@ export default function Footer() {
                 </p>
                 <p className="flex items-center gap-2.5">
                   <Phone className="h-4 w-4 shrink-0 text-accent-light" aria-hidden="true" />
-                  <a href={`tel:${COMPANY.phoneTel}`} className="hover:text-white">{COMPANY.phone}</a>
+                  <a href={`tel:${COMPANY.phoneTel}`} className="hover:text-white" onClick={() => trackPhoneClick('footer')}>
+                    {COMPANY.phone}
+                  </a>
                 </p>
                 <p className="flex items-center gap-2.5">
                   <Printer className="h-4 w-4 shrink-0 text-accent-light" aria-hidden="true" />
@@ -71,7 +86,9 @@ export default function Footer() {
                 </p>
                 <p className="flex items-center gap-2.5">
                   <Mail className="h-4 w-4 shrink-0 text-accent-light" aria-hidden="true" />
-                  <a href={`mailto:${COMPANY.email}`} className="hover:text-white">{COMPANY.email}</a>
+                  <a href={`mailto:${COMPANY.email}`} className="hover:text-white" onClick={() => trackEmailClick('footer')}>
+                    {COMPANY.email}
+                  </a>
                 </p>
               </address>
             </div>

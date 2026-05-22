@@ -36,11 +36,11 @@ export default function HomeHeroV2() {
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <CTAButton to="/contact" className="hero-kc__cta-primary">
+                <CTAButton to="/contact" className="hero-kc__cta-primary" analyticsLabel="Request a Quote" analyticsLocation="home_hero">
                   Request a Quote
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </CTAButton>
-                <CTAButton to="/capabilities" variant="light">
+                <CTAButton to="/capabilities" variant="light" analyticsLabel="View Capabilities" analyticsLocation="home_hero">
                   View Capabilities
                 </CTAButton>
               </div>

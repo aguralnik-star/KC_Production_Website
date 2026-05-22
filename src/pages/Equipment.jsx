@@ -53,7 +53,7 @@ export default function Equipment() {
           <p className="mx-auto mt-4 max-w-xl text-slate-400">
             Contact us for a prompt quotation on your next machining project.
           </p>
-          <CTAButton to="/contact" className="mt-8">
+          <CTAButton to="/contact" className="mt-8" analyticsLabel="Request a Quote" analyticsLocation="equipment">
             Request a Quote
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </CTAButton>

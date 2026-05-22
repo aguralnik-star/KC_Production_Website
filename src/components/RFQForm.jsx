@@ -63,6 +63,7 @@ export default function RFQForm() {
     trackStepProjectCompleted,
     trackFileAdded,
     trackFileRemoved,
+    trackFileError,
     trackSubmitAttempt,
     trackSubmitSuccess,
     trackSubmitError,
@@ -145,7 +146,7 @@ export default function RFQForm() {
 
       if (errors.length) {
         setFileErrors(errors);
-        trackSubmitError('file_validation');
+        trackFileError('file_validation');
         return;
       }
 
@@ -158,7 +159,7 @@ export default function RFQForm() {
       });
       setFileErrors([]);
     },
-    [files, trackFileAdded, trackFormStart, trackSubmitError],
+    [files, trackFileAdded, trackFileError, trackFormStart],
   );
 
   const removeFile = (index) => {
@@ -198,7 +199,7 @@ export default function RFQForm() {
 
     try {
       const result = await submitRFQ(form, files);
-      trackSubmitSuccess();
+      trackSubmitSuccess(result.reference_number);
       clearDraft();
       setSuccessPreview(result.reference_number);
 

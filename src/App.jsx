@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import SkipToContent from './components/SkipToContent';
 import LoadingState from './components/LoadingState';
+import ConversionTracker from './components/ConversionTracker';
 import ProtectedAdminRoute from './components/admin/ProtectedAdminRoute';
 import { lazyWithRetry } from './utils/performanceUtils';
 
@@ -52,6 +53,7 @@ function PublicRoutes() {
 export default function App() {
   return (
     <Suspense fallback={<LoadingState message="Loading application…" />}>
+      <ConversionTracker />
       <Routes>
         <Route path="/admin/login" element={<AdminLogin />} />
 

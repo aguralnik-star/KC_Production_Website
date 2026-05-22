@@ -39,6 +39,8 @@ export default function RFQStatusLookup() {
             label="RFQ Status"
             title="Check Your RFQ Status"
             description="Enter your RFQ reference number and the email address used during submission."
+            titleId="rfq-status-hero-heading"
+            headingLevel="h1"
             dark
           />
         </div>
@@ -66,8 +68,12 @@ export default function RFQStatusLookup() {
               <RFQStatusResultCard result={result} />
 
               <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <CTAButton href={`mailto:${COMPANY.email}`}>Contact K&amp;C</CTAButton>
-                <CTAButton to="/contact" variant="secondary">Submit Another RFQ</CTAButton>
+                <CTAButton href={`mailto:${COMPANY.email}`} analyticsLabel="Contact K&C" analyticsLocation="rfq_status_result">
+                  Contact K&amp;C
+                </CTAButton>
+                <CTAButton to="/contact" variant="secondary" analyticsLabel="Submit Another RFQ" analyticsLocation="rfq_status_result">
+                  Submit Another RFQ
+                </CTAButton>
                 <CTAButton type="button" variant="secondary" onClick={handleReset}>
                   Check Another RFQ
                 </CTAButton>

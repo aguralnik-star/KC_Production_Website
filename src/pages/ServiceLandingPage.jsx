@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import SEO from '../components/SEO';
 import ServiceHero from '../components/services/ServiceHero';
@@ -11,10 +12,17 @@ import ServiceFAQ from '../components/services/ServiceFAQ';
 import ServiceCTA from '../components/services/ServiceCTA';
 import { getRelatedServices, getServiceBySlug } from '../data/seoServicePages';
 import { buildServicePageJsonLd } from '../utils/serviceSeoUtils';
+import { trackServicePageView } from '../utils/analytics';
 
 export default function ServiceLandingPage() {
   const { slug } = useParams();
   const service = getServiceBySlug(slug);
+
+  useEffect(() => {
+    if (slug && service) {
+      trackServicePageView(slug);
+    }
+  }, [slug, service]);
 
   if (!service) {
     return <Navigate to="/capabilities" replace />;
@@ -31,7 +39,7 @@ export default function ServiceLandingPage() {
         jsonLd={buildServicePageJsonLd(service)}
       />
 
-      <ServiceHero eyebrow={service.eyebrow} h1={service.h1} overview={service.overview} />
+      <ServiceHero eyebrow={service.eyebrow} h1={service.h1} overview={service.overview} serviceSlug={slug} />
       <ServiceOverview overview={service.overview} />
       <ServiceCapabilities capabilities={service.capabilities} />
       <ServiceApplications applications={service.applications} />
@@ -39,7 +47,7 @@ export default function ServiceLandingPage() {
       <ServiceProcess />
       <ServiceWhyKC />
       <ServiceFAQ faq={service.faq} />
-      <ServiceCTA relatedServices={relatedServices} />
+      <ServiceCTA relatedServices={relatedServices} serviceSlug={slug} />
     </>
   );
 }
