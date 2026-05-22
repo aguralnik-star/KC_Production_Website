@@ -1,0 +1,15 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0A2745"/>
+      <stop offset="0.55" stop-color="#0D4F8B"/>
+      <stop offset="1" stop-color="#2E6DA4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <g opacity="0.18" stroke="#FFFFFF" stroke-width="2">
+    <path d="M120 720H1480"/><path d="M180 720V420"/><path d="M1420 720V420"/><path d="M180 420H1420"/>
+  </g>
+  <text x="800" y="390" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="700" text-anchor="middle">Haas VF-4</text>
+  <text x="800" y="450" fill="#FFFFFF" fill-opacity="0.82" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="600" text-anchor="middle" letter-spacing="5">PRODUCTION CNC MILLING</text>
+</svg>

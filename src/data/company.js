@@ -157,6 +157,59 @@ export const FEATURED_EQUIPMENT = {
   },
 };
 
+export const REPRESENTATIVE_EQUIPMENT_GALLERY = {
+  title: 'Representative CNC Machining Capability Examples',
+  disclaimer:
+    'Representative equipment shown for capability illustration purposes. Actual equipment configurations may vary.',
+  items: [
+    {
+      id: 'haas-umc-750',
+      name: 'Haas UMC-750',
+      category: '5-Axis CNC Machining',
+      description: 'Complex multi-sided machining with reduced setups and high precision.',
+      image: '/images/equipment/haas-umc-750.jpg',
+      imageAlt: 'Haas UMC-750 representative 5-axis CNC machining center',
+      badges: ['5-Axis Capability', 'Reduced Setups', 'Multi-Sided Machining', 'High Precision'],
+    },
+    {
+      id: 'haas-vf-5',
+      name: 'Haas VF-5',
+      category: 'Large Vertical Machining Center',
+      description: 'High-capacity CNC milling for tooling, fixtures, and production components.',
+      image: '/images/equipment/haas-vf-5.jpg',
+      imageAlt: 'Haas VF-5 representative large vertical machining center',
+      badges: ['Large Envelope', 'High Capacity', 'Tooling & Fixtures', 'Production Milling'],
+    },
+    {
+      id: 'haas-vf-4',
+      name: 'Haas VF-4',
+      category: 'Production CNC Milling',
+      description: 'Flexible machining platform for precision production manufacturing.',
+      image: '/images/equipment/haas-vf-4.jpg',
+      imageAlt: 'Haas VF-4 representative production CNC milling center',
+      badges: ['Production Milling', 'Precision Platform', 'Flexible Manufacturing', 'Repeatability'],
+    },
+    {
+      id: 'haas-vf-2',
+      name: 'Haas VF-2',
+      category: 'General Purpose CNC Milling',
+      description: 'Prototype and low-to-medium volume machining capability.',
+      image: '/images/equipment/haas-vf-2.jpg',
+      imageAlt: 'Haas VF-2 representative general purpose CNC milling center',
+      badges: ['Prototype Machining', 'Medium Volume', 'General Purpose', 'Quick Turnaround'],
+    },
+    {
+      id: 'haas-mini-mill',
+      name: 'Haas Mini Mill',
+      category: 'Compact Precision Machining',
+      description: 'Efficient machining solution for smaller precision components.',
+      image: '/images/equipment/haas-mini-mill.jpg',
+      imageAlt: 'Haas Mini Mill representative compact precision machining center',
+      badges: ['Compact Footprint', 'Precision Components', 'Efficient Machining', 'Small Parts'],
+    },
+  ],
+};
+
 export const MATERIALS = [
   'Aluminum',
   'Stainless Steel',

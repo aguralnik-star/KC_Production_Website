@@ -68,6 +68,46 @@ export function EquipmentCard({
 }) {
   const alt = imageAlt || title;
 
+  if (variant === 'gallery') {
+    return (
+      <article
+        className={`equipment-gallery-card ${className}`.trim()}
+        aria-labelledby={title ? `equipment-gallery-${title.replace(/\s+/g, '-').toLowerCase()}` : undefined}
+      >
+        <EquipmentImage src={image} alt={alt} className="equipment-gallery-card__media" />
+        <div className="equipment-gallery-card__body">
+          <p className="equipment-gallery-card__category">{category}</p>
+          <h3
+            id={title ? `equipment-gallery-${title.replace(/\s+/g, '-').toLowerCase()}` : undefined}
+            className="equipment-gallery-card__title"
+          >
+            {title}
+          </h3>
+          {description ? <p className="equipment-gallery-card__description">{description}</p> : null}
+          {badges.length > 0 ? (
+            <div className="equipment-gallery-card__badges">
+              {badges.map((badge) => (
+                <span key={badge} className="equipment-gallery-badge">
+                  {badge}
+                </span>
+              ))}
+            </div>
+          ) : null}
+          {ctaLabel ? (
+            <CTAButton
+              to={ctaTo || '/contact'}
+              variant="secondary"
+              className="equipment-gallery-card__cta mt-auto w-full"
+              aria-label={`Learn more about ${title} machining capability`}
+            >
+              {ctaLabel}
+            </CTAButton>
+          ) : null}
+        </div>
+      </article>
+    );
+  }
+
   if (variant === 'preview') {
     return (
       <article className={`equipment-preview-card ${className}`.trim()}>

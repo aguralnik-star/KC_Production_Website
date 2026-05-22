@@ -3,6 +3,7 @@ import SEO from '../components/SEO';
 import { PAGE_SEO } from '../config/siteConfig';
 import SectionHeading from '../components/SectionHeading';
 import EquipmentCategoryCard, { FeaturedEquipmentShowcase } from '../components/EquipmentCard';
+import EquipmentGallery from '../components/EquipmentGallery';
 import CTAButton from '../components/CTAButton';
 import { EQUIPMENT_SECTIONS, FEATURED_EQUIPMENT } from '../data/company';
 
@@ -44,7 +45,9 @@ export default function Equipment() {
         </div>
       </section>
 
-      <section className="section-padding">
+      <EquipmentGallery className="bg-white" />
+
+      <section className="section-padding bg-brand-light">
         <div className="section-container grid gap-6 sm:grid-cols-2">
           {EQUIPMENT_SECTIONS.map((section, i) => (
             <EquipmentCategoryCard key={section.title} icon={icons[i]} title={section.title} description={section.description} items={section.items} />
@@ -52,7 +55,7 @@ export default function Equipment() {
         </div>
       </section>
 
-      <section className="section-padding bg-brand-light">
+      <section className="section-padding">
         <div className="section-container">
           <SectionHeading
             label="Inspection Highlight"
