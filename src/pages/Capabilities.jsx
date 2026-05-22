@@ -1,41 +1,99 @@
-import { ArrowRight } from 'lucide-react';
+import { Award, Clock, Cpu, DollarSign, Factory, FlaskConical, RotateCw, Ruler, ShieldCheck, Wrench } from 'lucide-react';
 import SEO from '../components/SEO';
 import { PAGE_SEO } from '../config/siteConfig';
-import CapabilitiesSection from '../components/Capabilities';
 import SectionHeading from '../components/SectionHeading';
-import CTAButton from '../components/CTAButton';
+import CapabilitiesHero from '../components/capabilities/CapabilitiesHero';
+import CapabilityFeatureCard from '../components/capabilities/CapabilityFeatureCard';
+import CapabilityProcessStrip from '../components/capabilities/CapabilityProcessStrip';
+import CapabilityIndustriesStrip from '../components/capabilities/CapabilityIndustriesStrip';
+import CapabilitiesCTA from '../components/capabilities/CapabilitiesCTA';
 
-const detailedCapabilities = [
+const CAPABILITY_CARDS = [
   {
     title: 'CNC Milling',
-    summary: 'Haas CNC machining centers for complex milling applications from prototype to production.',
-    points: ['3-axis Haas vertical machining centers', 'Complex geometries and tight tolerances', 'Aluminum, steels, brass, copper, bronze, and plastics', 'Prototype through production quantities'],
+    icon: Cpu,
+    description:
+      'Precision vertical CNC milling for prototypes, tooling, fixtures, and production components.',
+    bullets: [
+      'Haas CNC milling centers',
+      '4-axis rotary table capability',
+      'Aluminum, steel, stainless, brass, bronze, and plastics',
+      'Prototype and production runs',
+      'Fixture and tooling components',
+    ],
   },
   {
     title: 'CNC Turning',
-    summary: 'Precision lathe work for turned components with consistent quality and repeatability.',
-    points: ['CNC turning for shafts, bushings, and fittings', 'Production and prototype quantities', 'In-process inspection', 'Competitive pricing and prompt delivery'],
+    icon: RotateCw,
+    description:
+      'Precision CNC turning for cylindrical parts, bushings, shafts, fittings, and custom machined components.',
+    bullets: [
+      'Haas ST-10 CNC lathe capability',
+      'Tight tolerance turning',
+      'Production part repeatability',
+      'Bar-fed and short-run components',
+      'Multi-material machining',
+    ],
   },
   {
     title: 'Prototype Machining',
-    summary: 'Fast, accurate prototypes to validate designs before production commitment.',
-    points: ['Quick response and prompt quotations', 'Machining from customer drawings or models', 'Design feedback available', 'Smooth transition to production runs'],
+    icon: FlaskConical,
+    description:
+      'Fast, accurate prototype machining to help customers validate design, fit, and function before production.',
+    bullets: [
+      'Engineering collaboration',
+      'Rapid design feedback',
+      'Low-volume machining',
+      'Material and tolerance review',
+      'Transition path to production',
+    ],
   },
   {
     title: 'Production Machining',
-    summary: 'Short and medium production runs with first-class quality and on-time delivery.',
-    points: ['Recurring production schedules', 'Documented setups for repeatability', 'First-article inspection', 'Total commitment to customer requirements'],
+    icon: Factory,
+    description:
+      'Repeatable machining processes for small-to-medium production runs with quality inspection support.',
+    bullets: [
+      'Repeatable setup processes',
+      'Consistent part quality',
+      'Production documentation',
+      'Batch manufacturing support',
+      'On-time delivery focus',
+    ],
   },
   {
-    title: 'Fixtures & Gauges',
-    summary: 'Custom inspection fixtures, manufacturing fixtures, and precision gauges.',
-    points: ['Custom inspection fixtures', 'Go/no-go and specialty gauges', 'Assembly and manufacturing fixtures', 'Built to customer specifications'],
+    title: 'Inspection Fixtures & Gauges',
+    icon: Ruler,
+    description:
+      'Custom inspection fixtures and gauges built to support repeatable quality control and production validation.',
+    bullets: [
+      'Inspection gauging',
+      'Functional checking fixtures',
+      'Production quality support',
+      'Repeatable measurement setups',
+      'Customer-specific fixture design',
+    ],
   },
   {
     title: 'Tooling & Custom Components',
-    summary: 'Production tooling, manufacturing fixtures, and custom machined components.',
-    points: ['Production tooling and workholding', 'Custom machined components', 'Replacement tooling', 'Industry expertise since 1987'],
+    icon: Wrench,
+    description:
+      'Tooling, fixtures, and custom machined components designed and manufactured for industrial production needs.',
+    bullets: [
+      'Production tooling',
+      'Manufacturing fixtures',
+      'Assembly support components',
+      'Custom machined details',
+      'Repair and replacement parts',
+    ],
   },
+];
+
+const QUALITY_FEATURES = [
+  { title: 'First-Class Quality', icon: ShieldCheck },
+  { title: 'Prompt Quotations', icon: Clock },
+  { title: 'Competitive Pricing', icon: DollarSign },
+  { title: 'On-Time Delivery', icon: Award },
 ];
 
 export default function Capabilities() {
@@ -43,49 +101,51 @@ export default function Capabilities() {
     <>
       <SEO {...PAGE_SEO.capabilities} />
 
-      <section className="page-hero">
-        <div className="section-container px-4 sm:px-6 lg:px-8">
+      <CapabilitiesHero />
+
+      <section className="section-padding" aria-labelledby="capability-cards-heading">
+        <div className="section-container">
           <SectionHeading
-            label="Capabilities"
-            title="Full-Service Precision Machining & Manufacturing"
-            description="CNC machining, precision machining, prototype and production work, inspection fixtures, gauges, production tooling, and custom components."
-            dark
+            label="What We Do"
+            title="Precision Manufacturing Capabilities"
+            titleId="capability-cards-heading"
+            description="From CNC milling and turning to fixtures, gauges, and production tooling — K&C supports demanding machining requirements with responsive service."
           />
+          <div className="mt-10 grid gap-6 sm:grid-cols-2">
+            {CAPABILITY_CARDS.map((capability) => (
+              <CapabilityFeatureCard key={capability.title} {...capability} />
+            ))}
+          </div>
         </div>
       </section>
 
-      <CapabilitiesSection showHeadingActions={false} showEquipmentPreview={false} className="bg-white" />
+      <CapabilityProcessStrip />
 
-      <section className="section-padding">
-        <div className="section-container space-y-8">
-          {detailedCapabilities.map(({ title, summary, points }) => (
-            <article key={title} className="card overflow-hidden p-0">
-              <div className="border-b border-slate-100 bg-slate-50 px-6 py-5 sm:px-8">
-                <h2 className="text-xl font-bold text-charcoal">{title}</h2>
-                <p className="mt-1 text-metallic">{summary}</p>
-              </div>
-              <ul className="grid gap-3 px-6 py-6 sm:grid-cols-2 sm:px-8">
-                {points.map((point) => (
-                  <li key={point} className="flex items-start gap-2.5 text-sm text-charcoal">
-                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                    {point}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
+      <CapabilityIndustriesStrip />
+
+      <section className="section-padding bg-slate-50" aria-labelledby="capability-quality-heading">
+        <div className="section-container">
+          <SectionHeading
+            label="Our Commitment"
+            title="Built Around Quality and Responsiveness"
+            titleId="capability-quality-heading"
+            description="From quote response to inspection, K&C focuses on first-class quality, competitive pricing, prompt communication, and long-term customer relationships."
+            align="center"
+          />
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {QUALITY_FEATURES.map(({ title, icon: Icon }) => (
+              <article key={title} className="card text-center">
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-charcoal text-accent-light">
+                  <Icon className="h-6 w-6" aria-hidden="true" />
+                </div>
+                <h3 className="mt-4 font-semibold text-charcoal">{title}</h3>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="section-padding bg-slate-50">
-        <div className="section-container text-center">
-          <SectionHeading title="Ready for a Prompt Quotation?" description="Share your project details and we'll respond quickly with competitive pricing." align="center" />
-          <CTAButton to="/contact" className="mt-8">
-            Request a Quote
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </CTAButton>
-        </div>
-      </section>
+      <CapabilitiesCTA />
     </>
   );
 }

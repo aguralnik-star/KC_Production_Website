@@ -628,6 +628,38 @@
   .equipment-gallery-card__cta {
     @apply mt-5;
   }
+
+  .capability-feature-card__icon {
+    @apply flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-charcoal text-accent-light;
+  }
+
+  .capability-process-strip {
+    @apply grid gap-6 sm:grid-cols-2 lg:grid-cols-5;
+  }
+
+  .capability-process-strip__step {
+    @apply relative text-center;
+  }
+
+  .capability-process-strip__icon-wrap {
+    @apply mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-brand-primary/10 text-brand-primary;
+  }
+
+  .capability-process-strip__number {
+    @apply mt-4 text-xs font-semibold uppercase tracking-[0.16em] text-brand-accent;
+  }
+
+  .capability-process-strip__title {
+    @apply mt-2 text-sm font-semibold text-charcoal sm:text-base;
+  }
+
+  .capability-process-strip__connector {
+    @apply absolute -right-3 top-1/2 h-0.5 w-6 -translate-y-1/2 bg-brand-accent/40;
+  }
+
+  .capability-industry-tag {
+    @apply inline-flex rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-charcoal shadow-sm transition-colors hover:border-brand-primary/30 hover:text-brand-primary;
+  }
 }
 
 @media print {

@@ -5,6 +5,7 @@ export default function SectionHeading({
   align = 'left',
   dark = false,
   className = '',
+  titleId,
 }) {
   const alignClass =
     align === 'center' ? 'mx-auto max-w-3xl text-center' : align === 'right' ? 'ml-auto max-w-3xl text-right' : 'max-w-3xl';
@@ -16,7 +17,10 @@ export default function SectionHeading({
           {label}
         </p>
       )}
-      <h2 className={`text-3xl font-bold tracking-tight sm:text-4xl lg:text-[2.75rem] lg:leading-tight ${dark ? 'text-white' : 'text-charcoal'}`}>
+      <h2
+        id={titleId}
+        className={`text-3xl font-bold tracking-tight sm:text-4xl lg:text-[2.75rem] lg:leading-tight ${dark ? 'text-white' : 'text-charcoal'}`}
+      >
         {title}
       </h2>
       {description && (
