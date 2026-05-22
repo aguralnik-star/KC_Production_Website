@@ -82,153 +82,46 @@ export const QUALITY_PILLARS = [
 
 export const EQUIPMENT_SECTIONS = [
   {
-    title: 'CNC Machining',
-    description: 'Haas CNC machining centers for milling and turning production and prototype work.',
-    items: ['Haas CNC machining centers', 'CNC milling', 'CNC turning', 'Prototype and production machining'],
+    title: 'CNC Milling Centers',
+    description: 'Haas vertical machining centers for precision milling, production runs, and complex components.',
+    items: ['Haas VF-2', 'Haas VF-3 Vertical Machining Centers', '4-axis rotary table capability'],
+  },
+  {
+    title: 'CNC Turning',
+    description: 'Precision lathe operations for turned components with consistent repeatability.',
+    items: ['Haas ST-10 CNC Lathe'],
   },
   {
     title: 'Inspection Equipment',
     description: 'Advanced inspection tools to verify dimensional accuracy and surface quality.',
-    items: ['Mitutoyo Crysta-Plus M574 CMM', 'Optical comparator', 'Profilometer', 'Inspection microscope'],
+    items: [
+      'Mitutoyo Crysta-Plus M574 CMM',
+      'Optical comparator',
+      'Profilometer',
+      'Inspection microscope',
+      'Video borescope systems',
+      'Air gauging equipment',
+    ],
   },
   {
     title: 'Gauging & Measurement',
     description: 'Comprehensive gauging capability for threads, bores, and precision dimensions.',
-    items: ['Thread, plug, ring, and pin gauges', 'Micrometers, calipers, and bore gauges', 'Air gauging systems'],
-  },
-  {
-    title: 'CAD/CAM Programming',
-    description: 'Mastercam programming for efficient, repeatable CNC toolpaths.',
-    items: ['Mastercam CAD/CAM programming', 'Solid model import', 'Optimized production toolpaths'],
-  },
-];
-
-export const EQUIPMENT_PAGE_HERO = {
-  machineName: 'Haas UMC-750 Universal Machining Center',
-  eyebrow: 'Advanced CNC Machining Technology',
-  headline: 'Modern CNC Manufacturing Equipment',
-  description:
-    'K&C Design and Manufacturing utilizes advanced CNC machining technology to deliver precision components, tooling, fixtures, prototypes, and production parts with exceptional quality and repeatability.',
-  image: '/images/equipment/haas-umc750-hero.jpg',
-  imageAlt: 'Haas UMC-750 5-axis CNC machining center',
-  placeholderText: 'UMC-750 Equipment Image',
-  featureBadges: [
-    'Precision Machining',
-    'Tight Tolerances',
-    'Production Manufacturing',
-    'Quality Inspection',
-  ],
-  overlayTitle: 'Representative CNC Equipment',
-  overlayText: 'Representative equipment shown for capability illustration purposes.',
-};
-
-export const FEATURED_EQUIPMENT = {
-  name: 'Haas VF-7/50 CNC Vertical Machining Center',
-  category: 'CNC Milling',
-  representativeLabel: 'Representative CNC Machining Capability Example',
-  disclaimer: 'Representative Equipment',
-  image: '/images/equipment/haas-vf7-50.jpg',
-  imageAlt: 'Haas VF-7/50 CNC Vertical Machining Center',
-  description:
-    'The Haas VF-7/50 provides high-performance CNC milling capability for large precision components, tooling, fixtures, production parts, and custom machined assemblies. Its rigid construction and large work envelope support both prototype and production manufacturing requirements.',
-  badges: [
-    'Large Work Envelope',
-    '50-Taper Spindle',
-    'CNC Milling',
-    'Production Machining',
-    'Prototype Machining',
-    'Precision Manufacturing',
-  ],
-  specs: [
-    'Travels: 84" x 32" x 30"',
-    '50-taper spindle',
-    'High-rigidity machining platform',
-    'Large-part machining capability',
-    'Precision CNC milling',
-    'Prototype and production work',
-    'Multi-material machining',
-  ],
-  features: [
-    'Large machining envelope',
-    'High horsepower spindle',
-    'Precision repeatability',
-    'Production-ready throughput',
-    'Fixture and tooling capability',
-    'Aluminum, steel, stainless, brass and engineering plastics',
-  ],
-  homepagePreview: {
-    title: 'Large Capacity CNC Milling',
-    subtitle: 'Powered by modern Haas machining technology',
-    summary:
-      'Representative large-capacity CNC milling capability for precision components, tooling, fixtures, and production machining.',
-    bullets: [
-      'Large-part machining',
-      'Precision CNC milling',
-      'Production machining',
-      'Prototype machining',
-      'Tight tolerance manufacturing',
+    items: [
+      'Thread gauges',
+      'Plug gauges',
+      'Ring gauges',
+      'Pin gauges',
+      'Micrometers',
+      'Calipers',
+      'Bore gauges',
     ],
   },
-  featurePanel: {
-    headline: 'Featured CNC Machining Capability',
-    body:
-      'K&C Design and Manufacturing utilizes modern CNC machining equipment, inspection systems, and CAD/CAM programming tools to support precision manufacturing requirements across multiple industries.',
+  {
+    title: 'CAD/CAM',
+    description: 'Mastercam programming for efficient, repeatable CNC toolpaths.',
+    items: ['Mastercam programming environment'],
   },
-};
-
-export const REPRESENTATIVE_EQUIPMENT_GALLERY = {
-  title: 'Representative CNC Machining Capability Examples',
-  disclaimer:
-    'Representative equipment shown for capability illustration purposes. Actual equipment configurations may vary.',
-  items: [
-    {
-      id: 'haas-umc-750',
-      name: 'HAAS UMC-750',
-      category: '5-Axis CNC Machining Center',
-      description: 'Complex multi-sided machining with reduced setups and high precision.',
-      image: '/images/equipment/haas-umc750-hero.jpg',
-      imageAlt: 'Haas UMC-750 5-axis CNC machining center',
-      badges: ['5-Axis Capability', 'Reduced Setups', 'Multi-Sided Machining', 'High Precision'],
-      featured: true,
-    },
-    {
-      id: 'haas-vf-5',
-      name: 'Haas VF-5',
-      category: 'Large Vertical Machining Center',
-      description: 'High-capacity CNC milling for tooling, fixtures, and production components.',
-      image: '/images/equipment/haas-vf-5.jpg',
-      imageAlt: 'Haas VF-5 representative large vertical machining center',
-      badges: ['Large Envelope', 'High Capacity', 'Tooling & Fixtures', 'Production Milling'],
-    },
-    {
-      id: 'haas-vf-4',
-      name: 'Haas VF-4',
-      category: 'Production CNC Milling',
-      description: 'Flexible machining platform for precision production manufacturing.',
-      image: '/images/equipment/haas-vf-4.jpg',
-      imageAlt: 'Haas VF-4 representative production CNC milling center',
-      badges: ['Production Milling', 'Precision Platform', 'Flexible Manufacturing', 'Repeatability'],
-    },
-    {
-      id: 'haas-vf-2',
-      name: 'Haas VF-2',
-      category: 'General Purpose CNC Milling',
-      description: 'Prototype and low-to-medium volume machining capability.',
-      image: '/images/equipment/haas-vf-2.jpg',
-      imageAlt: 'Haas VF-2 representative general purpose CNC milling center',
-      badges: ['Prototype Machining', 'Medium Volume', 'General Purpose', 'Quick Turnaround'],
-    },
-    {
-      id: 'haas-mini-mill',
-      name: 'Haas Mini Mill',
-      category: 'Compact Precision Machining',
-      description: 'Efficient machining solution for smaller precision components.',
-      image: '/images/equipment/haas-mini-mill.jpg',
-      imageAlt: 'Haas Mini Mill representative compact precision machining center',
-      badges: ['Compact Footprint', 'Precision Components', 'Efficient Machining', 'Small Parts'],
-    },
-  ],
-};
+];
 
 export const MATERIALS = [
   'Aluminum',

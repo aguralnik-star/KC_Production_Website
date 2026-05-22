@@ -3,7 +3,6 @@ import SEO from '../components/SEO';
 import { PAGE_SEO } from '../config/siteConfig';
 import Hero from '../components/Hero';
 import CapabilitiesSection from '../components/Capabilities';
-import { EquipmentPreviewCard, EquipmentPreviewLink } from '../components/EquipmentCard';
 import SectionHeading from '../components/SectionHeading';
 import IndustryCard from '../components/IndustryCard';
 import QualityFeature from '../components/QualityFeature';
@@ -27,20 +26,20 @@ export default function Home() {
         </div>
       </section>
 
-      <CapabilitiesSection showEquipmentPreview={false} />
+      <CapabilitiesSection />
 
-      <section className="section-padding border-b border-slate-100 bg-white" aria-labelledby="home-equipment-preview-heading">
+      <section className="section-padding border-b border-slate-100 bg-white" aria-labelledby="home-equipment-heading">
         <div className="section-container">
           <SectionHeading
-            label="Representative Equipment"
-            title="Featured CNC Machining Capability"
-            description="Representative large-capacity CNC milling example showcasing the type of modern machining capability K&C supports for precision manufacturing."
+            label="Equipment"
+            title="Precision Manufacturing Equipment"
+            description="Haas CNC milling and turning centers, Mitutoyo CMM inspection, precision gauging, and Mastercam programming support precision machining, tooling, fixtures, and production manufacturing."
           />
-          <div id="home-equipment-preview-heading" className="mt-10 max-w-4xl">
-            <EquipmentPreviewCard />
-            <div className="mt-6">
-              <EquipmentPreviewLink />
-            </div>
+          <div className="mt-8">
+            <CTAButton to="/equipment" variant="secondary">
+              View Equipment
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </CTAButton>
           </div>
         </div>
       </section>
