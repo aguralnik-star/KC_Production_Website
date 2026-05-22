@@ -69,6 +69,12 @@ export const PAGE_SEO = {
       'Precision machined components for transportation, medical, automotive, industrial equipment, hydraulics, electronics, and more.',
     path: '/industries',
   },
+  projects: {
+    title: 'Project Showcase | K&C Design and Manufacturing',
+    description:
+      'Representative machining, tooling, fixture, gauge, prototype, and production component projects from K&C Design and Manufacturing.',
+    path: '/projects',
+  },
   contact: {
     title: 'Request a Quote | K&C Design and Manufacturing',
     description:

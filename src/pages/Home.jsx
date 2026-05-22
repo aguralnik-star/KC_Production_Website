@@ -3,6 +3,7 @@ import { PAGE_SEO } from '../config/siteConfig';
 import HomeHeroV2 from '../components/home/HomeHeroV2';
 import HomeTrustStrip from '../components/home/HomeTrustStrip';
 import HomeCapabilitiesPreview from '../components/home/HomeCapabilitiesPreview';
+import HomeProjectsPreview from '../components/home/HomeProjectsPreview';
 import HomeEquipmentPreview from '../components/home/HomeEquipmentPreview';
 import HomeQualityPreview from '../components/home/HomeQualityPreview';
 import HomeIndustriesPreview from '../components/home/HomeIndustriesPreview';
@@ -18,6 +19,7 @@ export default function Home() {
       <HomeHeroV2 />
       <HomeTrustStrip />
       <HomeCapabilitiesPreview />
+      <HomeProjectsPreview />
       <HomeEquipmentPreview />
       <HomeQualityPreview />
       <HomeIndustriesPreview />

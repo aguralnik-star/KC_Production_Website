@@ -13,6 +13,7 @@ const Capabilities = lazy(() => lazyWithRetry(() => import('./pages/Capabilities
 const Equipment = lazy(() => lazyWithRetry(() => import('./pages/Equipment')));
 const Quality = lazy(() => lazyWithRetry(() => import('./pages/Quality')));
 const Industries = lazy(() => lazyWithRetry(() => import('./pages/Industries')));
+const Projects = lazy(() => lazyWithRetry(() => import('./pages/Projects')));
 const Contact = lazy(() => lazyWithRetry(() => import('./pages/Contact')));
 const RFQConfirmation = lazy(() => lazyWithRetry(() => import('./pages/RFQConfirmation')));
 const RFQStatusLookup = lazy(() => lazyWithRetry(() => import('./pages/RFQStatusLookup')));
@@ -35,6 +36,7 @@ function PublicRoutes() {
         <Route path="/equipment" element={<Equipment />} />
         <Route path="/quality" element={<Quality />} />
         <Route path="/industries" element={<Industries />} />
+        <Route path="/projects" element={<Projects />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/rfq/confirmation" element={<RFQConfirmation />} />
         <Route path="/rfq/status" element={<RFQStatusLookup />} />

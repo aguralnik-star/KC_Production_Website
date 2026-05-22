@@ -777,6 +777,91 @@
   .home-stats-band__label {
     @apply mt-2 text-xs font-semibold uppercase tracking-[0.14em] text-brand-accent sm:text-sm;
   }
+
+  .project-showcase-card__media {
+    @apply aspect-[16/10] w-full overflow-hidden bg-brand-navy;
+  }
+
+  .project-showcase-card__image {
+    @apply h-full w-full object-cover;
+  }
+
+  .project-showcase-card__placeholder {
+    @apply relative flex aspect-[16/10] w-full flex-col items-center justify-center overflow-hidden;
+    background: linear-gradient(145deg, #1a3d5c 0%, var(--color-brand-navy) 50%, #061525 100%);
+  }
+
+  .project-showcase-card__placeholder-glow {
+    @apply absolute -right-8 -top-8 h-32 w-32 rounded-full blur-3xl;
+    background: rgba(46, 109, 164, 0.35);
+  }
+
+  .project-showcase-card__placeholder-lines {
+    @apply absolute inset-0 opacity-25;
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 24px,
+      rgba(255, 255, 255, 0.08) 24px,
+      rgba(255, 255, 255, 0.08) 25px
+    );
+  }
+
+  .project-showcase-card__placeholder-icon {
+    @apply relative h-12 w-12 text-brand-accent;
+  }
+
+  .project-showcase-card__placeholder-label {
+    @apply relative mt-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-300;
+  }
+
+  .project-showcase-card__badge {
+    @apply inline-flex rounded-full border border-brand-primary/15 bg-brand-light px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-brand-primary;
+  }
+
+  .project-showcase-card__tag {
+    @apply inline-flex rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-medium text-charcoal;
+  }
+
+  .project-showcase-card__button {
+    @apply inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+  }
+
+  .project-showcase-card__button--secondary {
+    @apply border border-charcoal/15 bg-white text-charcoal hover:border-charcoal/30 hover:bg-slate-50;
+  }
+
+  .project-category-filter__list {
+    @apply flex flex-wrap justify-center gap-2;
+  }
+
+  .project-category-filter__button {
+    @apply rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-charcoal shadow-sm transition-colors hover:border-brand-primary/30 hover:text-brand-primary;
+  }
+
+  .project-category-filter__button--active {
+    @apply border-brand-primary bg-brand-primary text-white hover:text-white;
+  }
+
+  .project-detail-modal {
+    @apply fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-charcoal/60 px-4 py-8 sm:items-center;
+  }
+
+  .project-detail-modal__dialog {
+    @apply w-full max-w-2xl overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl;
+  }
+
+  .project-detail-modal__header {
+    @apply flex items-start justify-between gap-4 border-b border-slate-100 px-5 py-4 sm:px-6;
+  }
+
+  .project-detail-modal__media {
+    @apply aspect-[16/9];
+  }
+
+  .project-detail-modal__body {
+    @apply px-5 py-5 sm:px-6 sm:py-6;
+  }
 }
 
 @media print {

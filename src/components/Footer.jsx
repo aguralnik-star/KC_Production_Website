@@ -7,6 +7,7 @@ const footerLinks = {
   Company: [
     { to: '/about', label: 'About Us' },
     { to: '/capabilities', label: 'Capabilities' },
+    { to: '/projects', label: 'Projects' },
     { to: '/equipment', label: 'Equipment' },
     { to: '/quality', label: 'Quality' },
     { to: '/industries', label: 'Industries' },
