@@ -4,6 +4,7 @@ import RFQStatusBadge from './RFQStatusBadge';
 import RFQFileList from './RFQFileList';
 import RFQWorkflowPanel from './RFQWorkflowPanel';
 import CustomerStatusEmailPanel from './CustomerStatusEmailPanel';
+import AdditionalInfoRequestPanel from './AdditionalInfoRequestPanel';
 import { RFQ_STATUSES } from '../../services/adminRfqService';
 import { CUSTOMER_STATUS_LABELS } from '../../services/rfqWorkflowService';
 
@@ -168,6 +169,22 @@ export default function RFQRequestDetail({
                   label="Last Status Email"
                   value={request.last_customer_status_email_sent_at ? formatDate(request.last_customer_status_email_sent_at) : null}
                 />
+                <DetailRow
+                  label="Additional Info Requested"
+                  value={request.additional_info_requested_at ? formatDate(request.additional_info_requested_at) : null}
+                />
+                <DetailRow
+                  label="Additional Info Due"
+                  value={request.additional_info_due_at ? formatDate(request.additional_info_due_at) : null}
+                />
+                <DetailRow
+                  label="Additional Info Received"
+                  value={request.additional_info_received_at ? formatDate(request.additional_info_received_at) : null}
+                />
+                <DetailRow
+                  label="Customer Re-upload"
+                  value={request.has_customer_reupload ? 'Yes' : 'No'}
+                />
               </dl>
               {request.customer_status_message && (
                 <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm text-charcoal">
@@ -240,7 +257,10 @@ export default function RFQRequestDetail({
             <p className="mt-6 font-mono text-xs text-slate-400">ID: {request.id}</p>
           </>
         ) : activeTab === 'customer-updates' ? (
-          <CustomerStatusEmailPanel request={request} onRequestUpdated={onRequestUpdated} />
+          <div className="space-y-8">
+            <AdditionalInfoRequestPanel request={request} onRequestUpdated={onRequestUpdated} />
+            <CustomerStatusEmailPanel request={request} onRequestUpdated={onRequestUpdated} />
+          </div>
         ) : (
           <RFQWorkflowPanel
             request={request}

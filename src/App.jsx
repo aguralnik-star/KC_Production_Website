@@ -11,6 +11,7 @@ import Industries from './pages/Industries';
 import Contact from './pages/Contact';
 import RFQConfirmation from './pages/RFQConfirmation';
 import RFQStatusLookup from './pages/RFQStatusLookup';
+import AdditionalInfoUpload from './pages/AdditionalInfoUpload';
 import AdminLogin from './pages/AdminLogin';
 import AdminRFQDashboard from './pages/AdminRFQDashboard';
 
@@ -47,6 +48,7 @@ export default function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/rfq/confirmation" element={<RFQConfirmation />} />
                 <Route path="/rfq/status" element={<RFQStatusLookup />} />
+                <Route path="/rfq/additional-info/:token" element={<AdditionalInfoUpload />} />
               </Routes>
             </main>
             <Footer />

@@ -196,6 +196,22 @@ export default function RFQWorkflowPanel({ request, files, onRequestUpdated }) {
 
   return (
     <div className="space-y-4">
+      {successMessage && (
+        <p className="rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-800">{successMessage}</p>
+      )}
+
+      {request.status === 'waiting_on_customer' && (
+        <div className="rounded-xl border border-purple-200 bg-purple-50 px-4 py-3 text-sm text-purple-900">
+          This RFQ is waiting on customer additional information. Use the Customer Updates tab to review the request history, customer submissions, and re-uploaded files.
+        </div>
+      )}
+
+      {request.has_customer_reupload && (
+        <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-900">
+          The customer has submitted additional information. Review re-uploaded files in the Customer Updates tab before continuing quote preparation.
+        </div>
+      )}
+
       {error && (
         <div className="flex items-start gap-2 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800" role="alert">
           <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
