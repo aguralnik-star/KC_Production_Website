@@ -2,7 +2,8 @@ import {
   Truck, HeartPulse, Droplets, Car, Cog, Construction,
   Package, Gamepad2, Cpu, ScanSearch, Ruler, UtensilsCrossed, Shield,
 } from 'lucide-react';
-import PageHead from '../components/PageHead';
+import SEO from '../components/SEO';
+import { PAGE_SEO } from '../config/siteConfig';
 import SectionHeading from '../components/SectionHeading';
 import IndustryCard from '../components/IndustryCard';
 import CTAButton from '../components/CTAButton';
@@ -16,10 +17,7 @@ const industryIcons = [
 export default function Industries() {
   return (
     <>
-      <PageHead
-        title="Industries Served | K&C Design and Manufacturing"
-        description="Precision machining for transportation, medical, hydraulics, automotive, industrial, gaming, electronics, military, and more."
-      />
+      <SEO {...PAGE_SEO.industries} />
 
       <section className="page-hero">
         <div className="section-container px-4 sm:px-6 lg:px-8">

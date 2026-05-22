@@ -6,6 +6,7 @@ const NAV_ITEMS = [
   { to: '/admin/rfqs?tab=reminders', label: 'Reminders', match: (location) => location.pathname === '/admin/rfqs' && new URLSearchParams(location.search).get('tab') === 'reminders' },
   { to: '/admin/rfq-readiness', label: 'Readiness', match: (location) => location.pathname === '/admin/rfq-readiness' },
   { to: '/admin/rfq-operations', label: 'Operations', match: (location) => location.pathname === '/admin/rfq-operations' && location.hash !== '#analytics' },
+  { to: '/admin/launch-checklist', label: 'Launch', match: (location) => location.pathname === '/admin/launch-checklist' },
 ];
 
 export default function AdminNav() {

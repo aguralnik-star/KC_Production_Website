@@ -1,11 +1,14 @@
+import { lazy, Suspense } from 'react';
 import { AlertCircle, Loader2, Radar } from 'lucide-react';
 import RFQOperationsSummaryCards from './RFQOperationsSummaryCards';
 import RFQOperationsAlertFeed from './RFQOperationsAlertFeed';
 import RFQSystemHealthPanel from './RFQSystemHealthPanel';
 import RFQAdminActivityFeed from './RFQAdminActivityFeed';
-import RFQOperationsKPICharts from './RFQOperationsKPICharts';
 import RFQOperationsActionQueue from './RFQOperationsActionQueue';
 import RFQOperationsRefreshControl from './RFQOperationsRefreshControl';
+import LoadingState from '../../LoadingState';
+
+const RFQOperationsKPICharts = lazy(() => import('./RFQOperationsKPICharts'));
 
 export default function RFQOperationsCommandCenter({
   data,
@@ -83,7 +86,9 @@ export default function RFQOperationsCommandCenter({
         </div>
       </div>
 
-      <RFQOperationsKPICharts charts={data?.charts} />
+      <Suspense fallback={<LoadingState compact message="Loading analytics charts…" />}>
+        <RFQOperationsKPICharts charts={data?.charts} />
+      </Suspense>
     </div>
   );
 }

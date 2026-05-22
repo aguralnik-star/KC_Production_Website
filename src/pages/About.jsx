@@ -1,5 +1,6 @@
 import { ArrowRight, Heart, Users, Wrench, Handshake } from 'lucide-react';
-import PageHead from '../components/PageHead';
+import SEO from '../components/SEO';
+import { PAGE_SEO } from '../config/siteConfig';
 import SectionHeading from '../components/SectionHeading';
 import CTAButton from '../components/CTAButton';
 import { COMPANY, CORE_MESSAGE } from '../data/company';
@@ -37,10 +38,7 @@ const values = [
 export default function About() {
   return (
     <>
-      <PageHead
-        title="About Us | K&C Design and Manufacturing"
-        description="Founded in 1987 by Keith Clark. K&C provides quality precision machining, fixtures, and tooling from Addison, IL."
-      />
+      <SEO {...PAGE_SEO.about} />
 
       <section className="page-hero">
         <div className="section-container px-4 sm:px-6 lg:px-8">

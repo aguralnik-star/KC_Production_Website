@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Cpu, RotateCw, FlaskConical, Factory, Ruler, Wrench } from 'lucide-react';
-import PageHead from '../components/PageHead';
+import SEO from '../components/SEO';
+import { PAGE_SEO } from '../config/siteConfig';
 import Hero from '../components/Hero';
 import SectionHeading from '../components/SectionHeading';
 import CapabilityCard from '../components/CapabilityCard';
@@ -14,10 +15,7 @@ const capabilityIcons = [Cpu, RotateCw, FlaskConical, Factory, Ruler, Wrench];
 export default function Home() {
   return (
     <>
-      <PageHead
-        title="K&C Design and Manufacturing | Precision CNC Machining Addison, IL"
-        description="Quality precision CNC machining, fixtures, gauges, and tooling for Midwest manufacturers. Founded 1987. Request a quote today."
-      />
+      <SEO {...PAGE_SEO.home} schema="localBusiness" />
       <Hero />
 
       <section className="section-padding border-b border-slate-100">

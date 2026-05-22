@@ -1,5 +1,6 @@
 import { ArrowRight, Monitor, ScanLine, Ruler, Layers } from 'lucide-react';
-import PageHead from '../components/PageHead';
+import SEO from '../components/SEO';
+import { PAGE_SEO } from '../config/siteConfig';
 import SectionHeading from '../components/SectionHeading';
 import EquipmentCard from '../components/EquipmentCard';
 import CTAButton from '../components/CTAButton';
@@ -10,10 +11,7 @@ const icons = [Monitor, ScanLine, Ruler, Layers];
 export default function Equipment() {
   return (
     <>
-      <PageHead
-        title="Equipment | K&C Design and Manufacturing"
-        description="Haas CNC machining centers, Mitutoyo CMM, optical comparator, gauging systems, and Mastercam programming."
-      />
+      <SEO {...PAGE_SEO.equipment} />
 
       <section className="page-hero">
         <div className="section-container px-4 sm:px-6 lg:px-8">

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
-import PageHead from '../components/PageHead';
+import SEO from '../components/SEO';
+import { PAGE_SEO } from '../config/siteConfig';
 import SectionHeading from '../components/SectionHeading';
 import AdditionalInfoRequestCard from '../components/rfq/AdditionalInfoRequestCard';
 import AdditionalInfoUploadForm from '../components/rfq/AdditionalInfoUploadForm';
@@ -57,10 +58,7 @@ export default function AdditionalInfoUpload() {
 
   return (
     <>
-      <PageHead
-        title="Provide Additional RFQ Information | K&C Design and Manufacturing"
-        description="Securely upload revised drawings or provide additional RFQ information requested by K&C Design and Manufacturing."
-      />
+      <SEO {...PAGE_SEO.additionalInfo} />
 
       <section className="page-hero">
         <div className="section-container px-4 sm:px-6 lg:px-8">

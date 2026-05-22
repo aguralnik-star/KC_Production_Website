@@ -1,5 +1,6 @@
 import { Phone, Mail, MapPin, Printer } from 'lucide-react';
-import PageHead from '../components/PageHead';
+import SEO from '../components/SEO';
+import { PAGE_SEO } from '../config/siteConfig';
 import SectionHeading from '../components/SectionHeading';
 import RFQForm from '../components/RFQForm';
 import { COMPANY } from '../data/company';
@@ -7,10 +8,7 @@ import { COMPANY } from '../data/company';
 export default function Contact() {
   return (
     <>
-      <PageHead
-        title="Contact & Request a Quote | K&C Design and Manufacturing"
-        description="Contact K&C at (630) 543-3386 or submit an RFQ. 422 S. Irmen Drive, Addison, IL 60101."
-      />
+      <SEO {...PAGE_SEO.contact} />
 
       <section className="page-hero">
         <div className="section-container px-4 sm:px-6 lg:px-8">

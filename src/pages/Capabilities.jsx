@@ -1,5 +1,6 @@
 import { ArrowRight, Cpu, RotateCw, FlaskConical, Factory, Ruler, Wrench } from 'lucide-react';
-import PageHead from '../components/PageHead';
+import SEO from '../components/SEO';
+import { PAGE_SEO } from '../config/siteConfig';
 import SectionHeading from '../components/SectionHeading';
 import CapabilityCard from '../components/CapabilityCard';
 import CTAButton from '../components/CTAButton';
@@ -43,10 +44,7 @@ const detailedCapabilities = [
 export default function Capabilities() {
   return (
     <>
-      <PageHead
-        title="Capabilities | K&C Design and Manufacturing"
-        description="CNC milling, turning, prototype and production machining, fixtures, gauges, and custom tooling in Addison, IL."
-      />
+      <SEO {...PAGE_SEO.capabilities} />
 
       <section className="page-hero">
         <div className="section-container px-4 sm:px-6 lg:px-8">

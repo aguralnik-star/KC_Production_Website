@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Eye } from 'lucide-react';
 import RFQStatusBadge from './RFQStatusBadge';
 
@@ -11,7 +12,7 @@ function formatDate(dateString) {
   });
 }
 
-export default function RFQRequestTable({ requests, selectedId, onSelect }) {
+function RFQRequestTable({ requests, selectedId, onSelect }) {
   if (requests.length === 0) {
     return (
       <div className="rounded-xl border border-dashed border-slate-300 bg-white px-6 py-16 text-center">
@@ -23,7 +24,6 @@ export default function RFQRequestTable({ requests, selectedId, onSelect }) {
 
   return (
     <>
-      {/* Desktop table */}
       <div className="hidden overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm lg:block">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-slate-200 text-sm">
@@ -68,7 +68,6 @@ export default function RFQRequestTable({ requests, selectedId, onSelect }) {
         </div>
       </div>
 
-      {/* Mobile cards */}
       <div className="space-y-3 lg:hidden">
         {requests.map((req) => (
           <article
@@ -101,3 +100,5 @@ export default function RFQRequestTable({ requests, selectedId, onSelect }) {
     </>
   );
 }
+
+export default memo(RFQRequestTable);

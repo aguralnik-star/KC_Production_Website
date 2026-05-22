@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Menu, X, Phone, Mail } from 'lucide-react';
 import CTAButton from './CTAButton';
 import { COMPANY } from '../data/company';
+import { trapFocus } from '../utils/accessibilityUtils';
 
 const navLinks = [
   { to: '/', label: 'Home' },
@@ -16,6 +17,22 @@ const navLinks = [
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const mobileNavRef = useRef(null);
+
+  useEffect(() => {
+    if (!mobileOpen) return undefined;
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setMobileOpen(false);
+        return;
+      }
+      trapFocus(mobileNavRef.current, event);
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [mobileOpen]);
 
   const linkClass = ({ isActive }) =>
     `text-sm font-medium transition-colors ${isActive ? 'text-accent' : 'text-charcoal/80 hover:text-accent'}`;
@@ -41,7 +58,7 @@ export default function Header() {
       </div>
 
       <div className="section-container mx-auto flex items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        <Link to="/" className="group flex items-center gap-3">
+        <Link to="/" className="group flex items-center gap-3" aria-label="K&C Design and Manufacturing home">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-charcoal text-sm font-bold transition-colors group-hover:bg-accent">
             <span className="text-white">K&amp;C</span>
           </div>
@@ -72,6 +89,7 @@ export default function Header() {
           className="rounded-lg p-2 text-charcoal hover:bg-slate-100 lg:hidden"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-expanded={mobileOpen}
+          aria-controls="mobile-navigation"
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
         >
           {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -79,7 +97,12 @@ export default function Header() {
       </div>
 
       {mobileOpen && (
-        <nav className="border-t border-slate-200 bg-white px-4 py-4 lg:hidden" aria-label="Mobile navigation">
+        <nav
+          id="mobile-navigation"
+          ref={mobileNavRef}
+          className="border-t border-slate-200 bg-white px-4 py-4 lg:hidden"
+          aria-label="Mobile navigation"
+        >
           <ul className="flex flex-col gap-1">
             {navLinks.map(({ to, label }) => (
               <li key={to}>

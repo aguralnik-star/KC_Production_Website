@@ -1,5 +1,6 @@
 import { ClipboardCheck, ShieldCheck } from 'lucide-react';
-import PageHead from '../components/PageHead';
+import SEO from '../components/SEO';
+import { PAGE_SEO } from '../config/siteConfig';
 import SectionHeading from '../components/SectionHeading';
 import QualityFeature from '../components/QualityFeature';
 import CTAButton from '../components/CTAButton';
@@ -19,10 +20,7 @@ const commitments = [
 export default function Quality() {
   return (
     <>
-      <PageHead
-        title="Quality | K&C Design and Manufacturing"
-        description="First-class quality, precision inspection, repeatability, documentation, and on-time delivery from Addison, IL."
-      />
+      <SEO {...PAGE_SEO.quality} />
 
       <section className="page-hero">
         <div className="section-container px-4 sm:px-6 lg:px-8">

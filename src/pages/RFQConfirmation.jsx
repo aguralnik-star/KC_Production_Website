@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { AlertCircle, CheckCircle2 } from 'lucide-react';
-import PageHead from '../components/PageHead';
+import SEO from '../components/SEO';
+import { PAGE_SEO } from '../config/siteConfig';
 import SectionHeading from '../components/SectionHeading';
 import CTAButton from '../components/CTAButton';
 import RFQConfirmationCard from '../components/RFQConfirmationCard';
@@ -58,10 +59,7 @@ export default function RFQConfirmation() {
 
   return (
     <>
-      <PageHead
-        title="RFQ Confirmation | K&C Design and Manufacturing"
-        description="Your request for quote has been received by K&C Design and Manufacturing."
-      />
+      <SEO {...PAGE_SEO.rfqConfirmation} />
 
       <section className="page-hero print:hidden">
         <div className="section-container px-4 sm:px-6 lg:px-8">

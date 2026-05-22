@@ -1,4 +1,5 @@
 import { supabase, RFQ_BUCKET } from '../lib/supabaseClient';
+import { ADMIN_RFQ_LIST_LIMIT } from '../config/siteConfig';
 import { isCurrentUserAdmin } from './authService';
 import { buildPublicStatusUpdateForInternalChange } from './rfqWorkflowService';
 
@@ -30,7 +31,8 @@ export async function getRFQRequests() {
   const { data, error } = await supabase
     .from('rfq_requests')
     .select('*')
-    .order('created_at', { ascending: false });
+    .order('created_at', { ascending: false })
+    .limit(ADMIN_RFQ_LIST_LIMIT);
 
   if (error) throw new Error('Unable to load RFQ requests.');
   return data ?? [];
