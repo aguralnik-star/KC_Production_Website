@@ -1,8 +1,7 @@
 import { ArrowRight, Cpu, Factory, FlaskConical, RotateCw, Ruler, Wrench } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import CapabilityCard from './CapabilityCard';
 import CTAButton from './CTAButton';
-import { EquipmentPreviewCard } from './EquipmentCard';
+import { EquipmentPreviewCard, EquipmentPreviewLink } from './EquipmentCard';
 import SectionHeading from './SectionHeading';
 import { CAPABILITIES, MATERIALS } from '../data/company';
 
@@ -38,7 +37,7 @@ export default function Capabilities({
         </div>
 
         {showEquipmentPreview ? (
-          <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-stretch">
+          <div className="mt-10 grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] xl:items-stretch">
             {showMaterials ? (
               <div className="rounded-xl border border-slate-200 bg-white p-6 sm:p-8">
                 <p className="text-sm font-semibold uppercase tracking-wider text-metallic">Materials We Machine</p>
@@ -73,10 +72,8 @@ export default function Capabilities({
         ) : null}
 
         {showEquipmentPreview ? (
-          <div className="mt-6 text-center lg:text-left">
-            <Link to="/equipment" className="text-sm font-semibold text-brand-primary hover:text-brand-accent">
-              View equipment and representative machining capabilities
-            </Link>
+          <div className="mt-6 text-center xl:text-left">
+            <EquipmentPreviewLink />
           </div>
         ) : null}
       </div>

@@ -3,6 +3,7 @@ import SEO from '../components/SEO';
 import { PAGE_SEO } from '../config/siteConfig';
 import Hero from '../components/Hero';
 import CapabilitiesSection from '../components/Capabilities';
+import { EquipmentPreviewCard, EquipmentPreviewLink } from '../components/EquipmentCard';
 import SectionHeading from '../components/SectionHeading';
 import IndustryCard from '../components/IndustryCard';
 import QualityFeature from '../components/QualityFeature';
@@ -26,7 +27,23 @@ export default function Home() {
         </div>
       </section>
 
-      <CapabilitiesSection />
+      <CapabilitiesSection showEquipmentPreview={false} />
+
+      <section className="section-padding border-b border-slate-100 bg-white" aria-labelledby="home-equipment-preview-heading">
+        <div className="section-container">
+          <SectionHeading
+            label="Representative Equipment"
+            title="Featured CNC Machining Capability"
+            description="Representative large-capacity CNC milling example showcasing the type of modern machining capability K&C supports for precision manufacturing."
+          />
+          <div id="home-equipment-preview-heading" className="mt-10 max-w-4xl">
+            <EquipmentPreviewCard />
+            <div className="mt-6">
+              <EquipmentPreviewLink />
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section className="section-padding" aria-labelledby="industries-heading">
         <div className="section-container">

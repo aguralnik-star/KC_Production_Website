@@ -2,7 +2,7 @@ import { ArrowRight, Monitor, ScanLine, Ruler, Layers } from 'lucide-react';
 import SEO from '../components/SEO';
 import { PAGE_SEO } from '../config/siteConfig';
 import SectionHeading from '../components/SectionHeading';
-import EquipmentCard, { FeaturedEquipmentShowcase } from '../components/EquipmentCard';
+import EquipmentCategoryCard, { FeaturedEquipmentShowcase } from '../components/EquipmentCard';
 import CTAButton from '../components/CTAButton';
 import { EQUIPMENT_SECTIONS, FEATURED_EQUIPMENT } from '../data/company';
 
@@ -47,7 +47,7 @@ export default function Equipment() {
       <section className="section-padding">
         <div className="section-container grid gap-6 sm:grid-cols-2">
           {EQUIPMENT_SECTIONS.map((section, i) => (
-            <EquipmentCard key={section.title} icon={icons[i]} title={section.title} description={section.description} items={section.items} />
+            <EquipmentCategoryCard key={section.title} icon={icons[i]} title={section.title} description={section.description} items={section.items} />
           ))}
         </div>
       </section>
