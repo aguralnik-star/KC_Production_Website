@@ -6,7 +6,8 @@ import ProjectCategoryFilter from '../components/projects/ProjectCategoryFilter'
 import ProjectShowcaseGrid from '../components/projects/ProjectShowcaseGrid';
 import ProjectDetailModal from '../components/projects/ProjectDetailModal';
 import ProjectProcessSummary from '../components/projects/ProjectProcessSummary';
-import ProjectCTA from '../components/projects/ProjectCTA';
+import TestimonialSection from '../components/trust/TestimonialSection';
+import TrustCTA from '../components/trust/TrustCTA';
 import { SHOWCASE_PROJECTS, filterProjects } from '../data/projects';
 import { trackProjectCategoryFilter, trackProjectShowcaseView } from '../utils/analytics';
 
@@ -56,7 +57,14 @@ export default function Projects() {
       </section>
 
       <ProjectProcessSummary />
-      <ProjectCTA />
+      <TestimonialSection limit={2} className="bg-slate-50" />
+      <TrustCTA
+        headline="Have a similar machining, fixture, gauge, or tooling project?"
+        body="Send your drawings, specifications, and project requirements. K&C will review your RFQ and follow up with next steps."
+        analyticsLocation="projects_trust_cta"
+        secondaryLabel="View Capabilities"
+        secondaryTo="/capabilities"
+      />
 
       <ProjectDetailModal
         project={selectedProject}

@@ -10,6 +10,7 @@ const NAV_ITEMS = [
   { to: '/admin/launch-go-no-go', label: 'Go/No-Go', match: (location) => location.pathname === '/admin/launch-go-no-go' },
   { to: '/admin/handoff', label: 'Handoff', match: (location) => location.pathname === '/admin/handoff' },
   { to: '/admin/post-launch', label: 'Post-Launch', match: (location) => location.pathname === '/admin/post-launch' },
+  { to: '/admin/mobile-browser-qa', label: 'Mobile & Browser QA', match: (location) => location.pathname === '/admin/mobile-browser-qa' },
 ];
 
 export default function AdminNav() {

@@ -49,7 +49,7 @@ export default function Contact() {
                     <p className="font-medium text-charcoal">Phone</p>
                     <a
                       href={`tel:${COMPANY.phoneTel}`}
-                      className="text-sm text-metallic hover:text-accent"
+                      className="break-anywhere text-sm text-metallic hover:text-accent"
                       onClick={() => trackPhoneClick('contact_sidebar')}
                     >
                       {COMPANY.phone}
@@ -69,7 +69,7 @@ export default function Contact() {
                     <p className="font-medium text-charcoal">Email</p>
                     <a
                       href={`mailto:${COMPANY.email}`}
-                      className="text-sm text-metallic hover:text-accent"
+                      className="break-anywhere text-sm text-metallic hover:text-accent"
                       onClick={() => trackEmailClick('contact_sidebar')}
                     >
                       {COMPANY.email}

@@ -66,7 +66,7 @@ export const PAGE_SEO = {
   industries: {
     title: 'Industries Served | K&C Design and Manufacturing',
     description:
-      'Precision machined components for transportation, medical, automotive, industrial equipment, hydraulics, electronics, and more.',
+      'K&C Design and Manufacturing supports transportation, medical, automotive, hydraulics, valves, heavy equipment, material handling, electronics, food service, military, fixtures, and gauge applications.',
     path: '/industries',
   },
   projects: {

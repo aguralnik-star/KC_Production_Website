@@ -76,7 +76,7 @@ export default function Footer() {
                 </p>
                 <p className="flex items-center gap-2.5">
                   <Phone className="h-4 w-4 shrink-0 text-accent-light" aria-hidden="true" />
-                  <a href={`tel:${COMPANY.phoneTel}`} className="hover:text-white" onClick={() => trackPhoneClick('footer')}>
+                  <a href={`tel:${COMPANY.phoneTel}`} className="break-anywhere hover:text-white" onClick={() => trackPhoneClick('footer')}>
                     {COMPANY.phone}
                   </a>
                 </p>
@@ -86,7 +86,7 @@ export default function Footer() {
                 </p>
                 <p className="flex items-center gap-2.5">
                   <Mail className="h-4 w-4 shrink-0 text-accent-light" aria-hidden="true" />
-                  <a href={`mailto:${COMPANY.email}`} className="hover:text-white" onClick={() => trackEmailClick('footer')}>
+                  <a href={`mailto:${COMPANY.email}`} className="break-anywhere hover:text-white" onClick={() => trackEmailClick('footer')}>
                     {COMPANY.email}
                   </a>
                 </p>

@@ -4,6 +4,7 @@ import AboutHero from '../components/about/AboutHero';
 import AboutStory from '../components/about/AboutStory';
 import AboutTimeline from '../components/about/AboutTimeline';
 import AboutValues from '../components/about/AboutValues';
+import TrustSignalsSection from '../components/trust/TrustSignalsSection';
 import AboutExperienceStrip from '../components/about/AboutExperienceStrip';
 import AboutCTA from '../components/about/AboutCTA';
 
@@ -19,6 +20,8 @@ export default function About() {
       <AboutTimeline />
 
       <AboutValues />
+
+      <TrustSignalsSection limit={8} variant="light" />
 
       <AboutExperienceStrip />
 

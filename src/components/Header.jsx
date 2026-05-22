@@ -48,7 +48,7 @@ export default function Header() {
           <p className="hidden text-xs text-slate-300 sm:block">
             Precision CNC Machining • Fixtures • Tooling • Production Manufacturing
           </p>
-          <div className="flex w-full items-center justify-end gap-4 text-xs sm:w-auto">
+            <div className="flex w-full min-w-0 items-center justify-end gap-4 text-xs sm:w-auto">
             <a
               href={`tel:${COMPANY.phoneTel}`}
               className="flex items-center gap-1.5 text-slate-300 hover:text-white"
@@ -69,7 +69,7 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="section-container mx-auto flex items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+      <div className="section-container mx-auto flex min-w-0 items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
         <Logo
           variant="default"
           asLink

@@ -5,7 +5,7 @@ import SectionHeading from '../components/SectionHeading';
 import CapabilitiesHero from '../components/capabilities/CapabilitiesHero';
 import CapabilityFeatureCard from '../components/capabilities/CapabilityFeatureCard';
 import CapabilityProcessStrip from '../components/capabilities/CapabilityProcessStrip';
-import CapabilityIndustriesStrip from '../components/capabilities/CapabilityIndustriesStrip';
+import IndustriesServedModern from '../components/trust/IndustriesServedModern';
 import CapabilitiesCTA from '../components/capabilities/CapabilitiesCTA';
 
 const CAPABILITY_CARDS = [
@@ -121,9 +121,18 @@ export default function Capabilities() {
 
       <CapabilityProcessStrip />
 
-      <CapabilityIndustriesStrip />
+      <IndustriesServedModern
+        limit={6}
+        showDescriptions={false}
+        showCTA
+        ctaLabel="View All Industries"
+        ctaTo="/industries"
+        title="Industries We Support"
+        description="From transportation and medical to hydraulics, valves, heavy equipment, and custom inspection applications."
+        className="bg-slate-50"
+      />
 
-      <section className="section-padding bg-slate-50" aria-labelledby="capability-quality-heading">
+      <section className="section-padding bg-white" aria-labelledby="capability-quality-heading">
         <div className="section-container">
           <SectionHeading
             label="Our Commitment"

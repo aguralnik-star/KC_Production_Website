@@ -10,7 +10,10 @@ import ServiceProcess from '../components/services/ServiceProcess';
 import ServiceWhyKC from '../components/services/ServiceWhyKC';
 import ServiceFAQ from '../components/services/ServiceFAQ';
 import ServiceCTA from '../components/services/ServiceCTA';
+import CredibilityBand from '../components/trust/CredibilityBand';
+import IndustriesServedModern from '../components/trust/IndustriesServedModern';
 import { getRelatedServices, getServiceBySlug } from '../data/seoServicePages';
+import { getIndustriesForService } from '../data/industriesData';
 import { buildServicePageJsonLd } from '../utils/serviceSeoUtils';
 import { trackServicePageView } from '../utils/analytics';
 
@@ -29,6 +32,7 @@ export default function ServiceLandingPage() {
   }
 
   const relatedServices = getRelatedServices(service.relatedServices ?? []);
+  const relatedIndustries = getIndustriesForService(slug);
 
   return (
     <>
@@ -40,6 +44,7 @@ export default function ServiceLandingPage() {
       />
 
       <ServiceHero eyebrow={service.eyebrow} h1={service.h1} overview={service.overview} serviceSlug={slug} />
+      <CredibilityBand compact />
       <ServiceOverview overview={service.overview} />
       <ServiceCapabilities capabilities={service.capabilities} />
       <ServiceApplications applications={service.applications} />
@@ -47,6 +52,18 @@ export default function ServiceLandingPage() {
       <ServiceProcess />
       <ServiceWhyKC />
       <ServiceFAQ faq={service.faq} />
+      {relatedIndustries.length > 0 ? (
+        <IndustriesServedModern
+          industries={relatedIndustries}
+          showDescriptions={false}
+          showCTA
+          ctaLabel="View All Industries"
+          ctaTo="/industries"
+          title="Related Industries"
+          description="Explore industrial markets commonly supported by this service."
+          className="bg-brand-light"
+        />
+      ) : null}
       <ServiceCTA relatedServices={relatedServices} serviceSlug={slug} />
     </>
   );

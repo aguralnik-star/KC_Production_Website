@@ -28,6 +28,7 @@ const LaunchChecklist = lazy(() => lazyWithRetry(() => import('./pages/LaunchChe
 const AdminLaunchGoNoGoReview = lazy(() => lazyWithRetry(() => import('./pages/AdminLaunchGoNoGoReview')));
 const AdminHandoffCenter = lazy(() => lazyWithRetry(() => import('./pages/AdminHandoffCenter')));
 const AdminPostLaunchDashboard = lazy(() => lazyWithRetry(() => import('./pages/AdminPostLaunchDashboard')));
+const AdminMobileBrowserQA = lazy(() => lazyWithRetry(() => import('./pages/AdminMobileBrowserQA')));
 
 function PublicRoutes() {
   return (
@@ -65,6 +66,7 @@ export default function App() {
           <Route path="/admin/launch-go-no-go" element={<AdminLaunchGoNoGoReview />} />
           <Route path="/admin/handoff" element={<AdminHandoffCenter />} />
           <Route path="/admin/post-launch" element={<AdminPostLaunchDashboard />} />
+          <Route path="/admin/mobile-browser-qa" element={<AdminMobileBrowserQA />} />
         </Route>
 
         <Route path="/admin" element={<Navigate to="/admin/rfqs" replace />} />
