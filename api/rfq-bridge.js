@@ -101,6 +101,7 @@ export default async function handler(req, res) {
 
     return sendJson(res, 200, {
       ok: true,
+      success: true,
       message: 'RFQ forwarded successfully.',
       submittedAt: payload.submittedAt,
     });

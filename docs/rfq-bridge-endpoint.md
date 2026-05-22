@@ -140,6 +140,18 @@ Override the test target when needed:
 RFQ_BRIDGE_TEST_URL=https://your-preview.vercel.app/api/rfq-bridge npm run test:rfq-bridge
 ```
 
+## Local synchronization validation
+
+Run the full 11-step local validation workflow (bridge, mock FactoraOS intake, duplicate detection, and error handling):
+
+```bash
+npm run validate:rfq-sync
+```
+
+Report output: `docs/rfq-sync-validation-report.md`
+
+When `FACTORAOS_EXTERNAL_CRM_INTAKE_URL` and `FACTORAOS_EXTERNAL_CRM_INTAKE_SECRET` are not configured locally, the validator injects a mock FactoraOS intake server for end-to-end testing. Configure production env vars in Vercel before production RFQ sync validation.
+
 ## Frontend integration
 
 - Service: `src/services/rfqBridgeService.js`

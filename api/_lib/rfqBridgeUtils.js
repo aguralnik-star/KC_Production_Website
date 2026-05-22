@@ -29,7 +29,8 @@ const FIELD_LABELS = {
 };
 
 function trimString(value) {
-  return typeof value === 'string' ? value.trim() : '';
+  if (value == null) return '';
+  return typeof value === 'string' ? value.trim() : String(value).trim();
 }
 
 export function validateRFQBridgeInput(body) {

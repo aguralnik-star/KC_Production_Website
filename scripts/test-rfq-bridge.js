@@ -1,16 +1,16 @@
 const DEFAULT_URL = 'http://localhost:3000/api/rfq-bridge';
 
 const samplePayload = {
-  companyName: 'Acme Manufacturing',
-  contactName: 'Jane Doe',
-  email: 'jane.doe@example.com',
-  phone: '(630) 555-0100',
+  companyName: 'Test Manufacturing Inc',
+  contactName: 'John Smith',
+  email: 'john.smith@example.com',
+  phone: '555-555-1212',
   projectType: 'CNC Machining',
-  material: 'Aluminum 6061',
-  quantity: '25 pieces',
-  deadline: '4-6 weeks',
-  message: 'Prototype plus small production run with tight tolerances.',
-  sourcePage: '/request-quote',
+  material: '6061 Aluminum',
+  quantity: 100,
+  deadline: '2026-06-15',
+  message: 'RFQ Bridge Validation Test',
+  sourcePage: '/rfq',
 };
 
 async function main() {
